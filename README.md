@@ -9,17 +9,15 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 # Demo
 [IniLink](https://github.com/Mumtaza15/CH2-PS173-Product-Capstone/edit/main/README.md)
-| No | Name | Role | Github |
-| --- | --- | --- | --- |
-| 1 | Giga Muhamad Hasan | ML | 'tes' |
-| 2 | Putra Jadi Mukti | ML | 'tes' |
-| 3 | Sinta Murwanti | ML | 'tes' |
-| 4 | Daniel Hasiando Sinaga | CC | 'tes' |
-| 5 | Hidayat Nur Ali Razzaq(Project Manager) | CC | 'hidrozz'(https://github.com/hidrozz) |
-| 6 | Ahmad Fatha Mumtaza | MD | 'Mumtaza15'(https://github.com/Mumtaza15) |
-| 7 | M. Fajar Al Farizi | MD | 'tes' |
-
 
 # Product Capstone Team
-
+| No | Name | Role | Github |
+| --- | --- | --- | --- |
+| 1 | Giga Muhamad Hasan | ML | `` |
+| 2 | Putra Jadi Mukti | ML | `` |
+| 3 | Sinta Murwanti | ML | `` |
+| 4 | Daniel Hasiando Sinaga | CC | `` |
+| 5 | Hidayat Nur Ali Razzaq `Project Manager` | CC | [hidrozz](https://github.com/hidrozz) |
+| 6 | Ahmad Fatha Mumtaza | MD | [Mumtaza15](https://github.com/Mumtaza15) |
+| 7 | M. Fajar Al Farizi | MD | `` |
 
