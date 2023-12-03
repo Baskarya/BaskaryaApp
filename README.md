@@ -16,7 +16,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 | 1 | Giga Muhamad Hasan | ML | `` |
 | 2 | Putra Jadi Mukti | ML | `` |
 | 3 | Sinta Murwanti | ML | `` |
-| 4 | Daniel Hasiando Sinaga | CC | Routinee66 |
+| 4 | Daniel Hasiando Sinaga | CC | [Routinee66](https://github.com/Routinee66) |
 | 5 | Hidayat Nur Ali Razzaq `Project Manager` | CC | [hidrozz](https://github.com/hidrozz) |
 | 6 | Ahmad Fatha Mumtaza | MD | [Mumtaza15](https://github.com/Mumtaza15) |
 | 7 | M. Fajar Al Farizi | MD | `` |
