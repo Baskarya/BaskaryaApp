@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">BaskaryaApp</string>
+
+    <string name="error">Kolom tidak boleh kosong</string>
+    <string name="error_email">Email tidak sesuai dengan format</string>
+    <string name="error_password">Password tidak boleh kurang dari 8 karakter</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="signup">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="batikpedia">Batikpedia</string>
 </resources>
