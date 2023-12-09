@@ -7,9 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.baskaryaapp.databinding.ActivityLoginBinding
-import com.example.baskaryaapp.ui.batikpedia.BatikpediaActivity
 import com.example.baskaryaapp.ui.main.MainActivity
-import com.example.baskaryaapp.ui.register.RegisterActivity
 
 
 class LoginActivity : AppCompatActivity() {
@@ -30,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
 
 //        ini tes
         binding.loginButton.setOnClickListener{
-            val intent = Intent(this@LoginActivity, BatikpediaActivity::class.java)
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
         }
     }

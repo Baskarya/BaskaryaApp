@@ -1,11 +1,10 @@
 package com.example.baskaryaapp.ui.batikpedia
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.baskaryaapp.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BatikpediaActivity : AppCompatActivity() {
     // on below line we are creating variables
@@ -14,7 +13,6 @@ class BatikpediaActivity : AppCompatActivity() {
     lateinit var courseRV: RecyclerView
     lateinit var courseRVAdapter: BatikRVAdapter
     lateinit var courseList: ArrayList<BatikRVModal>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_batikpedia)
@@ -50,6 +48,5 @@ class BatikpediaActivity : AppCompatActivity() {
         // on below line we are notifying adapter
         // that data has been updated.
         courseRVAdapter.notifyDataSetChanged()
-
     }
 }
