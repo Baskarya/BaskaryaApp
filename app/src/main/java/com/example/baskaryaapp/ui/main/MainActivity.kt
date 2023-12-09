@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
     binding.fab.setOnClickListener{
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-
         try {
             startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE)
         }catch (e:ActivityNotFoundException){
