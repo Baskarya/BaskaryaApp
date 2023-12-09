@@ -34,9 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
         navview =findViewById(R.id.bottomNavigationView)
-
         replace(HomeFragment())
-
         navview.setOnItemSelectedListener{
             when(it.itemId){
                 R.id.home->replace(HomeFragment())
@@ -45,7 +43,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.Settings->replace(SettingFragment())
             }
             true
-
         }
 
     }
@@ -59,7 +56,6 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode== RESULT_OK){
             val imageBitmap=data?.extras?.get("data")as Bitmap
-
         }else{super.onActivityResult(requestCode, resultCode, data)
 
         }
