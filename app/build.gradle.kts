@@ -58,4 +58,7 @@ dependencies {
     implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
     implementation("androidx.camera:camera-view:$cameraxVersion")
     implementation("androidx.exifinterface:exifinterface:1.3.6")
+
+    // Carousel view
+    //implementation("com.synnapps:carouselview:0.1.4")
 }
