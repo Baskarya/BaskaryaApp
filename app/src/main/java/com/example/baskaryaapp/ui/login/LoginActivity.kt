@@ -2,24 +2,34 @@ package com.example.baskaryaapp.ui.login
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.baskaryaapp.databinding.ActivityLoginBinding
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaActivity
 import com.example.baskaryaapp.ui.main.MainActivity
 import com.example.baskaryaapp.ui.register.RegisterActivity
+import com.google.firebase.auth.FirebaseAuth
 
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-
+    private lateinit var  auth: FirebaseAuth
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        auth= FirebaseAuth.getInstance()
+        sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE)
+
 
         playAnimation()
 
@@ -30,9 +40,12 @@ class LoginActivity : AppCompatActivity() {
 
 //        ini tes
         binding.loginButton.setOnClickListener{
-            val intent = Intent(this@LoginActivity, BatikpediaActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this@LoginActivity, BatikpediaActivity::class.java)
+//            startActivity(intent)
+            login()
         }
+
+        checkUserSession()
     }
     private fun playAnimation() {
         ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
@@ -64,5 +77,60 @@ class LoginActivity : AppCompatActivity() {
             )
             startDelay = 100
         }.start()
+    }
+
+//    fun login(view: View){
+//        val email = binding.emailEditText.text.toString()
+//        val password = binding.emailEditText.text.toString()
+//
+//        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+//            if(task.isSuccessful){
+//                val intent= Intent(this,MainActivity::class.java)
+//                startActivity(intent)
+//                finish()
+//            }
+//        }.addOnFailureListener { exception ->
+//            Toast.makeText(applicationContext,exception.localizedMessage, Toast.LENGTH_LONG).show()
+//        }
+//    }
+
+    private fun login() {
+        val email = binding.emailEditText.text.toString()
+        val password = binding.passwordEditText.text.toString()
+
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // Save user session
+                saveUserSession()
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "Log In failed", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener { exception ->
+            Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun saveUserSession() {
+        // Mark the user as logged in
+        sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
+    }
+
+    private fun checkUserSession() {
+        // Check if the user is already logged in
+        if (sharedPreferences.getBoolean("isLoggedIn", false)) {
+            // If logged in, direct the user to the main activity
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    fun goToRegister(){
+        val intent= Intent(this,RegisterActivity::class.java)
+        startActivity(intent)
     }
 }
