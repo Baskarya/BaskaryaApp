@@ -11,6 +11,10 @@
         android:title="Article" />
 
     <item
+        android:id="@+id/blank"
+        android:title="" />
+
+    <item
         android:id="@+id/bookmark"
         android:icon="@drawable/ic_bookmark"
         android:title="Bookmark" />
