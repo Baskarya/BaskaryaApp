@@ -12,7 +12,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.ActivityMainBinding
+import com.example.baskaryaapp.ui.home.HomeFragment
 import com.example.baskaryaapp.ui.login.LoginActivity
+import com.example.baskaryaapp.ui.setting.SettingFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -48,16 +50,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         navview =findViewById(R.id.bottomNavigationView)
-//        replace(HomeFragment())
-//        navview.setOnItemSelectedListener{
-//            when(it.itemId){
-//                R.id.home->replace(HomeFragment())
-//                R.id.article->replace(HomeFragment())//Article Fragment
-//                R.id.bookmark->replace(HomeFragment())//Bookmark Fragment
-//                R.id.Settings->replace(SettingFragment())
-//            }
-//            true
-//        }
+        replace(HomeFragment())
+        navview.setOnItemSelectedListener{
+            when(it.itemId){
+                R.id.home->replace(HomeFragment())
+                R.id.article->replace(HomeFragment())//Article Fragment
+                R.id.bookmark->replace(HomeFragment())//Bookmark Fragment
+                R.id.Settings->replace(SettingFragment())
+            }
+            true
+        }
 
     }
     private fun replace (fragment : Fragment){
