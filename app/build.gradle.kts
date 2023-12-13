@@ -41,6 +41,7 @@ android {
 
 dependencies {
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
+    implementation("androidx.databinding:databinding-runtime:8.2.0")
     val cameraxVersion = "1.2.3"
 
     implementation("androidx.core:core-ktx:1.9.0")
@@ -59,6 +60,7 @@ dependencies {
     implementation("androidx.camera:camera-view:$cameraxVersion")
     implementation("androidx.exifinterface:exifinterface:1.3.6")
 
-    // Carousel view
-    //implementation("com.synnapps:carouselview:0.1.4")
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
 }
