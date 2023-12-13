@@ -41,7 +41,7 @@ class MyEditText : AppCompatEditText{
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 when (id) {
-                    R.id.nameEditText -> nameValidation(s.toString())
+//                    R.id.nameEditText -> nameValidation(s.toString())
                     R.id.emailEditText -> emailValidation(s.toString())
                     R.id.passwordEditText -> passwordValidation(s.toString())
                 }

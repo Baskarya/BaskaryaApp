@@ -6,14 +6,19 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.ActivityRegisterBinding
 import com.example.baskaryaapp.ui.login.LoginActivity
 import com.example.baskaryaapp.ui.main.MainActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var  auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -22,9 +27,12 @@ class RegisterActivity : AppCompatActivity() {
         playAnimation()
 
         binding.signupButton.setOnClickListener{
-            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+//            startActivity(intent)
+            register()
         }
+
+        auth= FirebaseAuth.getInstance()
     }
 
     private fun playAnimation() {
@@ -35,10 +43,10 @@ class RegisterActivity : AppCompatActivity() {
         }.start()
 
         val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(100)
-        val nameTextView =
-            ObjectAnimator.ofFloat(binding.nameTextView, View.ALPHA, 1f).setDuration(100)
-        val nameEditTextLayout =
-            ObjectAnimator.ofFloat(binding.nameEditTextLayout, View.ALPHA, 1f).setDuration(100)
+//        val nameTextView =
+//            ObjectAnimator.ofFloat(binding.nameTextView, View.ALPHA, 1f).setDuration(100)
+//        val nameEditTextLayout =
+//            ObjectAnimator.ofFloat(binding.nameEditTextLayout, View.ALPHA, 1f).setDuration(100)
         val emailTextView =
             ObjectAnimator.ofFloat(binding.emailTextView, View.ALPHA, 1f).setDuration(100)
         val emailEditTextLayout =
@@ -53,8 +61,8 @@ class RegisterActivity : AppCompatActivity() {
         AnimatorSet().apply {
             playSequentially(
                 title,
-                nameTextView,
-                nameEditTextLayout,
+//                nameTextView,
+//                nameEditTextLayout,
                 emailTextView,
                 emailEditTextLayout,
                 passwordTextView,
@@ -63,5 +71,43 @@ class RegisterActivity : AppCompatActivity() {
             )
             startDelay = 100
         }.start()
+    }
+
+    fun register(){
+        val email= binding.emailEditText.text.toString()
+        val password = binding.passwordEditText.text.toString()
+
+//        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+//            if(task.isSuccessful){
+//                val intent= Intent(this,LoginActivity::class.java)
+//                startActivity(intent)
+//                finish()
+//            }
+//            else {
+//                Toast.makeText(this, "Singed Up Failed!", Toast.LENGTH_SHORT).show()
+//            }
+//        }.addOnFailureListener { exception ->
+//            Toast.makeText(applicationContext,exception.localizedMessage,Toast.LENGTH_LONG).show()
+//        }
+
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val user = auth.currentUser
+                user?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName("YourDisplayName").build())
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "Signed Up Failed!", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener { exception ->
+            Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG).show()
+        }
+
+    }
+
+    fun goToLogin(view: View){
+        val intent= Intent(this,LoginActivity::class.java)
+        startActivity(intent)
     }
 }
