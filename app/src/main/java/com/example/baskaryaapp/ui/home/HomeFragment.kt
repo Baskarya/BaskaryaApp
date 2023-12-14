@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.FragmentHomeBinding
-import com.example.baskaryaapp.ui.batikpedia.BatikpediaActivity
+import com.example.baskaryaapp.ui.article.ArticleFragment
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
 
 
@@ -21,9 +21,11 @@ class HomeFragment : Fragment() {
 
     private var binding : FragmentHomeBinding? = null
     lateinit var rvBatik : RecyclerView
+    lateinit var rvArticle :RecyclerView
   lateinit var vpSlider: ViewPager
   lateinit var notif : ImageView
   lateinit var morebp:TextView
+  lateinit var morear:TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +39,7 @@ class HomeFragment : Fragment() {
 
 
         notif.setOnClickListener{
-            val intent=Intent(activity,BatikpediaActivity::class.java)
+            val intent=Intent(activity,BatikpediaFragment::class.java)
             startActivity(intent)
         }
 
@@ -48,7 +50,7 @@ class HomeFragment : Fragment() {
 //        }
 //        kalau ini kemungkinan nanti kita ganti logo aja
 
-
+        morear =view.findViewById(R.id.tv_moreTa)
         morebp =view.findViewById(R.id.tv_morebp)
 //        ubah jadi activity bang
 //        morebp.setOnClickListener{
@@ -64,7 +66,15 @@ class HomeFragment : Fragment() {
             // fragmentTransaction.addToBackStack("BatikpediaFragment")
             fragmentTransaction.commit()
         }
-
+        morear.setOnClickListener {
+            val articleFragment = ArticleFragment()
+            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+            // Replace the current fragment with BatikpediaFragment
+            fragmentTransaction.replace(R.id.navhost, articleFragment)
+            // You can add the fragment to the back stack if needed
+            // fragmentTransaction.addToBackStack("BatikpediaFragment")
+            fragmentTransaction.commit()
+        }
         val arrSlider= ArrayList<Int>()
         arrSlider.add(R.drawable.baskarya_logo)
         arrSlider.add(R.drawable.login_banner)
@@ -73,14 +83,25 @@ class HomeFragment : Fragment() {
         var adapterSlider=AdapterSlider(arrSlider,activity)
         vpSlider.adapter=adapterSlider
 
+        //batik
         val lm =LinearLayoutManager(activity)
         lm.orientation =LinearLayoutManager.HORIZONTAL
         rvBatik=view.findViewById(R.id.idRVCourses)
 
-        val adapterBatik = CoursesAdapter(ArrayBatik,activity)
+        val adapterBatik = HomeAdapter(ArrayBatik,activity)
         rvBatik.setHasFixedSize(true)
         rvBatik.layoutManager = lm
         rvBatik.adapter = adapterBatik
+
+        //article
+        val lmarticle = LinearLayoutManager(activity)
+        lmarticle.orientation = LinearLayoutManager.VERTICAL
+        rvArticle = view.findViewById(R.id.RVArticle)
+
+        val adapterArticle = AdapterArticle(ArrayArticle,activity)
+        rvArticle.setHasFixedSize(true)
+        rvArticle.layoutManager =lmarticle
+        rvArticle.adapter=adapterArticle
 
 
      return view
@@ -116,6 +137,32 @@ class HomeFragment : Fragment() {
 
 
         return courseList
+    }
+
+    val ArrayArticle:ArrayList<ArticleModel>get(){
+        val articleList =ArrayList<ArticleModel>()
+
+        val articleList1 = ArticleModel()
+        articleList1.articleName = "Android Development"
+        articleList1.articleIsi = "Ini isi article"
+        articleList1.articleImg =R.drawable.baskarya_logo
+
+        val articleList2 = ArticleModel()
+        articleList2.articleName = "Android Development"
+        articleList2.articleIsi = "Ini isi article"
+        articleList2.articleImg =R.drawable.baskarya_logo
+
+        val articleList3 = ArticleModel()
+        articleList3.articleName = "Android Development"
+        articleList3.articleIsi = "Ini isi article"
+        articleList3.articleImg =R.drawable.baskarya_logo
+
+
+        articleList.add(articleList1)
+        articleList.add(articleList2)
+        articleList.add(articleList3)
+
+        return articleList
     }
 
     override fun onDestroyView() {
