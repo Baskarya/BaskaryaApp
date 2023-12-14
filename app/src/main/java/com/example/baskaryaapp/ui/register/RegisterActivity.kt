@@ -83,19 +83,6 @@ class RegisterActivity : AppCompatActivity() {
         val email= binding.emailEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
 
-//        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
-//            if(task.isSuccessful){
-//                val intent= Intent(this,LoginActivity::class.java)
-//                startActivity(intent)
-//                finish()
-//            }
-//            else {
-//                Toast.makeText(this, "Singed Up Failed!", Toast.LENGTH_SHORT).show()
-//            }
-//        }.addOnFailureListener { exception ->
-//            Toast.makeText(applicationContext,exception.localizedMessage,Toast.LENGTH_LONG).show()
-//        }
-
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val user = auth.currentUser
@@ -110,10 +97,5 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG).show()
         }
 
-    }
-
-    fun goToLogin(view: View){
-        val intent= Intent(this,LoginActivity::class.java)
-        startActivity(intent)
     }
 }

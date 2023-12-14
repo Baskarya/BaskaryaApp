@@ -78,21 +78,6 @@ class LoginActivity : AppCompatActivity() {
         }.start()
     }
 
-//    fun login(view: View){
-//        val email = binding.emailEditText.text.toString()
-//        val password = binding.emailEditText.text.toString()
-//
-//        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
-//            if(task.isSuccessful){
-//                val intent= Intent(this,MainActivity::class.java)
-//                startActivity(intent)
-//                finish()
-//            }
-//        }.addOnFailureListener { exception ->
-//            Toast.makeText(applicationContext,exception.localizedMessage, Toast.LENGTH_LONG).show()
-//        }
-//    }
-
     private fun login() {
         val email = binding.emailEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
@@ -126,10 +111,5 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-    }
-
-    fun goToRegister(){
-        val intent= Intent(this,RegisterActivity::class.java)
-        startActivity(intent)
     }
 }

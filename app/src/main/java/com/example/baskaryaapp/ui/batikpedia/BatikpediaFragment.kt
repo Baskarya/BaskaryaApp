@@ -73,11 +73,19 @@ class BatikpediaFragment : Fragment() {
         batikpediaFragmentViewModel.lisBatik.observe(requireActivity()) { listBatik ->
             setBatikData(listBatik)
         }
+
+        batikpediaFragmentViewModel.isLoading.observe(requireActivity()) { loading ->
+            showLoading(loading)
+        }
     }
 
     private fun setBatikData(items: List<DataItem>) {
         val adapter = BatikRVAdapter()
         adapter.submitList(items)
         binding.idRVCourses.adapter = adapter
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
