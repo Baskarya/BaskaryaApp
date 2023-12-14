@@ -21,7 +21,7 @@
         <!--on below line we are creating
             a simple image view-->
         <ImageView
-            android:id="@+id/idIVCourse"
+            android:id="@+id/idIVBatik"
             android:layout_width="88dp"
             android:layout_height="88dp"
             android:layout_gravity="center"
@@ -33,7 +33,7 @@
         <!--on below line we are creating
             a simple text view-->
         <TextView
-            android:id="@+id/idTVCourse"
+            android:id="@+id/idTVBatik"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

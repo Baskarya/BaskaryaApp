@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.FragmentHomeBinding
-import com.example.baskaryaapp.ui.batikpedia.BatikpediaActivity
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
 
 
@@ -32,14 +31,6 @@ class HomeFragment : Fragment() {
     ): View? {
         val view:View=inflater.inflate(R.layout.fragment_home,container,false)
         vpSlider=view.findViewById(R.id.view_pager)
-
-        notif=view.findViewById(R.id.iv_notif)
-
-
-        notif.setOnClickListener{
-            val intent=Intent(activity,BatikpediaActivity::class.java)
-            startActivity(intent)
-        }
 
 //        notif=view.findViewById(R.id.iv_notif)
 //        notif.setOnClickListener{
