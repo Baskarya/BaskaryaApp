@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_1"
-    tools:context=".ui.batikpedia.BatikpediaActivity">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/titleTextView"
@@ -40,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleTextView"
-        tools:listitem="@layout/item_batik_list" />
+        tools:listitem="@layout/item_list_batik" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

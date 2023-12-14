@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.ActivityMainBinding
+import com.example.baskaryaapp.ui.article.ArticleFragment
+import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
 import com.example.baskaryaapp.ui.home.HomeFragment
 import com.example.baskaryaapp.ui.login.LoginActivity
 import com.example.baskaryaapp.ui.setting.SettingFragment
@@ -54,8 +56,9 @@ class MainActivity : AppCompatActivity() {
         navview.setOnItemSelectedListener{
             when(it.itemId){
                 R.id.home->replace(HomeFragment())
-                R.id.article->replace(HomeFragment())//Article Fragment
-                R.id.bookmark->replace(HomeFragment())//Bookmark Fragment
+                R.id.article->replace(ArticleFragment())
+                R.id.bookmark->replace(BatikpediaFragment())//Tes
+//                R.id.bookmark->replace(HomeFragment())//Bookmark Fragment
                 R.id.Settings->replace(SettingFragment())
             }
             true

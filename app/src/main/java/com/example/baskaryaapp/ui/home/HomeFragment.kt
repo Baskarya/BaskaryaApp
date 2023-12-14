@@ -14,6 +14,8 @@ import androidx.viewpager.widget.ViewPager
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.FragmentHomeBinding
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaActivity
+import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
+
 
 class HomeFragment : Fragment() {
 
@@ -30,6 +32,7 @@ class HomeFragment : Fragment() {
     ): View? {
         val view:View=inflater.inflate(R.layout.fragment_home,container,false)
         vpSlider=view.findViewById(R.id.view_pager)
+
         notif=view.findViewById(R.id.iv_notif)
 
 
@@ -38,10 +41,28 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+//        notif=view.findViewById(R.id.iv_notif)
+//        notif.setOnClickListener{
+//            val intent=Intent(activity,BatikpediaFragment::class.java)
+//            startActivity(intent)
+//        }
+//        kalau ini kemungkinan nanti kita ganti logo aja
+
+
         morebp =view.findViewById(R.id.tv_morebp)
-        morebp.setOnClickListener{
-            val intent=Intent(activity,BatikpediaActivity::class.java)
-            startActivity(intent)
+//        ubah jadi activity bang
+//        morebp.setOnClickListener{
+//            val intent=Intent(activity,BatikpediaFragment::class.java)
+//            startActivity(intent)
+//        }
+        morebp.setOnClickListener {
+            val batikpediaFragment = BatikpediaFragment()
+            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+            // Replace the current fragment with BatikpediaFragment
+            fragmentTransaction.replace(R.id.navhost, batikpediaFragment)
+            // You can add the fragment to the back stack if needed
+            // fragmentTransaction.addToBackStack("BatikpediaFragment")
+            fragmentTransaction.commit()
         }
 
         val arrSlider= ArrayList<Int>()

@@ -41,10 +41,14 @@ class LoginActivity : AppCompatActivity() {
 //        }
 
 //        ini tes
+
         binding.loginButton.setOnClickListener{
-//            val intent = Intent(this@LoginActivity, BatikpediaActivity::class.java)
-//            startActivity(intent)
             login()
+        }
+
+        binding.signupButton.setOnClickListener{
+            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(intent)
         }
 
         checkUserSession()
@@ -65,8 +69,9 @@ class LoginActivity : AppCompatActivity() {
             ObjectAnimator.ofFloat(binding.passwordTextView, View.ALPHA, 1f).setDuration(100)
         val passwordEditTextLayout =
             ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 1f).setDuration(100)
-        val signup = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 1f).setDuration(100)
-
+        val login = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 1f).setDuration(100)
+        val line = ObjectAnimator.ofFloat(binding.horizontalLine, View.ALPHA, 1f).setDuration(100)
+        val signup = ObjectAnimator.ofFloat(binding.textSignup, View.ALPHA, 1f).setDuration(100)
 
         AnimatorSet().apply {
             playSequentially(
@@ -75,26 +80,14 @@ class LoginActivity : AppCompatActivity() {
                 emailEditTextLayout,
                 passwordTextView,
                 passwordEditTextLayout,
-                signup
+                login,
+                line,
+                signup,
+
             )
             startDelay = 100
         }.start()
     }
-
-//    fun login(view: View){
-//        val email = binding.emailEditText.text.toString()
-//        val password = binding.emailEditText.text.toString()
-//
-//        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
-//            if(task.isSuccessful){
-//                val intent= Intent(this,MainActivity::class.java)
-//                startActivity(intent)
-//                finish()
-//            }
-//        }.addOnFailureListener { exception ->
-//            Toast.makeText(applicationContext,exception.localizedMessage, Toast.LENGTH_LONG).show()
-//        }
-//    }
 
     private fun login() {
         val email = binding.emailEditText.text.toString()
@@ -129,10 +122,5 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-    }
-
-    fun goToRegister(){
-        val intent= Intent(this,RegisterActivity::class.java)
-        startActivity(intent)
     }
 }

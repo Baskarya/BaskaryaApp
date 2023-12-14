@@ -27,9 +27,12 @@ class RegisterActivity : AppCompatActivity() {
         playAnimation()
 
         binding.signupButton.setOnClickListener{
-//            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-//            startActivity(intent)
             register()
+        }
+
+        binding.loginButton.setOnClickListener{
+            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+            startActivity(intent)
         }
 
         auth= FirebaseAuth.getInstance()
@@ -56,7 +59,8 @@ class RegisterActivity : AppCompatActivity() {
         val passwordEditTextLayout =
             ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 1f).setDuration(100)
         val signup = ObjectAnimator.ofFloat(binding.signupButton, View.ALPHA, 1f).setDuration(100)
-
+        val line = ObjectAnimator.ofFloat(binding.horizontalLine, View.ALPHA, 1f).setDuration(100)
+        val login = ObjectAnimator.ofFloat(binding.textLogin, View.ALPHA, 1f).setDuration(100)
 
         AnimatorSet().apply {
             playSequentially(
@@ -67,7 +71,9 @@ class RegisterActivity : AppCompatActivity() {
                 emailEditTextLayout,
                 passwordTextView,
                 passwordEditTextLayout,
-                signup
+                signup,
+                line,
+                login
             )
             startDelay = 100
         }.start()
@@ -76,19 +82,6 @@ class RegisterActivity : AppCompatActivity() {
     fun register(){
         val email= binding.emailEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
-
-//        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
-//            if(task.isSuccessful){
-//                val intent= Intent(this,LoginActivity::class.java)
-//                startActivity(intent)
-//                finish()
-//            }
-//            else {
-//                Toast.makeText(this, "Singed Up Failed!", Toast.LENGTH_SHORT).show()
-//            }
-//        }.addOnFailureListener { exception ->
-//            Toast.makeText(applicationContext,exception.localizedMessage,Toast.LENGTH_LONG).show()
-//        }
 
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -104,10 +97,5 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG).show()
         }
 
-    }
-
-    fun goToLogin(view: View){
-        val intent= Intent(this,LoginActivity::class.java)
-        startActivity(intent)
     }
 }
