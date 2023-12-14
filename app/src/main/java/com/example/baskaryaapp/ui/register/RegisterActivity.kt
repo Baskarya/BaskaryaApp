@@ -27,9 +27,12 @@ class RegisterActivity : AppCompatActivity() {
         playAnimation()
 
         binding.signupButton.setOnClickListener{
-//            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-//            startActivity(intent)
             register()
+        }
+
+        binding.loginButton.setOnClickListener{
+            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+            startActivity(intent)
         }
 
         auth= FirebaseAuth.getInstance()
@@ -56,7 +59,8 @@ class RegisterActivity : AppCompatActivity() {
         val passwordEditTextLayout =
             ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 1f).setDuration(100)
         val signup = ObjectAnimator.ofFloat(binding.signupButton, View.ALPHA, 1f).setDuration(100)
-
+        val line = ObjectAnimator.ofFloat(binding.horizontalLine, View.ALPHA, 1f).setDuration(100)
+        val login = ObjectAnimator.ofFloat(binding.textLogin, View.ALPHA, 1f).setDuration(100)
 
         AnimatorSet().apply {
             playSequentially(
@@ -67,7 +71,9 @@ class RegisterActivity : AppCompatActivity() {
                 emailEditTextLayout,
                 passwordTextView,
                 passwordEditTextLayout,
-                signup
+                signup,
+                line,
+                login
             )
             startDelay = 100
         }.start()

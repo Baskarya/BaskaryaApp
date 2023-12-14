@@ -1,9 +1,6 @@
 package com.example.baskaryaapp.ui.batikpedia
 
 data class BatikRVModal (
-    // on below line we are creating a
-    // two variable one for course name
-    // and other for course image.
-    var courseName: String,
-    var courseImg: Int
+    var batikName: String,
+    var batikImg: Int,
 )
