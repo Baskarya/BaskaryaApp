@@ -35,7 +35,7 @@
 
         <!--on below line we are creating a recycler view-->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/idRVCourses"
+            android:id="@+id/idRVBatik"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

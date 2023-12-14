@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.FragmentHomeBinding
+
 import com.example.baskaryaapp.ui.article.ArticleFragment
+
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
 
 
@@ -42,6 +44,7 @@ class HomeFragment : Fragment() {
             val intent=Intent(activity,BatikpediaFragment::class.java)
             startActivity(intent)
         }
+
 
 //        notif=view.findViewById(R.id.iv_notif)
 //        notif.setOnClickListener{

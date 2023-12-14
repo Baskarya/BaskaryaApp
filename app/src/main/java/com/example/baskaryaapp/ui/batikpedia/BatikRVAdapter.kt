@@ -25,13 +25,17 @@ class BatikRVAdapter : ListAdapter<DataItem, BatikRVAdapter.ListViewHolder>(DIFF
     }
 
     class ListViewHolder(private val binding: ItemListBatikBinding) : RecyclerView.ViewHolder(binding.root) {
+
         //        val courseNameTV: TextView = itemView.findViewById(R.id.idTVBatik)
+
+//        val courseNameTV: TextView = itemView.findViewById(R.id.idTVBatik)
+
 //        val courseIV: ImageView = itemView.findViewById(R.id.idIVBatik)
         fun bind(batik: DataItem){
             Glide.with(binding.root.context)
                 .load(batik.dataDokumen?.url)
-                .into(binding.idIVCourse)
-            binding.idTVCourse.text = batik.dataDokumen?.title
+                .into(binding.idIVBatik)
+            binding.idTVBatik.text = batik.dataDokumen?.title
         }
     }
 

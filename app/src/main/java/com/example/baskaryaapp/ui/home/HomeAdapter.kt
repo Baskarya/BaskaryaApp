@@ -14,8 +14,8 @@ class HomeAdapter(var data: ArrayList<BatikRvModel>,var context: Activity?):Recy
 
 
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view) {
-        val courseName = view.findViewById<TextView>(R.id.idTVCourse)
-        val courseImg = view.findViewById<ImageView>(R.id.idIVCourse)
+        val courseName = view.findViewById<TextView>(R.id.idTVBatik)
+        val courseImg = view.findViewById<ImageView>(R.id.idIVBatik)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
