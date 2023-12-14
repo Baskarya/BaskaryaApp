@@ -1,6 +1,5 @@
 package com.example.baskaryaapp.ui.batikpedia
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.baskaryaapp.R
 
-class BatikRVAdapter (
+class BatikRVAdapter(
     // on below line we are passing variables
     // as course list and context
     private val courseList: ArrayList<BatikRVModal>,
-    private val context: Context
+    private val context: BatikpediaActivity
 ) : RecyclerView.Adapter<BatikRVAdapter.CourseViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,

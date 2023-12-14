@@ -6,12 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.baskaryaapp.databinding.ActivityLoginBinding
-import com.example.baskaryaapp.ui.batikpedia.BatikpediaActivity
 import com.example.baskaryaapp.ui.main.MainActivity
 import com.example.baskaryaapp.ui.register.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -35,6 +33,10 @@ class LoginActivity : AppCompatActivity() {
 
 //        binding.loginButton.setOnClickListener{
 //            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//            startActivity(intent)
+//        }
+//        binding.signup.setOnClickListener{
+//            val intent =Intent(this,RegisterActivity::class.java)
 //            startActivity(intent)
 //        }
 
