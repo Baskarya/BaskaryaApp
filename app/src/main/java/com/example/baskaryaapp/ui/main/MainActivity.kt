@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+
     }
     private fun replace (fragment : Fragment){
         val fragmentManager=supportFragmentManager
@@ -78,7 +79,6 @@ class MainActivity : AppCompatActivity() {
         }else{super.onActivityResult(requestCode, resultCode, data)
 
         }
-
     }
 
     private fun logoutUser() {

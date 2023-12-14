@@ -43,6 +43,7 @@ android {
 
 dependencies {
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
+    implementation("androidx.databinding:databinding-runtime:8.2.0")
     val cameraxVersion = "1.2.3"
 
     implementation("androidx.core:core-ktx:1.9.0")
@@ -84,6 +85,6 @@ dependencies {
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
-    
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
 
 }

@@ -19,6 +19,8 @@
     <string name="galery">Gallery</string>
     <string name="scan">Scan</string>
     <string name="setting">Setting</string>
+    <string name="search">Search</string>
+    <string name="more">More</string>
 
     <string name="title_text">Ini judul</string>
     <string name="description_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean volutpat tempor odio sit amet placerat. Proin id ante sit amet lorem pellentesque condimentum sed eget sapien. Praesent ut lobortis quam, vitae faucibus urna. Suspendisse bibendum aliquam arcu. Aenean suscipit rhoncus tortor, quis egestas quam malesuada et. Sed turpis leo, dignissim nec auctor eu, euismod at mauris. Aenean sodales erat a commodo pharetra. Sed ac nisi erat. Mauris at neque id nunc aliquet ultrices a et enim. Donec ut sagittis dolor. Aliquam gravida lorem eu ullamcorper consequat. Sed id tellus vel velit cursus hendrerit. Duis quis massa a elit aliquet sollicitudin. Donec laoreet nulla sit amet augue aliquam imperdiet sit amet sed justo. Donec nulla massa, dignissim id nulla vitae, scelerisque gravida ligula. Etiam imperdiet, lacus sodales tempus consequat, diam diam suscipit odio, eu bibendum ligula ipsum ac felis.</string>
