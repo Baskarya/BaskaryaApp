@@ -31,6 +31,17 @@ class LoginActivity : AppCompatActivity() {
 
         playAnimation()
 
+//        binding.loginButton.setOnClickListener{
+//            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//            startActivity(intent)
+//        }
+//        binding.signup.setOnClickListener{
+//            val intent =Intent(this,RegisterActivity::class.java)
+//            startActivity(intent)
+//        }
+
+//        ini tes
+
         binding.loginButton.setOnClickListener{
             login()
         }

@@ -116,6 +116,16 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout"
         tools:alpha="100" />
 
+<!--    <TextView-->
+<!--        android:id="@+id/signup"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="363dp"-->
+<!--        android:text="register"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/loginButton" />-->
+
     <View
         android:id="@+id/horizontal_line"
         android:layout_width="match_parent"
@@ -150,6 +160,7 @@
             android:textStyle="bold"
             android:text="@string/signup" />
     </LinearLayout>
+
 
     <ProgressBar
         android:id="@+id/progressBar"

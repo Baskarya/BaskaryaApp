@@ -13,10 +13,33 @@ import com.example.baskaryaapp.data.response.DataItem
 import com.example.baskaryaapp.databinding.ItemListBatikBinding
 
 
+class BatikRVAdapter(
+    // on below line we are passing variables
+    // as course list and context
+    private val courseList: ArrayList<BatikRVModal>,
+    private val context: BatikpediaActivity
+) : RecyclerView.Adapter<BatikRVAdapter.CourseViewHolder>() {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BatikRVAdapter.CourseViewHolder {
+        // this method is use to inflate the layout file
+        // which we have created for our recycler view.
+        // on below line we are inflating our layout file.
+        val itemView = LayoutInflater.from(parent.context).inflate(
+            R.layout.item_batik_list,
+            parent, false
+        )
+        // at last we are returning our view holder
+        // class with our item View File.
+        return CourseViewHolder(itemView)
+
+
 class BatikRVAdapter : ListAdapter<DataItem, BatikRVAdapter.ListViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BatikRVAdapter.ListViewHolder {
         val binding = ItemListBatikBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
+
     }
 
     override fun onBindViewHolder(holder: BatikRVAdapter.ListViewHolder, position: Int) {
