@@ -32,4 +32,11 @@
     <string name="already_have_an_accont">Already have an accont? </string>
     <string name="dont_have_an_account">Don\'t have an account? </string>
     <string name="bookmark">Bookmark</string>
+
+    <string name="uname">Username</string>
+    <string name="recomendation">Recomendation</string>
+    <string name="result">Results</string>
+    <string name="notes">Notes</string>
+    <string name="isinote">Click the batik result card to the next customization page</string>
+    <string name="batik">Batik</string>
 </resources>
