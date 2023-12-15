@@ -39,4 +39,12 @@
     <string name="notes">Notes</string>
     <string name="isinote">Click the batik result card to the next customization page</string>
     <string name="batik">Batik</string>
+    <string name="custom">Costumization</string>
+    <string name="namabatik">Nama Batik :</string>
+    <string name="desc">Deskripsi : </string>
+    <string name="upload">Upload Image</string>
+    <string name="logout">Logout</string>
+    <string name="language">Language</string>
+    <string name="mode">Mode</string>
+    <string name="isinote2">Make sure the photo captures the batik pattern you want, otherwise the result will not be satisfactory</string>
 </resources>

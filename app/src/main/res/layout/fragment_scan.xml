@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.recomendation.RecomendationFragment"
-    tools:ignore="MissingDefaultResource"
-    android:background="@drawable/background_2">
+    android:id="@+id/scan"
+    android:background="@drawable/background_1"
+    tools:context=".ui.scan.ScanFragment">
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/recomendation"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/upload"
         android:textColor="@color/color_5"
         android:textSize="30dp"
-        android:gravity="center"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
@@ -29,37 +29,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/result"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+    <ImageView
+        android:id="@+id/iv_item_image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="80dp"
+        android:importantForAccessibility="no"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_place_holder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="20dp"
-        android:paddingTop="25dp"
-        android:paddingStart="16dp"
-        android:textColor="@color/color_5"
-        android:textStyle="bold"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/idRVBatik"
+    <LinearLayout
+        android:id="@+id/ll_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_result"
-        tools:listitem="@layout/item_list_batik_notext" />
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/iv_item_image"
+        tools:layout_editor_absoluteX="0dp">
 
+        <Button
+            android:id="@+id/btn_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:text="@string/camera"
+            android:backgroundTint="@color/color_3"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/btn_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/galery"
+            android:backgroundTint="@color/color_3"
+            tools:ignore="ButtonStyle" />
+
+    </LinearLayout>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:id="@+id/card_view"
         android:padding="16dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
@@ -67,7 +86,8 @@
         app:cardBackgroundColor="@color/color_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idRVBatik">
+        app:layout_constraintTop_toBottomOf="@+id/ll_button"
+        android:paddingBottom="10dp">
 
         <!-- Isi card note di sini -->
         <TextView
@@ -84,15 +104,26 @@
             android:id="@+id/tv_isinotes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/isinote"
+            android:text="@string/isinote2"
             android:textColor="@color/color_5"
             android:textSize="20dp"
             android:paddingTop="10dp"
             android:layout_marginTop="30dp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:paddingBottom="20dp"/>
 
     </androidx.cardview.widget.CardView>
 
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginEnd="75dp"
+        android:text="@string/upload"
+        android:backgroundTint="@color/color_3"
+        app:layout_constraintTop_toBottomOf="@id/card_view" />
 
     <ProgressBar
         android:id="@+id/progressBar"

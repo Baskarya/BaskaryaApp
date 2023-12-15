@@ -1,4 +1,4 @@
-package com.example.baskaryaapp.ui.recomendation
+package com.example.baskaryaapp.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,16 +10,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.baskaryaapp.data.api.ApiConfig
 import com.example.baskaryaapp.data.repo.BatikRepository
 import com.example.baskaryaapp.data.response.DataItem
-import com.example.baskaryaapp.databinding.FragmentRecomendationBinding
+import com.example.baskaryaapp.databinding.FragmentSearchBatikBinding
 import com.example.baskaryaapp.ui.BatikViewModelFactory
+import com.example.baskaryaapp.ui.batikpedia.BatikRVAdapter
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaViewModel
 
-class RecomendationFragment : Fragment() {
-    private lateinit var binding: FragmentRecomendationBinding
+class SearchBatikFragment : Fragment() {
+    private lateinit var binding: FragmentSearchBatikBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = FragmentRecomendationBinding.inflate(inflater, container, false)
+        binding = FragmentSearchBatikBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -30,7 +31,9 @@ class RecomendationFragment : Fragment() {
         val factory = BatikViewModelFactory.getInstance(repository)
         val batikpediaViewModel = ViewModelProvider(this, factory)[BatikpediaViewModel::class.java]
 
-
+        // on below line we are creating a variable
+        // for our grid layout manager and specifying
+        // column count as 2
         val layoutManager = GridLayoutManager(requireContext(), 3)
 
         binding.idRVBatik.layoutManager = layoutManager
@@ -45,7 +48,7 @@ class RecomendationFragment : Fragment() {
     }
 
     private fun setBatikData(items: List<DataItem>) {
-        val adapter = RecomentationAdapter()
+        val adapter = BatikRVAdapter()
         adapter.submitList(items)
         binding.idRVBatik.adapter = adapter
     }

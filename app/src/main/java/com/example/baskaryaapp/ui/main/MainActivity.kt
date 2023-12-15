@@ -3,22 +3,19 @@ package com.example.baskaryaapp.ui.main
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
-import android.content.ActivityNotFoundException
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.provider.MediaStore
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.ActivityMainBinding
 import com.example.baskaryaapp.ui.article.ArticlesFragment
 import com.example.baskaryaapp.ui.bookmark.BookmarkFragment
 import com.example.baskaryaapp.ui.home.HomeFragment
-import com.example.baskaryaapp.ui.login.LoginActivity
+import com.example.baskaryaapp.ui.scan.ScanFragment
 import com.example.baskaryaapp.ui.setting.SettingFragment
-import com.google.firebase.auth.FirebaseAuth
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -36,19 +33,21 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE)
 
-        checkUserSession()
+//        checkUserSession()
 
-        binding.logout.setOnClickListener {
-            logoutUser()
-        }
+//        binding.logout.setOnClickListener {
+//            logoutUser()
+//        }
 
         binding.fab.setOnClickListener{
-            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            try {
-                startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE)
-            }catch (e:ActivityNotFoundException){
-                Toast.makeText(this,"Error : "+ e.localizedMessage,Toast.LENGTH_SHORT).show()
-            }
+            val scanFragment = ScanFragment()
+            val fragmentManager = supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.navhost, scanFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+
+//            binding.logout.visibility=View.GONE
         }
 
         navview =findViewById(R.id.bottomNavigationView)
@@ -81,30 +80,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun logoutUser() {
-        auth.signOut()
-
-        // Clear user session
-        clearUserSession()
-
-        // Redirect to LoginActivity
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun clearUserSession() {
-        // Mark the user as logged out
-        sharedPreferences.edit().putBoolean("isLoggedIn", false).apply()
-    }
-
-    private fun checkUserSession() {
-        // Check if the user is still logged in
-        if (!sharedPreferences.getBoolean("isLoggedIn", false)) {
-            // If not logged in, redirect to LoginActivity
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-    }
+//    private fun logoutUser() {
+//        auth.signOut()
+//
+//        // Clear user session
+//        clearUserSession()
+//
+//        // Redirect to LoginActivity
+//        val intent = Intent(this, LoginActivity::class.java)
+//        startActivity(intent)
+//        finish()
+//    }
+//
+//    private fun clearUserSession() {
+//        // Mark the user as logged out
+//        sharedPreferences.edit().putBoolean("isLoggedIn", false).apply()
+//    }
+//
+//    private fun checkUserSession() {
+//        // Check if the user is still logged in
+//        if (!sharedPreferences.getBoolean("isLoggedIn", false)) {
+//            // If not logged in, redirect to LoginActivity
+//            val intent = Intent(this, LoginActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+//    }
 }
