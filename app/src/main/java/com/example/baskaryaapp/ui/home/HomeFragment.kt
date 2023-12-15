@@ -1,6 +1,6 @@
 package com.example.baskaryaapp.ui.home
 
-import android.content.Intent
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.FragmentHomeBinding
-
 import com.example.baskaryaapp.ui.article.ArticlesFragment
-
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
+import com.example.baskaryaapp.ui.search.SearchResultFragment
 
 
 class HomeFragment : Fragment() {
@@ -38,44 +37,27 @@ class HomeFragment : Fragment() {
         vpSlider=view.findViewById(R.id.view_pager)
 
         notif=view.findViewById(R.id.iv_notif)
-
-
-        notif.setOnClickListener{
-            val intent=Intent(activity,BatikpediaFragment::class.java)
-            startActivity(intent)
+        notif.setOnClickListener {
+            val tesFragment = SearchResultFragment()
+            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.navhost, tesFragment)
+            fragmentTransaction.commit()
         }
-
-
-//        notif=view.findViewById(R.id.iv_notif)
-//        notif.setOnClickListener{
-//            val intent=Intent(activity,BatikpediaFragment::class.java)
-//            startActivity(intent)
-//        }
 //        kalau ini kemungkinan nanti kita ganti logo aja
 
         morear =view.findViewById(R.id.tv_moreTa)
         morebp =view.findViewById(R.id.tv_morebp)
-//        ubah jadi activity bang
-//        morebp.setOnClickListener{
-//            val intent=Intent(activity,BatikpediaFragment::class.java)
-//            startActivity(intent)
-//        }
+
         morebp.setOnClickListener {
             val batikpediaFragment = BatikpediaFragment()
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            // Replace the current fragment with BatikpediaFragment
             fragmentTransaction.replace(R.id.navhost, batikpediaFragment)
-            // You can add the fragment to the back stack if needed
-            // fragmentTransaction.addToBackStack("BatikpediaFragment")
             fragmentTransaction.commit()
         }
         morear.setOnClickListener {
             val articleFragment = ArticlesFragment()
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            // Replace the current fragment with BatikpediaFragment
             fragmentTransaction.replace(R.id.navhost, articleFragment)
-            // You can add the fragment to the back stack if needed
-            // fragmentTransaction.addToBackStack("BatikpediaFragment")
             fragmentTransaction.commit()
         }
         val arrSlider= ArrayList<Int>()
