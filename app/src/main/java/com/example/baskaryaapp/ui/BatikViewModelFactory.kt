@@ -1,6 +1,5 @@
 package com.example.baskaryaapp.ui
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.baskaryaapp.data.repo.BatikRepository
@@ -26,20 +25,20 @@ import com.example.baskaryaapp.ui.batikpedia.BatikpediaViewModel
 //    }
 //}
 
-class ViewModelFactory private constructor(private val batikRepository: BatikRepository) : ViewModelProvider.NewInstanceFactory() {
+class BatikViewModelFactory private constructor(private val batikRepository: BatikRepository) : ViewModelProvider.NewInstanceFactory() {
 
     companion object {
         @Volatile
-        private var INSTANCE: ViewModelFactory? = null
+        private var INSTANCE: BatikViewModelFactory? = null
 
         @JvmStatic
-        fun getInstance(batikRepository: BatikRepository): ViewModelFactory {
+        fun getInstance(batikRepository: BatikRepository): BatikViewModelFactory {
             if (INSTANCE == null) {
-                synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(batikRepository)
+                synchronized(BatikViewModelFactory::class.java) {
+                    INSTANCE = BatikViewModelFactory(batikRepository)
                 }
             }
-            return INSTANCE as ViewModelFactory
+            return INSTANCE as BatikViewModelFactory
         }
     }
 
