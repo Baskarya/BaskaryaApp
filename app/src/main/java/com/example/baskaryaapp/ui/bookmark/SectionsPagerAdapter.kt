@@ -4,6 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.baskaryaapp.ui.article.ArticlesFragment
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
+import com.example.baskaryaapp.ui.customization.CustomizationFragment
+import com.example.baskaryaapp.ui.search.SearchArticleFragment
+import com.example.baskaryaapp.ui.search.SearchBatikFragment
 import com.example.baskaryaapp.ui.setting.SettingFragment
 
 class SectionsPagerAdapter(fragment: Fragment) :
@@ -12,9 +15,9 @@ class SectionsPagerAdapter(fragment: Fragment) :
     override fun createFragment(position: Int): Fragment {
         var fragment: Fragment? = null
         when (position) {
-            0 -> fragment = BatikpediaFragment()
-            1 -> fragment = ArticlesFragment()
-            2 -> fragment = SettingFragment()
+            0 -> fragment = CustomizationFragment()
+            1 -> fragment = SearchBatikFragment()
+            2 -> fragment = SearchArticleFragment()
         }
         return fragment as Fragment
     }

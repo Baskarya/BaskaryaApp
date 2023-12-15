@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baskaryaapp.data.api.ApiConfig
 import com.example.baskaryaapp.data.repo.ArticlesRepository
-import com.example.baskaryaapp.data.response.DataItem
+import com.example.baskaryaapp.data.response.ArticlesItem
+import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.FragmentSearchArticleBinding
 import com.example.baskaryaapp.ui.ArticlesViewModelFactory
 import com.example.baskaryaapp.ui.article.ArticlesAdapter
@@ -49,7 +50,7 @@ class SearchArticleFragment : Fragment() {
         }
     }
 
-    private fun setArticlesData(items: List<DataItem>) {
+    private fun setArticlesData(items: List<ArticlesItem>) {
         val adapter = ArticlesAdapter()
         adapter.submitList(items)
         binding.rvArticles.adapter = adapter
