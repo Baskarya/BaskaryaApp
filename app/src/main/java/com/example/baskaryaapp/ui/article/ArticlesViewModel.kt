@@ -6,12 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.baskaryaapp.data.repo.ArticlesRepository
-import com.example.baskaryaapp.data.response.DataItem
+import com.example.baskaryaapp.data.response.ArticlesItem
 import kotlinx.coroutines.launch
 
 class ArticlesViewModel(private val repository: ArticlesRepository) : ViewModel() {
-    private val _listArticles = MutableLiveData<List<DataItem>>()
-    val listArticles: LiveData<List<DataItem>> = _listArticles
+    private val _listArticles = MutableLiveData<List<ArticlesItem>>()
+    val listArticles: LiveData<List<ArticlesItem>> = _listArticles
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading

@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class BatikResponse(
 
 	@field:SerializedName("data")
-	val data: List<DataItem> = emptyList(),
+	val data: List<BatikItem> = emptyList(),
 
 	@field:SerializedName("error")
 	val error: Boolean? = null,
@@ -17,7 +17,7 @@ data class BatikResponse(
 )
 
 @Parcelize
-data class DataItem(
+data class BatikItem(
 
 	@field:SerializedName("origin")
 	val origin: String? = null,

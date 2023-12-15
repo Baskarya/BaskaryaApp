@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.baskaryaapp.data.api.ApiConfig.apiService
 import com.example.baskaryaapp.data.repo.BatikRepository
-import com.example.baskaryaapp.data.response.DataItem
+import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.FragmentBatikpediaBinding
 import com.example.baskaryaapp.ui.BatikViewModelFactory
 
@@ -45,7 +45,7 @@ class BatikpediaFragment : Fragment() {
         }
     }
 
-    private fun setBatikData(items: List<DataItem>) {
+    private fun setBatikData(items: List<BatikItem>) {
         val adapter = BatikRVAdapter()
         adapter.submitList(items)
         binding.idRVBatik.adapter = adapter

@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.baskaryaapp.data.response.DataItem
+import com.example.baskaryaapp.data.response.ArticlesItem
 import com.example.baskaryaapp.databinding.ItemListArticlesBinding
 import com.example.baskaryaapp.ui.detailArticle.DetailArticleActivity
 
-class ArticlesAdapter : ListAdapter<DataItem, ArticlesAdapter.ListViewHolder>(DIFF_CALLBACK){
+class ArticlesAdapter : ListAdapter<ArticlesItem, ArticlesAdapter.ListViewHolder>(DIFF_CALLBACK){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = ItemListArticlesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,7 +27,7 @@ class ArticlesAdapter : ListAdapter<DataItem, ArticlesAdapter.ListViewHolder>(DI
     }
 
     class ListViewHolder(private val binding: ItemListArticlesBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(articles: DataItem){
+        fun bind(articles: ArticlesItem){
             Glide.with(binding.root.context)
                 .load(articles.imageUrl)
                 .into(binding.imgItemPhoto)
@@ -43,8 +43,6 @@ class ArticlesAdapter : ListAdapter<DataItem, ArticlesAdapter.ListViewHolder>(DI
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                         itemView.context as Activity,
                         Pair(binding.imgItemPhoto, "image"),
-                        Pair(binding.tvItemTitle, "name"),
-                        Pair(binding.tvItemDescription, "description"),
                     )
 
                 itemView.context.startActivity(intentDetail, optionsCompat.toBundle())
@@ -54,17 +52,17 @@ class ArticlesAdapter : ListAdapter<DataItem, ArticlesAdapter.ListViewHolder>(DI
 
     companion object {
 
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItem>(){
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ArticlesItem>(){
             override fun areItemsTheSame(
-                oldItem: DataItem,
-                newItem: DataItem
+                oldItem: ArticlesItem,
+                newItem: ArticlesItem
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: DataItem,
-                newItem: DataItem
+                oldItem: ArticlesItem,
+                newItem: ArticlesItem
             ): Boolean {
                 return oldItem == newItem
             }

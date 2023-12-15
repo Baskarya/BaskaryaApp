@@ -10,14 +10,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.baskaryaapp.data.response.DataItem
+import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.ItemListBatikBinding
-import com.example.baskaryaapp.ui.article.ArticlesAdapter
-import com.example.baskaryaapp.ui.detailArticle.DetailArticleActivity
 import com.example.baskaryaapp.ui.detailBatik.DetailBatikActivity
 
 
-class BatikRVAdapter : ListAdapter<DataItem, BatikRVAdapter.ListViewHolder>(DIFF_CALLBACK) {
+class BatikRVAdapter : ListAdapter<BatikItem, BatikRVAdapter.ListViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = ItemListBatikBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
@@ -37,7 +35,7 @@ class BatikRVAdapter : ListAdapter<DataItem, BatikRVAdapter.ListViewHolder>(DIFF
 
 //        val courseNameTV: TextView = itemView.findViewById(R.id.idTVBatik)
 //        val courseIV: ImageView = itemView.findViewById(R.id.idIVBatik)
-        fun bind(batik: DataItem){
+        fun bind(batik: BatikItem){
             Glide.with(binding.root.context)
                 .load(batik?.imageUrl)
                 .into(binding.idIVBatik)
@@ -63,17 +61,17 @@ class BatikRVAdapter : ListAdapter<DataItem, BatikRVAdapter.ListViewHolder>(DIFF
 
     companion object {
 
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItem>(){
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BatikItem>(){
             override fun areItemsTheSame(
-                oldItem: DataItem,
-                newItem: DataItem
+                oldItem: BatikItem,
+                newItem: BatikItem
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: DataItem,
-                newItem: DataItem
+                oldItem: BatikItem,
+                newItem: BatikItem
             ): Boolean {
                 return oldItem == newItem
             }

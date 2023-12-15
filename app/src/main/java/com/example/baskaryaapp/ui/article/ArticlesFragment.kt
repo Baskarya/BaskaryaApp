@@ -10,13 +10,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baskaryaapp.data.api.ApiConfig
 import com.example.baskaryaapp.data.repo.ArticlesRepository
-import com.example.baskaryaapp.data.repo.BatikRepository
-import com.example.baskaryaapp.data.response.DataItem
+import com.example.baskaryaapp.data.response.ArticlesItem
 import com.example.baskaryaapp.databinding.FragmentArticlesBinding
 import com.example.baskaryaapp.ui.ArticlesViewModelFactory
-import com.example.baskaryaapp.ui.BatikViewModelFactory
-import com.example.baskaryaapp.ui.batikpedia.BatikRVAdapter
-import com.example.baskaryaapp.ui.batikpedia.BatikpediaViewModel
 
 class ArticlesFragment : Fragment() {
 
@@ -51,7 +47,7 @@ class ArticlesFragment : Fragment() {
         }
     }
 
-    private fun setArticlesData(items: List<DataItem>) {
+    private fun setArticlesData(items: List<ArticlesItem>) {
         val adapter = ArticlesAdapter()
         adapter.submitList(items)
         binding.rvArticles.adapter = adapter

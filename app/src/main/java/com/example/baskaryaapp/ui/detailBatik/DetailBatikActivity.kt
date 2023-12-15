@@ -3,8 +3,7 @@ package com.example.baskaryaapp.ui.detailBatik
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
-import com.example.baskaryaapp.R
-import com.example.baskaryaapp.data.response.DataItem
+import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.ActivityDetailBatikBinding
 
 class DetailBatikActivity : AppCompatActivity() {
@@ -15,7 +14,7 @@ class DetailBatikActivity : AppCompatActivity() {
         binding = ActivityDetailBatikBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val batik = intent.getParcelableExtra<DataItem>(EXTRA_BATIK)
+        val batik = intent.getParcelableExtra<BatikItem>(EXTRA_BATIK)
         batik?.let {
             Glide.with(this)
                 .load(it.imageUrl)
