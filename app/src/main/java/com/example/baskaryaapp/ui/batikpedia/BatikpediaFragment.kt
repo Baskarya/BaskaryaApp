@@ -11,7 +11,7 @@ import com.example.baskaryaapp.data.api.ApiConfig.apiService
 import com.example.baskaryaapp.data.repo.BatikRepository
 import com.example.baskaryaapp.data.response.DataItem
 import com.example.baskaryaapp.databinding.FragmentBatikpediaBinding
-import com.example.baskaryaapp.ui.ViewModelFactory
+import com.example.baskaryaapp.ui.BatikViewModelFactory
 
 class BatikpediaFragment : Fragment() {
     private lateinit var binding: FragmentBatikpediaBinding
@@ -26,8 +26,8 @@ class BatikpediaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val repository = BatikRepository.getInstance(apiService)
-        val factory = ViewModelFactory.getInstance(repository)
-        val batikpediaFragmentViewModel = ViewModelProvider(this, factory)[BatikpediaViewModel::class.java]
+        val factory = BatikViewModelFactory.getInstance(repository)
+        val batikpediaViewModel = ViewModelProvider(this, factory)[BatikpediaViewModel::class.java]
 
         // on below line we are creating a variable
         // for our grid layout manager and specifying
@@ -36,11 +36,11 @@ class BatikpediaFragment : Fragment() {
 
         binding.idRVBatik.layoutManager = layoutManager
 
-        batikpediaFragmentViewModel.lisBatik.observe(requireActivity()) { listBatik ->
+        batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
             setBatikData(listBatik)
         }
 
-        batikpediaFragmentViewModel.isLoading.observe(requireActivity()) { loading ->
+        batikpediaViewModel.isLoading.observe(requireActivity()) { loading ->
             showLoading(loading)
         }
     }

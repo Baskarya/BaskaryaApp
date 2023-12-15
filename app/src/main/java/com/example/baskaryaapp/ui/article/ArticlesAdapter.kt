@@ -1,4 +1,4 @@
-package com.example.baskaryaapp.ui.batikpedia
+package com.example.baskaryaapp.ui.article
 
 import android.app.Activity
 import android.content.Intent
@@ -11,54 +11,45 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.baskaryaapp.data.response.DataItem
-import com.example.baskaryaapp.databinding.ItemListBatikBinding
-import com.example.baskaryaapp.ui.article.ArticlesAdapter
+import com.example.baskaryaapp.databinding.ItemListArticlesBinding
 import com.example.baskaryaapp.ui.detailArticle.DetailArticleActivity
-import com.example.baskaryaapp.ui.detailBatik.DetailBatikActivity
 
+class ArticlesAdapter : ListAdapter<DataItem, ArticlesAdapter.ListViewHolder>(DIFF_CALLBACK){
 
-class BatikRVAdapter : ListAdapter<DataItem, BatikRVAdapter.ListViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val binding = ItemListBatikBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemListArticlesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-//        tes
-//        holder.courseNameTV.text = courseList.get(position).batikName
-//        holder.courseIV.setImageResource(courseList.get(position).batikImg)
-        val batik = getItem(position)
-        holder.bind(batik)
+        val articles = getItem(position)
+        holder.bind(articles)
     }
 
-    class ListViewHolder(private val binding: ItemListBatikBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        //        val courseNameTV: TextView = itemView.findViewById(R.id.idTVBatik)
-
-//        val courseNameTV: TextView = itemView.findViewById(R.id.idTVBatik)
-//        val courseIV: ImageView = itemView.findViewById(R.id.idIVBatik)
-        fun bind(batik: DataItem){
+    class ListViewHolder(private val binding: ItemListArticlesBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(articles: DataItem){
             Glide.with(binding.root.context)
-                .load(batik?.imageUrl)
-                .into(binding.idIVBatik)
-            binding.idTVBatik.text = batik?.title
+                .load(articles.imageUrl)
+                .into(binding.imgItemPhoto)
+            binding.tvItemTitle.text = articles.title
+//            binding.tvItemDescription.text = articles.content
 
             binding.root.setOnClickListener{
-                val intentDetail = Intent(binding.root.context, DetailBatikActivity::class.java)
-                intentDetail.putExtra(EXTRA_ID, batik.id)
-                intentDetail.putExtra(EXTRA_BATIK, batik)
+                val intentDetail = Intent(binding.root.context, DetailArticleActivity::class.java)
+                intentDetail.putExtra(EXTRA_ID, articles.id)
+                intentDetail.putExtra(EXTRA_ARTICLES, articles)
 
                 val optionsCompat: ActivityOptionsCompat =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                         itemView.context as Activity,
-                        Pair(binding.idIVBatik, "image"),
+                        Pair(binding.imgItemPhoto, "image"),
+                        Pair(binding.tvItemTitle, "name"),
+                        Pair(binding.tvItemDescription, "description"),
                     )
 
                 itemView.context.startActivity(intentDetail, optionsCompat.toBundle())
             }
         }
-
-
     }
 
     companion object {
@@ -80,6 +71,6 @@ class BatikRVAdapter : ListAdapter<DataItem, BatikRVAdapter.ListViewHolder>(DIFF
         }
 
         const val EXTRA_ID = "key_id"
-        const val EXTRA_BATIK = "key_batik"
+        const val EXTRA_ARTICLES = "key_articles"
     }
 }

@@ -160,7 +160,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/item_list_article"
+            tools:listitem="@layout/item_list_articles"
             android:paddingBottom="50dp"/>
     </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

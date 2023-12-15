@@ -17,7 +17,7 @@ class AdapterArticle (var data: ArrayList<ArticleModel>,var context: Activity?):
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view : View= LayoutInflater.from(parent.context).inflate(R.layout.item_list_article,parent,false)
+        val view : View= LayoutInflater.from(parent.context).inflate(R.layout.item_list_articles,parent,false)
         return AdapterArticle.MyViewHolder(view)
     }
 

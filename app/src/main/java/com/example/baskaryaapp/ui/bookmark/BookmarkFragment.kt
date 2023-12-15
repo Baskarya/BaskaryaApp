@@ -6,14 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.FragmentBookmarkBinding
-import com.example.baskaryaapp.ui.article.ArticleFragment
-import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
-import com.example.baskaryaapp.ui.setting.SettingFragment
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class BookmarkFragment : Fragment() {

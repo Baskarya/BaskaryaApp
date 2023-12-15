@@ -14,12 +14,13 @@ interface ApiService {
 //        @Part file: MultipartBody.Part
 //    ): Response<CameraResponse>
 
-    @GET("/articles")
+    @GET("/api/articles")
     suspend fun article(
-    ): Response<List<ArticlesResponse>>
+    ): ArticlesResponse
 
-    @GET("/batik")
+    @GET("/api/batik")
     suspend fun batik(
     ): BatikResponse
+
 
 }

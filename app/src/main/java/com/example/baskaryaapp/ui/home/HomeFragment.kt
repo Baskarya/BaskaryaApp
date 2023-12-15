@@ -13,7 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.FragmentHomeBinding
-import com.example.baskaryaapp.ui.article.ArticleFragment
+
+
+import com.example.baskaryaapp.ui.article.ArticlesFragment
+
+
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
 
 
@@ -68,7 +72,7 @@ class HomeFragment : Fragment() {
             fragmentTransaction.commit()
         }
         morear.setOnClickListener {
-            val articleFragment = ArticleFragment()
+            val articleFragment = ArticlesFragment()
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
             // Replace the current fragment with BatikpediaFragment
             fragmentTransaction.replace(R.id.navhost, articleFragment)
