@@ -36,9 +36,9 @@ class BookmarkFragment : Fragment() {
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(
-            R.string.recomendation,
+            R.string.custom,
             R.string.batikpedia,
-            R.string.article,
+            R.string.recomendation,
         )
     }
 }
