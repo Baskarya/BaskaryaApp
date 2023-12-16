@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.ActivityMainBinding
@@ -13,6 +14,7 @@ import com.example.baskaryaapp.ui.article.ArticlesFragment
 import com.example.baskaryaapp.ui.bookmark.BookmarkFragment
 import com.example.baskaryaapp.ui.home.HomeFragment
 import com.example.baskaryaapp.ui.scan.ScanFragment
+import com.example.baskaryaapp.ui.setting.Prefference
 import com.example.baskaryaapp.ui.setting.SettingFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var sharedPreferences: SharedPreferences
+    private val pref by lazy { Prefference(this) }
 
     private lateinit var navview: BottomNavigationView
     val REQUEST_IMAGE_CAPTURE = 100
@@ -29,6 +32,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        when (pref.getBoolean("dark_mode")){
+            true ->{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+            }
+            false ->{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+            }
+
+        }
 
         auth = FirebaseAuth.getInstance()
         sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE)
