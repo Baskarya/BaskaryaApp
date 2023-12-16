@@ -1,4 +1,4 @@
-package com.example.baskaryaapp.ui.article
+package com.example.baskaryaapp.ui.bookmark.customization
 
 import android.app.Activity
 import android.content.Intent
@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.baskaryaapp.data.response.ArticlesItem
 import com.example.baskaryaapp.databinding.ItemListArticlesBinding
+import com.example.baskaryaapp.databinding.ItemListCustomizationBinding
 import com.example.baskaryaapp.ui.detailArticle.DetailArticleActivity
 
-class ArticlesAdapter : ListAdapter<ArticlesItem, ArticlesAdapter.ListViewHolder>(DIFF_CALLBACK){
+class CustomizationAdapter : ListAdapter<ArticlesItem, CustomizationAdapter.ListViewHolder>(DIFF_CALLBACK){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val binding = ItemListArticlesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemListCustomizationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
     }
 
@@ -26,13 +27,11 @@ class ArticlesAdapter : ListAdapter<ArticlesItem, ArticlesAdapter.ListViewHolder
         holder.bind(articles)
     }
 
-    class ListViewHolder(private val binding: ItemListArticlesBinding) : RecyclerView.ViewHolder(binding.root){
+    class ListViewHolder(private val binding: ItemListCustomizationBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(articles: ArticlesItem){
             Glide.with(binding.root.context)
                 .load(articles.imageUrl)
                 .into(binding.imgItemPhoto)
-            binding.tvItemTitle.text = articles.title
-//            binding.tvItemDescription.text = articles.content
 
             binding.root.setOnClickListener{
                 val intentDetail = Intent(binding.root.context, DetailArticleActivity::class.java)

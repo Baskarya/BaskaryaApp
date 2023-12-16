@@ -1,39 +1,41 @@
-package com.example.baskaryaapp.ui.batikpedia
+package com.example.baskaryaapp.ui.bookmark.batikpedia
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.baskaryaapp.data.api.ApiConfig.apiService
+import com.example.baskaryaapp.R
+import com.example.baskaryaapp.data.api.ApiConfig
 import com.example.baskaryaapp.data.repo.BatikRepository
 import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.FragmentBatikpediaBinding
+import com.example.baskaryaapp.databinding.FragmentBookmarkBatikBinding
 import com.example.baskaryaapp.ui.BatikViewModelFactory
+import com.example.baskaryaapp.ui.batikpedia.BatikRVAdapter
+import com.example.baskaryaapp.ui.batikpedia.BatikpediaViewModel
 
-class BatikpediaFragment : Fragment() {
-    private lateinit var binding: FragmentBatikpediaBinding
+
+class BookmarkBatikFragment : Fragment() {
+    private lateinit var binding: FragmentBookmarkBatikBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = FragmentBatikpediaBinding.inflate(inflater, container, false)
+        binding = FragmentBookmarkBatikBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val repository = BatikRepository.getInstance(apiService)
+        val repository = BatikRepository.getInstance(ApiConfig.apiService)
         val factory = BatikViewModelFactory.getInstance(repository)
         val batikpediaViewModel = ViewModelProvider(this, factory)[BatikpediaViewModel::class.java]
 
         val layoutManager = GridLayoutManager(requireContext(), 3)
-
-        binding.idRVBatik.layoutManager = layoutManager
+        binding.idBookmarkBatik.layoutManager = layoutManager
 
         batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
             setBatikData(listBatik)
@@ -47,8 +49,7 @@ class BatikpediaFragment : Fragment() {
     private fun setBatikData(items: List<BatikItem>) {
         val adapter = BatikRVAdapter()
         adapter.submitList(items)
-        binding.idRVBatik.adapter = adapter
-        Log.d("DetailBatikActivity", "ID: $items")
+        binding.idBookmarkBatik.adapter = adapter
     }
 
     private fun showLoading(isLoading: Boolean) {

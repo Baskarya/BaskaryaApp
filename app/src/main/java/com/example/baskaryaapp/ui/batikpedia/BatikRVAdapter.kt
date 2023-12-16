@@ -43,8 +43,11 @@ class BatikRVAdapter : ListAdapter<BatikItem, BatikRVAdapter.ListViewHolder>(DIF
 
             binding.root.setOnClickListener{
                 val intentDetail = Intent(binding.root.context, DetailBatikActivity::class.java)
-                intentDetail.putExtra(EXTRA_ID, batik.id)
+//                intentDetail.putExtra(EXTRA_ID, batik.id)
                 intentDetail.putExtra(EXTRA_BATIK, batik)
+                intentDetail.putExtra("key_id", batik.id)
+                intentDetail.putExtra("key_title", batik.title)
+                intentDetail.putExtra("key_imageUrl", batik.imageUrl)
 
                 val optionsCompat: ActivityOptionsCompat =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(

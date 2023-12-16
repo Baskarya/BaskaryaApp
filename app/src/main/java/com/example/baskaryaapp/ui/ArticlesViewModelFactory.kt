@@ -3,7 +3,7 @@ package com.example.baskaryaapp.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.baskaryaapp.data.repo.ArticlesRepository
-import com.example.baskaryaapp.ui.article.ArticlesViewModel
+import com.example.baskaryaapp.ui.articles.ArticlesViewModel
 
 class ArticlesViewModelFactory private constructor(private val articlesRepository: ArticlesRepository) : ViewModelProvider.NewInstanceFactory() {
 

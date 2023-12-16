@@ -1,30 +1,31 @@
-package com.example.baskaryaapp.ui.search
+package com.example.baskaryaapp.ui.bookmark.articles
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baskaryaapp.data.api.ApiConfig
 import com.example.baskaryaapp.data.repo.ArticlesRepository
 import com.example.baskaryaapp.data.response.ArticlesItem
-import com.example.baskaryaapp.databinding.FragmentSearchArticleBinding
+import com.example.baskaryaapp.databinding.FragmentArticlesBinding
+import com.example.baskaryaapp.databinding.FragmentBookmarkArticlesBinding
 import com.example.baskaryaapp.ui.ArticlesViewModelFactory
 import com.example.baskaryaapp.ui.articles.ArticlesAdapter
 import com.example.baskaryaapp.ui.articles.ArticlesViewModel
 
-class SearchArticleFragment : Fragment() {
+class BookmarkArticlesFragment : Fragment()  {
 
-    private lateinit var binding: FragmentSearchArticleBinding
+    private lateinit var binding: FragmentBookmarkArticlesBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentSearchArticleBinding.inflate(inflater, container, false)
+        binding = FragmentBookmarkArticlesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -36,9 +37,9 @@ class SearchArticleFragment : Fragment() {
         val articlesViewModel = ViewModelProvider(this, factory)[ArticlesViewModel::class.java]
 
         val layoutManager = LinearLayoutManager(requireActivity())
-        binding.rvArticles.layoutManager = layoutManager
+        binding.rvBookmarkArticles.layoutManager = layoutManager
         val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
-        binding.rvArticles.addItemDecoration(itemDecoration)
+        binding.rvBookmarkArticles.addItemDecoration(itemDecoration)
 
         articlesViewModel.listArticles.observe(requireActivity()) { listArticles ->
             setArticlesData(listArticles)
@@ -52,7 +53,7 @@ class SearchArticleFragment : Fragment() {
     private fun setArticlesData(items: List<ArticlesItem>) {
         val adapter = ArticlesAdapter()
         adapter.submitList(items)
-        binding.rvArticles.adapter = adapter
+        binding.rvBookmarkArticles.adapter = adapter
     }
 
     private fun showLoading(isLoading: Boolean) {

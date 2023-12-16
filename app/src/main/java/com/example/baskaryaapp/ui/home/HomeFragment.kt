@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.FragmentHomeBinding
-import com.example.baskaryaapp.ui.article.ArticlesFragment
+import com.example.baskaryaapp.ui.articles.ArticlesFragment
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
 import com.example.baskaryaapp.ui.search.SearchResultFragment
 
