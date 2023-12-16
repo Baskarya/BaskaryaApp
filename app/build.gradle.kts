@@ -84,6 +84,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
 
+    //DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
     //Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
