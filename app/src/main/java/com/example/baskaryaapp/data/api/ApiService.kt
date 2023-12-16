@@ -2,7 +2,6 @@ package com.example.baskaryaapp.data.api
 
 import com.example.baskaryaapp.data.response.ArticlesResponse
 import com.example.baskaryaapp.data.response.BatikResponse
-import com.example.baskaryaapp.data.response.SearchResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -24,8 +23,13 @@ interface ApiService {
     ): BatikResponse
 
     @GET("api/search")
-    fun search(
+    fun searchbatik(
         @Query("batik") query: String,
-    ): Call<SearchResponse>
+    ): Call<BatikResponse>
+
+    @GET("api/search")
+    fun searcharticle(
+        @Query("article") query: String,
+    ): Call<ArticlesResponse>
 
 }
