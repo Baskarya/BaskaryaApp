@@ -1,6 +1,8 @@
 package com.example.baskaryaapp.ui.home
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +44,35 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val handler = Handler(Looper.getMainLooper())
+        val delay = 3000L // Ubah waktu delay sesuai keinginan, misalnya 3000L untuk 3 detik
+        vpSlider=view.findViewById(R.id.view_pager)
+        val arrSlider= ArrayList<Int>()
+        arrSlider.add(R.drawable.baskarya_logo)
+        arrSlider.add(R.drawable.login_banner)
+        arrSlider.add(R.drawable.register_banner)
+
+        var adapterSlider=AdapterSlider(arrSlider,activity)
+        vpSlider.adapter=adapterSlider
+
+        val runnable = object : Runnable {
+            override fun run() {
+                val currentItem = vpSlider.currentItem
+                val totalCount = adapterSlider.count
+
+                if (currentItem < totalCount - 1) {
+                    vpSlider.currentItem = currentItem + 1
+                } else {
+                    vpSlider.currentItem = 0
+                }
+
+                handler.postDelayed(this, delay)
+            }
+        }
+
+        handler.postDelayed(runnable, delay)
+
+
         val repository = BatikRepository.getInstance(apiService)
         val factory = BatikViewModelFactory.getInstance(repository)
         val batikpediaViewModel = ViewModelProvider(this, factory)[BatikpediaViewModel::class.java]
@@ -67,14 +98,6 @@ class HomeFragment : Fragment() {
         batikpediaViewModel.isLoading.observe(requireActivity()) { loading ->
             showLoading(loading)
         }
-        vpSlider=view.findViewById(R.id.view_pager)
-        val arrSlider= ArrayList<Int>()
-        arrSlider.add(R.drawable.baskarya_logo)
-        arrSlider.add(R.drawable.login_banner)
-        arrSlider.add(R.drawable.register_banner)
-
-        var adapterSlider=AdapterSlider(arrSlider,activity)
-        vpSlider.adapter=adapterSlider
 
         //SearchView
         val searchView =view.findViewById<SearchView>(R.id.searchView)
