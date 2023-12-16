@@ -1,50 +1,113 @@
 package com.example.baskaryaapp.ui.home
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.baskaryaapp.R
+import com.example.baskaryaapp.data.api.ApiConfig
+import com.example.baskaryaapp.data.api.ApiConfig.apiService
+import com.example.baskaryaapp.data.repo.ArticlesRepository
+import com.example.baskaryaapp.data.repo.BatikRepository
+import com.example.baskaryaapp.data.response.ArticlesItem
+import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.FragmentHomeBinding
+import com.example.baskaryaapp.ui.ArticlesViewModelFactory
+import com.example.baskaryaapp.ui.BatikViewModelFactory
 import com.example.baskaryaapp.ui.article.ArticlesFragment
+import com.example.baskaryaapp.ui.article.ArticlesViewModel
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
+import com.example.baskaryaapp.ui.batikpedia.BatikpediaViewModel
 import com.example.baskaryaapp.ui.search.SearchResultFragment
 
-
 class HomeFragment : Fragment() {
+    private lateinit var binding: FragmentHomeBinding
+      lateinit var vpSlider: ViewPager
+    lateinit var morebp:TextView
+    lateinit var morear: TextView
 
-    private var binding : FragmentHomeBinding? = null
-    lateinit var rvBatik : RecyclerView
-    lateinit var rvArticle :RecyclerView
-  lateinit var vpSlider: ViewPager
-  lateinit var notif : ImageView
-  lateinit var morebp:TextView
-  lateinit var morear:TextView
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view:View=inflater.inflate(R.layout.fragment_home,container,false)
-        vpSlider=view.findViewById(R.id.view_pager)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        notif=view.findViewById(R.id.iv_notif)
-        notif.setOnClickListener {
-            val tesFragment = SearchResultFragment()
-            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.navhost, tesFragment)
-            fragmentTransaction.commit()
+        val repository = BatikRepository.getInstance(apiService)
+        val factory = BatikViewModelFactory.getInstance(repository)
+        val batikpediaViewModel = ViewModelProvider(this, factory)[BatikpediaViewModel::class.java]
+        val articlerepository = ArticlesRepository.getInstance(ApiConfig.apiService)
+        val articlefactory = ArticlesViewModelFactory.getInstance(articlerepository)
+        val articlesViewModel = ViewModelProvider(this, articlefactory)[ArticlesViewModel::class.java]
+
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val arlayoutManager = LinearLayoutManager(requireActivity())
+        binding.RVArticle.layoutManager = arlayoutManager
+        val itemDecoration = DividerItemDecoration(requireActivity(), arlayoutManager.orientation)
+        binding.RVArticle.addItemDecoration(itemDecoration)
+
+        articlesViewModel.listArticles.observe(requireActivity()) { listArticles ->
+            setArticlesData(listArticles)
         }
-//        kalau ini kemungkinan nanti kita ganti logo aja
+        binding.idRVCourses.layoutManager = layoutManager
 
+        batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
+            setBatikData(listBatik)
+        }
+
+        batikpediaViewModel.isLoading.observe(requireActivity()) { loading ->
+            showLoading(loading)
+        }
+        vpSlider=view.findViewById(R.id.view_pager)
+        val arrSlider= ArrayList<Int>()
+        arrSlider.add(R.drawable.baskarya_logo)
+        arrSlider.add(R.drawable.login_banner)
+        arrSlider.add(R.drawable.register_banner)
+
+        var adapterSlider=AdapterSlider(arrSlider,activity)
+        vpSlider.adapter=adapterSlider
+
+        //SearchView
+        val searchView =view.findViewById<SearchView>(R.id.searchView)
+
+        searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (!query.isNullOrEmpty()) {
+                    // Buat instance dari SearchResultFragment
+                    val searchResultFragment = SearchResultFragment()
+
+                    // Lakukan transaksi fragment untuk pindah ke SearchResultFragment
+                    val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.homefragment, searchResultFragment)
+                    fragmentTransaction.addToBackStack(null) // Agar dapat kembali ke fragment sebelumnya
+                    fragmentTransaction.commit()
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val searchResultFragment = SearchResultFragment()
+
+                if (!newText.isNullOrEmpty()) {
+                    // Buat instance SearchResultFragment dengan membawa data pencarian
+                    val bundle = Bundle()
+                    bundle.putString("query", newText)
+                    searchResultFragment.arguments = bundle
+                }
+
+                return true
+            }
+        })
         morear =view.findViewById(R.id.tv_moreTa)
         morebp =view.findViewById(R.id.tv_morebp)
 
@@ -60,98 +123,21 @@ class HomeFragment : Fragment() {
             fragmentTransaction.replace(R.id.navhost, articleFragment)
             fragmentTransaction.commit()
         }
-        val arrSlider= ArrayList<Int>()
-        arrSlider.add(R.drawable.baskarya_logo)
-        arrSlider.add(R.drawable.login_banner)
-        arrSlider.add(R.drawable.register_banner)
-
-        var adapterSlider=AdapterSlider(arrSlider,activity)
-        vpSlider.adapter=adapterSlider
-
-        //batik
-        val lm =LinearLayoutManager(activity)
-        lm.orientation =LinearLayoutManager.HORIZONTAL
-        rvBatik=view.findViewById(R.id.idRVCourses)
-
-        val adapterBatik = HomeAdapter(ArrayBatik,activity)
-        rvBatik.setHasFixedSize(true)
-        rvBatik.layoutManager = lm
-        rvBatik.adapter = adapterBatik
-
-        //article
-        val lmarticle = LinearLayoutManager(activity)
-        lmarticle.orientation = LinearLayoutManager.VERTICAL
-        rvArticle = view.findViewById(R.id.RVArticle)
-
-        val adapterArticle = AdapterArticle(ArrayArticle,activity)
-        rvArticle.setHasFixedSize(true)
-        rvArticle.layoutManager =lmarticle
-        rvArticle.adapter=adapterArticle
-
-
-     return view
-    }
-    val ArrayBatik :ArrayList<BatikRvModel>get(){
-        val courseList = ArrayList<BatikRvModel>()
-
-        val courseList1 = BatikRvModel()
-        courseList1.courseName = "Android Development"
-        courseList1.courseImg =R.drawable.background_1
-
-        val courseList2 = BatikRvModel()
-        courseList2.courseName = "C++ Development"
-        courseList2.courseImg =R.drawable.background_2
-
-        val courseList3 = BatikRvModel()
-        courseList3.courseName = "Java Development"
-        courseList3.courseImg =R.drawable.ic_back
-
-        val courseList4 = BatikRvModel()
-        courseList4.courseName = "Python Development"
-        courseList4.courseImg =R.drawable.login_banner
-
-        val courseList5 = BatikRvModel()
-        courseList5.courseName = "JavaScript Development"
-        courseList5.courseImg =R.drawable.register_banner
-
-        courseList.add(courseList1)
-        courseList.add(courseList2)
-        courseList.add(courseList3)
-        courseList.add(courseList4)
-        courseList.add(courseList5)
-
-
-        return courseList
     }
 
-    val ArrayArticle:ArrayList<ArticleModel>get(){
-        val articleList =ArrayList<ArticleModel>()
-
-        val articleList1 = ArticleModel()
-        articleList1.articleName = "Android Development"
-        articleList1.articleIsi = "Ini isi article"
-        articleList1.articleImg =R.drawable.baskarya_logo
-
-        val articleList2 = ArticleModel()
-        articleList2.articleName = "Android Development"
-        articleList2.articleIsi = "Ini isi article"
-        articleList2.articleImg =R.drawable.baskarya_logo
-
-        val articleList3 = ArticleModel()
-        articleList3.articleName = "Android Development"
-        articleList3.articleIsi = "Ini isi article"
-        articleList3.articleImg =R.drawable.baskarya_logo
-
-
-        articleList.add(articleList1)
-        articleList.add(articleList2)
-        articleList.add(articleList3)
-
-        return articleList
+    private fun setBatikData(items: List<BatikItem>) {
+        val adapter = HomeAdapter(3)
+        adapter.submitList(items)
+        binding.idRVCourses.adapter = adapter
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding=null
+    private fun setArticlesData(items: List<ArticlesItem>) {
+        val adapter = AdapterArticle(1)
+        adapter.submitList(items)
+        binding.RVArticle.adapter = adapter
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
