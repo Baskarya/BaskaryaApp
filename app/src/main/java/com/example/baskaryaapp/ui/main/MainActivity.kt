@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.databinding.ActivityMainBinding
-import com.example.baskaryaapp.ui.article.ArticlesFragment
+import com.example.baskaryaapp.ui.articles.ArticlesFragment
 import com.example.baskaryaapp.ui.bookmark.BookmarkFragment
 import com.example.baskaryaapp.ui.home.HomeFragment
 import com.example.baskaryaapp.ui.scan.ScanFragment
@@ -70,7 +70,6 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.home->replace(HomeFragment())
                 R.id.article->replace(ArticlesFragment())
-//                R.id.bookmark->replace(BatikpediaFragment())//Tes
                 R.id.bookmark->replace(BookmarkFragment())
                 R.id.Settings->replace(SettingFragment())
             }

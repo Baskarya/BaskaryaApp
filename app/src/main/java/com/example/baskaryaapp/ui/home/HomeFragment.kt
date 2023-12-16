@@ -23,8 +23,8 @@ import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.FragmentHomeBinding
 import com.example.baskaryaapp.ui.ArticlesViewModelFactory
 import com.example.baskaryaapp.ui.BatikViewModelFactory
-import com.example.baskaryaapp.ui.article.ArticlesFragment
-import com.example.baskaryaapp.ui.article.ArticlesViewModel
+import com.example.baskaryaapp.ui.articles.ArticlesFragment
+import com.example.baskaryaapp.ui.articles.ArticlesViewModel
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaViewModel
 import com.example.baskaryaapp.ui.search.SearchResultFragment

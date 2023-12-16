@@ -15,8 +15,8 @@ import com.example.baskaryaapp.data.repo.ArticlesRepository
 import com.example.baskaryaapp.data.response.ArticlesItem
 import com.example.baskaryaapp.databinding.FragmentSearchArticleBinding
 import com.example.baskaryaapp.ui.ArticlesViewModelFactory
-import com.example.baskaryaapp.ui.article.ArticlesAdapter
-import com.example.baskaryaapp.ui.article.ArticlesViewModel
+import com.example.baskaryaapp.ui.articles.ArticlesAdapter
+import com.example.baskaryaapp.ui.articles.ArticlesViewModel
 
 class SearchArticleFragment : Fragment() {
 

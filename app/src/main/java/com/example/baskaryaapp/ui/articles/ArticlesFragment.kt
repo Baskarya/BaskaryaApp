@@ -1,4 +1,4 @@
-package com.example.baskaryaapp.ui.article
+package com.example.baskaryaapp.ui.articles
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

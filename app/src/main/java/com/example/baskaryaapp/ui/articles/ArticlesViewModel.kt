@@ -1,4 +1,4 @@
-package com.example.baskaryaapp.ui.article
+package com.example.baskaryaapp.ui.articles
 
 import android.util.Log
 import androidx.lifecycle.LiveData

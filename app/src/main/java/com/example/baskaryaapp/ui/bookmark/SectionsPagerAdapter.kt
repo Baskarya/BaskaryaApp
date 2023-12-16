@@ -2,13 +2,12 @@ package com.example.baskaryaapp.ui.bookmark
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.baskaryaapp.ui.article.ArticlesFragment
-import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
+import com.example.baskaryaapp.ui.bookmark.articles.BookmarkArticlesFragment
+import com.example.baskaryaapp.ui.bookmark.batikpedia.BookmarkBatikFragment
+import com.example.baskaryaapp.ui.bookmark.customization.BookmarkCustomizationFragment
 import com.example.baskaryaapp.ui.customization.CustomizationFragment
 import com.example.baskaryaapp.ui.recomendation.RecomendationFragment
-import com.example.baskaryaapp.ui.search.SearchArticleFragment
 import com.example.baskaryaapp.ui.search.SearchBatikFragment
-import com.example.baskaryaapp.ui.setting.SettingFragment
 
 class SectionsPagerAdapter(fragment: Fragment) :
     FragmentStateAdapter(fragment) {
@@ -16,9 +15,9 @@ class SectionsPagerAdapter(fragment: Fragment) :
     override fun createFragment(position: Int): Fragment {
         var fragment: Fragment? = null
         when (position) {
-            0 -> fragment = CustomizationFragment()
-            1 -> fragment = SearchBatikFragment()
-            2 -> fragment = RecomendationFragment()
+            0 -> fragment = BookmarkArticlesFragment()
+            1 -> fragment = BookmarkBatikFragment()
+            2 -> fragment = BookmarkCustomizationFragment()
         }
         return fragment as Fragment
     }
