@@ -16,6 +16,17 @@ import com.example.baskaryaapp.ui.detailBatik.DetailBatikActivity
 
 
 class BatikRVAdapter : ListAdapter<BatikItem, BatikRVAdapter.ListViewHolder>(DIFF_CALLBACK) {
+
+    private var onItemClickCallback:OnItemClickCallback?=null
+    private val list =ArrayList<BatikItem>()
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+        this.onItemClickCallback=onItemClickCallback
+    }
+    fun setList(user: ArrayList<BatikItem>){
+        list.clear()
+        list.addAll(user)
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = ItemListBatikBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
@@ -61,7 +72,9 @@ class BatikRVAdapter : ListAdapter<BatikItem, BatikRVAdapter.ListViewHolder>(DIF
 
 
     }
-
+    interface OnItemClickCallback{
+        fun onItemCliked(batik:BatikItem)
+    }
     companion object {
 
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BatikItem>(){

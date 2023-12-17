@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
@@ -39,16 +40,12 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val currentUser = auth.currentUser
+        currentUser?.let {
+            val userEmail = it.email
+            view.findViewById<TextView>(R.id.tv_email)?.text = userEmail
+        }
 
-//        val textViewLanguage = view.findViewById<TextView>(R.id.tv_bahasa)
-//
-//        // Mendapatkan informasi tentang bahasa yang sedang digunakan
-//        val currentLanguage = Locale.getDefault().displayLanguage
-//
-//        // Menampilkan informasi bahasa ke dalam TextView
-//        textViewLanguage.text = "$currentLanguage"
-
-        // Implementasi logout ketika tombol logout diklik
         view.findViewById<View>(R.id.btn_logout)?.setOnClickListener {
             showLogoutConfirmation()
         }

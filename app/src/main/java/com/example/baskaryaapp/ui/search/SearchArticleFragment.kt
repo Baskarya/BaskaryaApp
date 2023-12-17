@@ -13,10 +13,14 @@ import com.example.baskaryaapp.R
 import com.example.baskaryaapp.data.api.ApiConfig
 import com.example.baskaryaapp.data.repo.ArticlesRepository
 import com.example.baskaryaapp.data.response.ArticlesItem
+import com.example.baskaryaapp.data.response.ArticlesResponse
 import com.example.baskaryaapp.databinding.FragmentSearchArticleBinding
 import com.example.baskaryaapp.ui.ArticlesViewModelFactory
 import com.example.baskaryaapp.ui.articles.ArticlesAdapter
 import com.example.baskaryaapp.ui.articles.ArticlesViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SearchArticleFragment : Fragment() {
 
@@ -56,13 +60,7 @@ class SearchArticleFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (!query.isNullOrEmpty()) {
                     // Buat instance dari SearchResultFragment
-                    val searchResultFragment = SearchResultFragment()
-
-                    // Lakukan transaksi fragment untuk pindah ke SearchResultFragment
-                    val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                    fragmentTransaction.replace(R.id.homefragment, searchResultFragment)
-                    fragmentTransaction.addToBackStack(null) // Agar dapat kembali ke fragment sebelumnya
-                    fragmentTransaction.commit()
+                    searchArticle(query)
                 }
                 return true
             }
@@ -78,6 +76,34 @@ class SearchArticleFragment : Fragment() {
                 }
 
                 return true
+            }
+        })
+    }
+
+    private fun searchArticle(query:String)  {
+        // Memanggil metode Retrofit yang telah kamu definisikan sebelumnya
+        val call = ApiConfig.apiService.searcharticle(query)
+        showLoading(true)
+        // Memanggil permintaan jaringan secara asynchronous
+        call.enqueue(object : Callback<ArticlesResponse> {
+            override fun onResponse(call: Call<ArticlesResponse>, response: Response<ArticlesResponse>) {
+                if (response.isSuccessful) {
+                    val batikResponse = response.body()
+                    // Cek apakah respons tidak null dan memiliki data
+                    batikResponse?.let {
+                        // Panggil fungsi setBatikData dengan hasil pencarian
+                        setArticlesData(it.data)
+                        showLoading(false)
+                    }
+                } else {
+                    // Menangani respons gagal
+                    // Tampilkan pesan kesalahan atau lakukan tindakan yang sesuai
+                }
+            }
+
+            override fun onFailure(call: Call<ArticlesResponse>, t: Throwable) {
+                // Menangani kegagalan jaringan
+                // Tampilkan pesan kesalahan atau lakukan tindakan yang sesuai
             }
         })
     }
