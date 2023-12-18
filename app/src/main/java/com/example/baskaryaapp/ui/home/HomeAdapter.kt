@@ -22,6 +22,7 @@ class HomeAdapter (private val maxItemCount: Int): ListAdapter<BatikItem, HomeAd
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+
         val batik = getItem(position)
         holder.bind(batik)
     }
@@ -31,6 +32,7 @@ class HomeAdapter (private val maxItemCount: Int): ListAdapter<BatikItem, HomeAd
     }
 
     class ListViewHolder(private val binding: ItemListBatikBinding) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(batik: BatikItem){
             Glide.with(binding.root.context)
                 .load(batik?.imageUrl)

@@ -46,7 +46,7 @@
     <string name="logout">Logout</string>
     <string name="language">Language</string>
     <string name="mode">Mode</string>
-    <string name="lightmode">Light Mode</string>
+    <string name="lightmode">Dark Mode</string>
     <string name="ch_language">Change Language</string>
     <string name="isinote2">Make sure the photo captures the batik pattern you want, otherwise the result will not be satisfactory</string>
 </resources>

@@ -2,9 +2,9 @@ package com.example.baskaryaapp.data.api
 
 import com.example.baskaryaapp.data.response.ArticlesResponse
 import com.example.baskaryaapp.data.response.BatikResponse
-import retrofit2.Response
+import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Multipart
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -21,5 +21,15 @@ interface ApiService {
     @GET("/api/batik")
     suspend fun batik(
     ): BatikResponse
+
+    @GET("api/search")
+    fun searchbatik(
+        @Query("batik") query: String,
+    ): Call<BatikResponse>
+
+    @GET("api/search")
+    fun searcharticle(
+        @Query("article") query: String,
+    ): Call<ArticlesResponse>
 
 }

@@ -4,10 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
@@ -18,7 +20,8 @@ import com.google.firebase.auth.FirebaseAuth
 class SettingFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var auth: FirebaseAuth
-    
+    private val pref by lazy { Prefference(requireContext()) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Inisialisasi Firebase Authentication dan SharedPreferences
@@ -37,41 +40,40 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val currentUser = auth.currentUser
+        currentUser?.let {
+            val userEmail = it.email
+            view.findViewById<TextView>(R.id.tv_email)?.text = userEmail
+        }
 
-        // Implementasi logout ketika tombol logout diklik
         view.findViewById<View>(R.id.btn_logout)?.setOnClickListener {
             showLogoutConfirmation()
         }
+        //ganti bahasa
+        view.findViewById<View>(R.id.cv_bahasa).setOnClickListener{
+            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+            true
+        }
 
         val switchTheme = view.findViewById<Switch>(R.id.sw_mode)
+        switchTheme.isChecked = pref.getBoolean("dark_mode")
 
-        // Mendeteksi perubahan pada Switch
-        switchTheme.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                // Ganti ke Dark Mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                saveThemePreference(true) // Simpan preferensi Dark Mode
-            } else {
-                // Ganti ke Light Mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                saveThemePreference(false) // Simpan preferensi Light Mode
+        switchTheme.setOnCheckedChangeListener{compoundButton,isChacked->
+            when(isChacked){
+                true->{
+                    pref.put("dark_mode",true)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+                }
+                false->{
+                    pref.put("dark_mode",false)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+                }
             }
         }
-        if (getSavedThemePreference()) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
     }
 
-
-    private fun saveThemePreference(isDarkMode: Boolean) {
-        sharedPreferences.edit().putBoolean("isDarkMode", isDarkMode).apply()
-    }
-
-    private fun getSavedThemePreference(): Boolean {
-        return sharedPreferences.getBoolean("isDarkMode", false)
-    }
     private fun showLogoutConfirmation() {
         // Menampilkan dialog konfirmasi sebelum logout
         AlertDialog.Builder(requireContext())
