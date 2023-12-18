@@ -22,24 +22,24 @@ class BatikRVAdapter : ListAdapter<BatikItem, BatikRVAdapter.ListViewHolder>(DIF
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-//        tes
-//        holder.courseNameTV.text = courseList.get(position).batikName
-//        holder.courseIV.setImageResource(courseList.get(position).batikImg)
         val batik = getItem(position)
         holder.bind(batik)
     }
 
     class ListViewHolder(private val binding: ItemListBatikBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        //        val courseNameTV: TextView = itemView.findViewById(R.id.idTVBatik)
-
-//        val courseNameTV: TextView = itemView.findViewById(R.id.idTVBatik)
-//        val courseIV: ImageView = itemView.findViewById(R.id.idIVBatik)
         fun bind(batik: BatikItem){
             Glide.with(binding.root.context)
                 .load(batik?.imageUrl)
                 .into(binding.idIVBatik)
             binding.idTVBatik.text = batik?.title
+
+//        if (batik.isBookmarked) {
+//            // Tampilkan ikon bookmark terisi jika batik di-bookmark
+//            binding.icBookmark.setImageResource(R.drawable.ic_bookmarked)
+//        } else {
+//            // Tampilkan ikon bookmark kosong jika batik tidak di-bookmark
+//            binding.icBookmark.setImageResource(R.drawable.ic_unbookmarked)
+//        }
 
             binding.root.setOnClickListener{
                 val intentDetail = Intent(binding.root.context, DetailBatikActivity::class.java)

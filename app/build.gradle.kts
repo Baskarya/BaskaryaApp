@@ -45,6 +45,7 @@ android {
 dependencies {
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
     implementation("androidx.databinding:databinding-runtime:8.2.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.10.0")
     val cameraxVersion = "1.2.3"
 
     implementation("androidx.core:core-ktx:1.9.0")

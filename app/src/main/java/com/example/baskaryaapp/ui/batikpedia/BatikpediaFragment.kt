@@ -8,12 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.baskaryaapp.data.api.ApiConfig.apiService
+import com.example.baskaryaapp.data.helper.FirebaseHelper
 import com.example.baskaryaapp.data.repo.BatikRepository
 import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.FragmentBatikpediaBinding
 import com.example.baskaryaapp.ui.BatikViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 
 class BatikpediaFragment : Fragment() {
     private lateinit var binding: FragmentBatikpediaBinding
@@ -23,6 +29,9 @@ class BatikpediaFragment : Fragment() {
         binding = FragmentBatikpediaBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    private val firebaseHelper = FirebaseHelper()
+    private lateinit var batikList: MutableList<BatikItem>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,8 +44,31 @@ class BatikpediaFragment : Fragment() {
 
         binding.idRVBatik.layoutManager = layoutManager
 
-        batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
-            setBatikData(listBatik)
+//        batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
+//            setBatikData(listBatik)
+//        }
+
+        batikList = mutableListOf()
+
+        val auth: FirebaseAuth = FirebaseAuth.getInstance()
+        val userId = auth.currentUser?.uid
+
+        lifecycleScope.launch {
+            while (isActive) {
+                batikpediaViewModel.isLoading.observe(requireActivity()) { loading ->
+                    showLoading(loading)
+                }
+                delay(1000)
+                if (userId != null) {
+                    // Dapatkan data bookmark
+                    firebaseHelper.getBookmarkedBatiks(userId) { bookmarkedIds ->
+                        // Set data batik
+                        batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
+                            setBatikData(listBatik, bookmarkedIds)
+                        }
+                    }
+                }
+            }
         }
 
         batikpediaViewModel.isLoading.observe(requireActivity()) { loading ->
@@ -44,11 +76,21 @@ class BatikpediaFragment : Fragment() {
         }
     }
 
-    private fun setBatikData(items: List<BatikItem>) {
+//    private fun setBatikData(items: List<BatikItem>) {
+//        val adapter = BatikRVAdapter()
+//        adapter.submitList(items)
+//        binding.idRVBatik.adapter = adapter
+//        Log.d("DetailBatikActivity", "ID: $items")
+//    }
+
+    private fun setBatikData(items: List<BatikItem>, bookmarkedIds: List<String?>) {
         val adapter = BatikRVAdapter()
-        adapter.submitList(items)
+        // Set status bookmark pada setiap item berdasarkan daftar bookmarkedIds
+        val itemsWithBookmarkStatus = items.map { batik ->
+            batik.copy(isBookmarked = bookmarkedIds.contains(batik.id))
+        }
+        adapter.submitList(itemsWithBookmarkStatus)
         binding.idRVBatik.adapter = adapter
-        Log.d("DetailBatikActivity", "ID: $items")
     }
 
     private fun showLoading(isLoading: Boolean) {

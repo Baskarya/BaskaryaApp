@@ -22,5 +22,4 @@ interface ApiService {
     suspend fun batik(
     ): BatikResponse
 
-
 }

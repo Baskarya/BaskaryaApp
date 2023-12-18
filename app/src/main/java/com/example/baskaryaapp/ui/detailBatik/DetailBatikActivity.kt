@@ -6,11 +6,13 @@ import android.util.Log
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.example.baskaryaapp.R
+import com.example.baskaryaapp.data.database.Bookmark
 import com.example.baskaryaapp.data.database.BookmarkBatik
+import com.example.baskaryaapp.data.helper.FirebaseHelper
 import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.ActivityDetailBatikBinding
-import com.example.baskaryaapp.ui.BatikViewModelFactory
 import com.example.baskaryaapp.ui.BookmarkBatikViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,6 +23,10 @@ class DetailBatikActivity : AppCompatActivity() {
     private val detailBatikViewModel by viewModels<DetailBatikViewModel>(){
         BookmarkBatikViewModelFactory.getInstance(application)
     }
+    private val firebaseHelper = FirebaseHelper()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var batikList: MutableList<BatikItem>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,35 +44,62 @@ class DetailBatikActivity : AppCompatActivity() {
         }
 
 //        detailBatikViewModel.getBatik(intent.getStringExtra(EXTRA_ID))
-        val id = intent.getIntExtra("key_id", 0)
+//        val id = intent.getIntExtra("key_id", 0)
 //        val id = intent.getIntExtra(EXTRA_ID, 0)
+        val id = intent.getStringExtra("key_id").toString()
         val title = intent.getStringExtra("key_title").toString()
         val imageUrl = intent.getStringExtra("key_imageUrl").toString()
+        batikList = mutableListOf()
 
         var bookmark = false
-        CoroutineScope(Dispatchers.IO).launch {
-            val count = detailBatikViewModel.isBookmarked(id)
-            withContext(Dispatchers.Main){
-                if (count > 0){
-                    binding.icBookmark.setImageResource(R.drawable.ic_bookmarked)
-                    bookmark = true
-                }else{
-                    binding.icBookmark.setImageResource(R.drawable.ic_unbookmarked)
-                    bookmark = false
-                }
+//        CoroutineScope(Dispatchers.IO).launch {
+//            val count = detailBatikViewModel.isBookmarked(id)
+//            withContext(Dispatchers.Main){
+//                val userId = auth.currentUser?.uid
+//                if (userId != null) {
+//                    if (count > 0){
+//                        binding.icBookmark.setImageResource(R.drawable.ic_bookmarked)
+//                        bookmark = true
+//                    }else{
+//                        binding.icBookmark.setImageResource(R.drawable.ic_unbookmarked)
+//                        bookmark = false
+//                    }
+//                }
+//            }
+//        }
+
+        if (batik?.isBookmarked == true) {
+            binding.icBookmark.setImageResource(R.drawable.ic_bookmarked)
+            bookmark = true
+        } else {
+            binding.icBookmark.setImageResource(R.drawable.ic_unbookmarked)
+            bookmark = false
+        }
+
+        binding.icBookmark.setOnClickListener {
+            bookmark = !bookmark
+            if (bookmark) {
+                binding.icBookmark.setImageResource(R.drawable.ic_bookmarked)
+                firebaseHelper.addBookmark(id, title, imageUrl, batikList)
+            } else {
+                binding.icBookmark.setImageResource(R.drawable.ic_unbookmarked)
+                firebaseHelper.removeBookmark(id, title, imageUrl, batikList)
             }
         }
 
-        binding.icBookmark.setOnClickListener{
-            bookmark = !bookmark
-            if (bookmark){
-                binding.icBookmark.setImageResource(R.drawable.ic_bookmarked)
-                detailBatikViewModel.saveBatik(BookmarkBatik(id, title, imageUrl))
-            }else{
-                binding.icBookmark.setImageResource(R.drawable.ic_unbookmarked)
-                detailBatikViewModel.deleteBatik(id)
-            }
-        }
+//        binding.icBookmark.setOnClickListener{
+//            bookmark = !bookmark
+//            val userId = auth.currentUser?.uid
+//            if (userId != null) {
+//                if (bookmark) {
+//                    binding.icBookmark.setImageResource(R.drawable.ic_bookmarked)
+//                    detailBatikViewModel.saveBatik(BookmarkBatik(id, title, imageUrl))
+//                } else {
+//                    binding.icBookmark.setImageResource(R.drawable.ic_unbookmarked)
+//                    detailBatikViewModel.deleteBatik(id)
+//                }
+//            }
+//        }
         Log.d("DetailBatikActivity", "ID: $id")
         Log.d("DetailBatikActivity", "title: $title")
         Log.d("DetailBatikActivity", "imageurl: $imageUrl")
