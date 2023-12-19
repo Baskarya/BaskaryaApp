@@ -12,6 +12,7 @@ class BatikRepository private constructor(
 
 
 
+
     companion object {
         @Volatile
         private var instance: BatikRepository? = null

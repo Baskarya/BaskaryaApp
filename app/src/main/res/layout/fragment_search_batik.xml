@@ -31,7 +31,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/searchView"
             app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/item_list_batik"/>
+            tools:listitem="@layout/item_list_batik"
+            android:paddingBottom="50dp"/>
 
         <ProgressBar
             android:id="@+id/progressBar"

@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiUpload {
     private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://machineess-aqtiniby7q-et.a.run.app/")
+        .baseUrl("https://ml-baskarya-veuznuhx2a-et.a.run.app/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(
             OkHttpClient.Builder()

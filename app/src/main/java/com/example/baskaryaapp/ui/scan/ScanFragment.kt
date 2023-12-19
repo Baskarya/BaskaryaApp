@@ -11,6 +11,7 @@
     import com.example.baskaryaapp.data.api.ApiUpload
     import com.example.baskaryaapp.data.response.UploadResponse
     import com.example.baskaryaapp.databinding.FragmentScanBinding
+    import com.example.baskaryaapp.ui.recomendation.RecomendationFragment
     import com.example.baskaryaapp.utils.getImageUri
     import com.example.baskaryaapp.utils.uriToFile
     import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -69,21 +70,16 @@
             }
         }
 
-    //    private fun uploadImage(){
-    //        val recommendationFragment = RecomendationFragment()
-    //        parentFragmentManager.beginTransaction()
-    //            .replace(R.id.navhost, recommendationFragment)
-    //            .addToBackStack(null)
-    //            .commit()
-    //
-    //        binding.buttonAdd.visibility = View.GONE
-    //        binding.cardView.visibility= View.GONE
-    //    }
     private fun uploadImage() {
         currentImageUri?.let { uri ->
             val file = uriToFile(uri, requireContext())
             val requestFile = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
             val imagePart = MultipartBody.Part.createFormData("file", file.name, requestFile)
+
+            // Tampilkan ProgressBar
+            binding.progressBar.visibility = View.VISIBLE
+            // Sembunyikan tombol upload
+            binding.buttonAdd.isEnabled = false
 
             ApiUpload.apiService.postbatik(imagePart).enqueue(object : retrofit2.Callback<UploadResponse> {
                 override fun onResponse(call: Call<UploadResponse>, response: Response<UploadResponse>) {
@@ -91,19 +87,31 @@
                         val uploadResponse = response.body()
                         uploadResponse?.let {
                             Log.d("UploadResponse", "Status: ${it.status}")
-                            // Anda dapat menambahkan lebih banyak informasi respons yang ingin ditampilkan di sini
                         }
+                        val recommendationFragment = RecomendationFragment()
+                        parentFragmentManager.beginTransaction()
+                            .replace(R.id.navhost, recommendationFragment)
+                            .addToBackStack(null)
+                            .commit()
                     } else {
-                        Log.e("UploadResponse", "Unsuccessful response: ${response.code()}")                }
+                        Log.e("UploadResponse", "Unsuccessful response: ${response.code()}")
+                    }
+                    // Sembunyikan ProgressBar setelah selesai
+                    binding.progressBar.visibility = View.GONE
+                    // Tampilkan tombol upload lagi
+                    binding.buttonAdd.isEnabled = true
                 }
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
-                    Log.e("UploadResponse", "Failure: ${t.message}")            }
+                    Log.e("UploadResponse", "Failure: ${t.message}")
+                    // Sembunyikan ProgressBar jika terjadi kegagalan
+                    binding.progressBar.visibility = View.GONE
+                    // Tampilkan tombol upload lagi
+                    binding.buttonAdd.isEnabled = true
+                }
             })
         }
     }
-
-
         private fun showImage() {
             currentImageUri?.let {
                 Log.d("Image URI", "showImage: $it")
