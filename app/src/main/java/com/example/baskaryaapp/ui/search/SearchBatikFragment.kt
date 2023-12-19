@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -87,20 +88,43 @@ class SearchBatikFragment : Fragment() {
                 if (response.isSuccessful) {
                     val batikResponse = response.body()
                     // Cek apakah respons tidak null dan memiliki data
+//                    batikResponse?.let {
+//                        // Panggil fungsi setBatikData dengan hasil pencarian
+//                        setBatikData(it.data)
+//                        showLoading(false)
+//                    }
+//                } else {
+//                    // Menangani respons gagal
+//                    // Tampilkan pesan kesalahan atau lakukan tindakan yang sesuai
+//                }
                     batikResponse?.let {
-                        // Panggil fungsi setBatikData dengan hasil pencarian
-                        setBatikData(it.data)
-                        showLoading(false)
+                        if (it.data.isNullOrEmpty()) {
+                            // Data tidak tersedia
+                            showLoading(false)
+                            // Tampilkan pesan bahwa data tidak ditemukan
+                            // Misalnya dengan menggunakan Toast atau Snackbar
+                            Toast.makeText(context, "Data tidak ditemukan", Toast.LENGTH_SHORT).show()
+                        } else {
+                            // Panggil fungsi setBatikData dengan hasil pencarian
+                            setBatikData(it.data)
+                            showLoading(false)
+                        }
                     }
                 } else {
                     // Menangani respons gagal
                     // Tampilkan pesan kesalahan atau lakukan tindakan yang sesuai
+                    showLoading(false)
+                    // Tampilkan pesan kesalahan dari server jika ada
+                    val errorMessage = "Error: Data tidak ditemukan"
+                    Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<BatikResponse>, t: Throwable) {
                 // Menangani kegagalan jaringan
                 // Tampilkan pesan kesalahan atau lakukan tindakan yang sesuai
+                showLoading(false)
+                Toast.makeText(context, "Terjadi kesalahan: " + t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
