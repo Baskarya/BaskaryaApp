@@ -12,7 +12,7 @@ import com.example.baskaryaapp.databinding.FragmentRecomendationBinding
 
 class RecomendationFragment : Fragment() {
     private lateinit var binding: FragmentRecomendationBinding
-    private lateinit var adapter: RecomentationAdapter // Ganti dengan nama adaptermu
+    private lateinit var adapter: RecomentationAdapter
     var uploadResponseData: List<SimilarImagesItem?>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -24,18 +24,16 @@ class RecomendationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Inisialisasi RecyclerView dan Adapter
         adapter = RecomentationAdapter()
         binding.idRVBatik.adapter = adapter
         binding.idRVBatik.layoutManager = GridLayoutManager(requireContext(),3)
 
-        // Tampilkan data respons ke RecyclerView
+
         uploadResponseData?.let {
             updateRecyclerViewWithData(it)
         }
     }
 
-    // Fungsi untuk mengupdate data RecyclerView dari luar
     fun updateRecyclerViewWithData(data: List<SimilarImagesItem?>?) {
         adapter.submitList(data)
     }
