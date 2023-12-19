@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,6 +8,12 @@
     tools:context=".ui.recomendation.RecomendationFragment"
     tools:ignore="MissingDefaultResource"
     android:background="@drawable/background_2">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="50dp">
+
+
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="match_parent"
@@ -58,7 +64,8 @@
         app:cardBackgroundColor="@color/color_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idRVBatik">
+        app:layout_constraintTop_toBottomOf="@+id/idRVBatik"
+        android:paddingBottom="50dp">
 
         <!-- Isi card note di sini -->
         <TextView
@@ -96,5 +103,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

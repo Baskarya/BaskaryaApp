@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -34,6 +35,7 @@ class HomeFragment : Fragment() {
       lateinit var vpSlider: ViewPager
     lateinit var morebp:TextView
     lateinit var morear: TextView
+    lateinit var search_btn :ImageView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -133,7 +135,15 @@ class HomeFragment : Fragment() {
         })
         morear =view.findViewById(R.id.tv_moreTa)
         morebp =view.findViewById(R.id.tv_morebp)
+        search_btn=view.findViewById(R.id.iv_search)
 
+
+        search_btn.setOnClickListener{
+            val searchfragment = SearchResultFragment()
+            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.navhost, searchfragment)
+            fragmentTransaction.commit()
+        }
         morebp.setOnClickListener {
             val batikpediaFragment = BatikpediaFragment()
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
