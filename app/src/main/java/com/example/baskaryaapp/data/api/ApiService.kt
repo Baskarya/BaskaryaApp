@@ -36,9 +36,12 @@ interface ApiService {
     fun searcharticle(
         @Query("article") query: String,
     ): Call<ArticlesResponse>
+
     @Multipart
     @POST("api/ml")
     fun postbatik(
-        @Part image: MultipartBody.Part
+        @Part file: MultipartBody.Part
     ): Call<UploadResponse>
+
+
 }

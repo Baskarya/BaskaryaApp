@@ -83,7 +83,7 @@
         currentImageUri?.let { uri ->
             val file = uriToFile(uri, requireContext())
             val requestFile = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
-            val imagePart = MultipartBody.Part.createFormData("image", file.name, requestFile)
+            val imagePart = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
             ApiUpload.apiService.postbatik(imagePart).enqueue(object : retrofit2.Callback<UploadResponse> {
                 override fun onResponse(call: Call<UploadResponse>, response: Response<UploadResponse>) {
