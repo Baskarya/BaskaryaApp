@@ -9,9 +9,11 @@
     import androidx.fragment.app.Fragment
     import com.example.baskaryaapp.R
     import com.example.baskaryaapp.data.api.ApiUpload
+    import com.example.baskaryaapp.data.response.SimilarImagesItem
     import com.example.baskaryaapp.data.response.UploadResponse
     import com.example.baskaryaapp.databinding.FragmentScanBinding
     import com.example.baskaryaapp.ui.recomendation.RecomendationFragment
+    import com.example.baskaryaapp.ui.recomendation.RecomentationAdapter
     import com.example.baskaryaapp.utils.getImageUri
     import com.example.baskaryaapp.utils.uriToFile
     import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -26,10 +28,14 @@
         private lateinit var binding: FragmentScanBinding
         private var currentImageUri: Uri? = null
         private val REQUEST_IMAGE_CAPTURE = 100
+        private var uploadResponseData: List<SimilarImagesItem?>? = null
+        private lateinit var adapter: RecomentationAdapter // Ganti dengan nama adaptermu
+
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             binding = FragmentScanBinding.bind(view)
+            adapter = RecomentationAdapter()
             binding.imageView2.setOnClickListener{back()}
             binding.btnGallery.setOnClickListener { startGallery() }
             binding.btnCamera.setOnClickListener { startCamera() }
@@ -86,13 +92,9 @@
                     if (response.isSuccessful) {
                         val uploadResponse = response.body()
                         uploadResponse?.let {
-                            Log.d("UploadResponse", "Status: ${it.status}")
+                            uploadResponseData = it.similarImages
+                            showUploadResponseInRecomendationFragment()
                         }
-                        val recommendationFragment = RecomendationFragment()
-                        parentFragmentManager.beginTransaction()
-                            .replace(R.id.navhost, recommendationFragment)
-                            .addToBackStack(null)
-                            .commit()
                     } else {
                         Log.e("UploadResponse", "Unsuccessful response: ${response.code()}")
                     }
@@ -110,8 +112,19 @@
                     binding.buttonAdd.isEnabled = true
                 }
             })
+
         }
     }
+
+        private fun showUploadResponseInRecomendationFragment() {
+            val recommendationFragment = RecomendationFragment()
+            recommendationFragment.uploadResponseData = uploadResponseData
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.navhost, recommendationFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
         private fun showImage() {
             currentImageUri?.let {
                 Log.d("Image URI", "showImage: $it")

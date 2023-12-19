@@ -1,81 +1,53 @@
 package com.example.baskaryaapp.ui.recomendation
 
-import android.app.Activity
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.baskaryaapp.data.response.BatikItem
+import com.example.baskaryaapp.R
+import com.example.baskaryaapp.data.response.SimilarImagesItem
 import com.example.baskaryaapp.databinding.ItemListBatikNotextBinding
-import com.example.baskaryaapp.ui.detailBatik.DetailBatikActivity
 
-class RecomentationAdapter : ListAdapter<BatikItem, RecomentationAdapter.ListViewHolder>(DIFF_CALLBACK) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+class RecomentationAdapter :
+    ListAdapter<SimilarImagesItem, RecomentationAdapter.UploadResponseViewHolder>(DiffCallback()) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UploadResponseViewHolder {
         val binding = ItemListBatikNotextBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ListViewHolder(binding)
+        return UploadResponseViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-//        tes
-//        holder.courseNameTV.text = courseList.get(position).batikName
-//        holder.courseIV.setImageResource(courseList.get(position).batikImg)
-        val batik = getItem(position)
-        holder.bind(batik)
+    override fun onBindViewHolder(holder: UploadResponseViewHolder, position: Int) {
+        val currentItem = getItem(position)
+        holder.bind(currentItem)
     }
 
-    class ListViewHolder(private val binding: ItemListBatikNotextBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class UploadResponseViewHolder(private val binding: ItemListBatikNotextBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        //        val courseNameTV: TextView = itemView.findViewById(R.id.idTVBatik)
-
-        //        val courseNameTV: TextView = itemView.findViewById(R.id.idTVBatik)
-//        val courseIV: ImageView = itemView.findViewById(R.id.idIVBatik)
-        fun bind(batik: BatikItem){
-            Glide.with(binding.root.context)
-                .load(batik?.imageUrl)
-                .into(binding.idIVBatik)
-
-            binding.root.setOnClickListener{
-                val intentDetail = Intent(binding.root.context, DetailBatikActivity::class.java)
-                intentDetail.putExtra(EXTRA_ID, batik.id)
-                intentDetail.putExtra(EXTRA_BATIK, batik)
-
-                val optionsCompat: ActivityOptionsCompat =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        itemView.context as Activity,
-                        Pair(binding.idIVBatik, "image"),
-                    )
-
-                itemView.context.startActivity(intentDetail, optionsCompat.toBundle())
+        fun bind(similarImage: SimilarImagesItem) {
+            binding.apply {
+                // Load gambar ke ImageView menggunakan Glide
+                similarImage.url?.let { url ->
+                    Glide.with(itemView)
+                        .load(url)
+                        .placeholder(R.drawable.baskarya_logo) // Gambar placeholder jika URL tidak valid
+                        .into(idIVBatik)
+                }
             }
         }
-
-
     }
 
-    companion object {
-
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BatikItem>(){
-            override fun areItemsTheSame(
-                oldItem: BatikItem,
-                newItem: BatikItem
-            ): Boolean {
-                return oldItem == newItem
-            }
-
-            override fun areContentsTheSame(
-                oldItem: BatikItem,
-                newItem: BatikItem
-            ): Boolean {
-                return oldItem == newItem
-            }
+    class DiffCallback : DiffUtil.ItemCallback<SimilarImagesItem>() {
+        override fun areItemsTheSame(oldItem: SimilarImagesItem, newItem: SimilarImagesItem): Boolean {
+            // Jika id atau identifier item digunakan, periksa di sini
+            return oldItem.namaBatik == newItem.namaBatik // Ganti dengan identifier yang sesuai jika ada
         }
 
-        const val EXTRA_ID = "key_id"
-        const val EXTRA_BATIK = "key_batik"
+        override fun areContentsTheSame(oldItem: SimilarImagesItem, newItem: SimilarImagesItem): Boolean {
+            // Periksa apakah konten dari item sama di sini (jika perlu)
+            return oldItem == newItem
+        }
     }
 }
