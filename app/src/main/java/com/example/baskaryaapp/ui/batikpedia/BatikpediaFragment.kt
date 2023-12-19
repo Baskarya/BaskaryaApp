@@ -53,18 +53,27 @@ class BatikpediaFragment : Fragment() {
         val auth: FirebaseAuth = FirebaseAuth.getInstance()
         val userId = auth.currentUser?.uid
 
-        lifecycleScope.launch {
-            while (isActive) {
-                batikpediaViewModel.isLoading.observe(requireActivity()) { loading ->
-                    showLoading(loading)
+        if (userId != null) {
+            // Dapatkan data bookmark
+            firebaseHelper.getBookmarkedBatiks(userId) { bookmarkedIds ->
+                // Set data batik
+                batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
+                    setBatikData(listBatik, bookmarkedIds)
                 }
-                delay(1000)
-                if (userId != null) {
+            }
+        }
+
+        lifecycleScope.launch {
+            while (lifecycleScope.coroutineContext.isActive) {
+                delay(10000)
+                if (isAdded() && userId != null) {
                     // Dapatkan data bookmark
                     firebaseHelper.getBookmarkedBatiks(userId) { bookmarkedIds ->
-                        // Set data batik
-                        batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
-                            setBatikData(listBatik, bookmarkedIds)
+                        if (isAdded()) {
+                            // Set data batik
+                            batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
+                                setBatikData(listBatik, bookmarkedIds)
+                            }
                         }
                     }
                 }

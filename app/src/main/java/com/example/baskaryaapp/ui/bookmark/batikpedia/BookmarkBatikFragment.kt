@@ -67,14 +67,16 @@ class BookmarkBatikFragment : Fragment() {
 //        }
 
         lifecycleScope.launch {
-            while (isActive) {
-                delay(1000)
-                if (userId != null) {
+            while (lifecycleScope.coroutineContext.isActive) {
+                delay(5000)
+                if (isAdded() && userId != null) {
                     // Dapatkan data bookmark
                     firebaseHelper.getBookmarkedBatiks(userId) { bookmarkedIds ->
-                        // Set data batik
-                        batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
-                            setBatikData(listBatik, bookmarkedIds)
+                        if (isAdded()) {
+                            // Set data batik
+                            batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
+                                setBatikData(listBatik, bookmarkedIds)
+                            }
                         }
                     }
                 }
