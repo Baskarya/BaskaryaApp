@@ -10,8 +10,7 @@ import com.example.baskaryaapp.R
 import com.example.baskaryaapp.data.response.SimilarImagesItem
 import com.example.baskaryaapp.databinding.ItemListBatikNotextBinding
 
-class RecomentationAdapter :
-    ListAdapter<SimilarImagesItem, RecomentationAdapter.UploadResponseViewHolder>(DiffCallback()) {
+class RecomentationAdapter : ListAdapter<SimilarImagesItem, RecomentationAdapter.UploadResponseViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UploadResponseViewHolder {
         val binding = ItemListBatikNotextBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -28,11 +27,10 @@ class RecomentationAdapter :
 
         fun bind(similarImage: SimilarImagesItem) {
             binding.apply {
-                // Load gambar ke ImageView menggunakan Glide
                 similarImage.url?.let { url ->
                     Glide.with(itemView)
                         .load(url)
-                        .placeholder(R.drawable.baskarya_logo) // Gambar placeholder jika URL tidak valid
+                        .placeholder(R.drawable.baskarya_logo)
                         .into(idIVBatik)
                 }
             }
@@ -41,8 +39,7 @@ class RecomentationAdapter :
 
     class DiffCallback : DiffUtil.ItemCallback<SimilarImagesItem>() {
         override fun areItemsTheSame(oldItem: SimilarImagesItem, newItem: SimilarImagesItem): Boolean {
-            // Jika id atau identifier item digunakan, periksa di sini
-            return oldItem.namaBatik == newItem.namaBatik // Ganti dengan identifier yang sesuai jika ada
+            return oldItem.namaBatik == newItem.namaBatik
         }
 
         override fun areContentsTheSame(oldItem: SimilarImagesItem, newItem: SimilarImagesItem): Boolean {
