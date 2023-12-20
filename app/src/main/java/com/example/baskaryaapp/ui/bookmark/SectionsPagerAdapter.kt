@@ -5,9 +5,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.baskaryaapp.ui.bookmark.articles.BookmarkArticlesFragment
 import com.example.baskaryaapp.ui.bookmark.batikpedia.BookmarkBatikFragment
 import com.example.baskaryaapp.ui.bookmark.customization.BookmarkCustomizationFragment
-import com.example.baskaryaapp.ui.customization.CustomizationFragment
-import com.example.baskaryaapp.ui.recomendation.RecomendationFragment
-import com.example.baskaryaapp.ui.search.SearchBatikFragment
 
 class SectionsPagerAdapter(fragment: Fragment) :
     FragmentStateAdapter(fragment) {

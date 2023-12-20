@@ -27,9 +27,8 @@
 
         private lateinit var binding: FragmentScanBinding
         private var currentImageUri: Uri? = null
-        private val REQUEST_IMAGE_CAPTURE = 100
         private var uploadResponseData: List<SimilarImagesItem?>? = null
-        private lateinit var adapter: RecomentationAdapter // Ganti dengan nama adaptermu
+        private lateinit var adapter: RecomentationAdapter
 
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,8 +36,8 @@
             binding = FragmentScanBinding.bind(view)
             adapter = RecomentationAdapter()
             binding.imageView2.setOnClickListener{back()}
-            binding.btnGallery.setOnClickListener { startGallery() }
-            binding.btnCamera.setOnClickListener { startCamera() }
+            binding.fabGallery.setOnClickListener { startGallery() }
+            binding.fabCamera.setOnClickListener { startCamera() }
             binding.buttonAdd.setOnClickListener { uploadImage() }
         }
 

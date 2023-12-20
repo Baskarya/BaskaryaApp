@@ -47,12 +47,6 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE)
 
-//        checkUserSession()
-
-//        binding.logout.setOnClickListener {
-//            logoutUser()
-//        }
-
         binding.fab.setOnClickListener{
             val scanFragment = ScanFragment()
             val fragmentManager = supportFragmentManager
@@ -61,7 +55,6 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 
-//            binding.logout.visibility=View.GONE
         }
 
         navview =findViewById(R.id.bottomNavigationView)
@@ -92,31 +85,4 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
-//    private fun logoutUser() {
-//        auth.signOut()
-//
-//        // Clear user session
-//        clearUserSession()
-//
-//        // Redirect to LoginActivity
-//        val intent = Intent(this, LoginActivity::class.java)
-//        startActivity(intent)
-//        finish()
-//    }
-//
-//    private fun clearUserSession() {
-//        // Mark the user as logged out
-//        sharedPreferences.edit().putBoolean("isLoggedIn", false).apply()
-//    }
-//
-//    private fun checkUserSession() {
-//        // Check if the user is still logged in
-//        if (!sharedPreferences.getBoolean("isLoggedIn", false)) {
-//            // If not logged in, redirect to LoginActivity
-//            val intent = Intent(this, LoginActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
-//    }
 }
