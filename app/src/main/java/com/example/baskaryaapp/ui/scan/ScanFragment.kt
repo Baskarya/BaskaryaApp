@@ -21,8 +21,7 @@
     import okhttp3.RequestBody.Companion.asRequestBody
     import retrofit2.Call
     import retrofit2.Response
-
-
+    
     class ScanFragment : Fragment(R.layout.fragment_scan) {
 
         private lateinit var binding: FragmentScanBinding

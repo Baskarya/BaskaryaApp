@@ -10,9 +10,6 @@ class BatikRepository private constructor(
         return apiService.batik()
     }
 
-
-
-
     companion object {
         @Volatile
         private var instance: BatikRepository? = null

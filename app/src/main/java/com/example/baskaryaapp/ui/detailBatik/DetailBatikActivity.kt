@@ -6,23 +6,13 @@ import android.util.Log
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.example.baskaryaapp.R
-import com.example.baskaryaapp.data.database.Bookmark
-import com.example.baskaryaapp.data.database.BookmarkBatik
 import com.example.baskaryaapp.data.helper.FirebaseHelper
 import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.ActivityDetailBatikBinding
-import com.example.baskaryaapp.ui.BookmarkBatikViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class DetailBatikActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBatikBinding
-    private val detailBatikViewModel by viewModels<DetailBatikViewModel>(){
-        BookmarkBatikViewModelFactory.getInstance(application)
-    }
     private val firebaseHelper = FirebaseHelper()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private lateinit var batikList: MutableList<BatikItem>
@@ -80,10 +70,10 @@ class DetailBatikActivity : AppCompatActivity() {
             bookmark = !bookmark
             if (bookmark) {
                 binding.icBookmark.setImageResource(R.drawable.ic_bookmarked)
-                firebaseHelper.addBookmark(id, title, imageUrl, batikList)
+                firebaseHelper.addBookmarkBatik(id, title, imageUrl, batikList)
             } else {
                 binding.icBookmark.setImageResource(R.drawable.ic_unbookmarked)
-                firebaseHelper.removeBookmark(id, title, imageUrl, batikList)
+                firebaseHelper.removeBookmarkBatik(id, title, imageUrl, batikList)
             }
         }
 

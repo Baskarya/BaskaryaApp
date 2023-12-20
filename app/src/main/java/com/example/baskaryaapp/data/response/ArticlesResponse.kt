@@ -36,7 +36,9 @@ data class ArticlesItem(
 	val title: String? = null,
 
 	@field:SerializedName("content")
-	val content: String? = null
+	val content: String? = null,
+
+	var isBookmarked: Boolean = false
 ):Parcelable
 
 //data class PublishedDate(

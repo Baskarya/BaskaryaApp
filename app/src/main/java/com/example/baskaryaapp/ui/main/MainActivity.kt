@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
@@ -63,6 +65,19 @@ class MainActivity : AppCompatActivity() {
 
 //            binding.logout.visibility=View.GONE
         }
+
+//        binding.nestedScrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
+//            if (scrollY == (binding.nestedScrollView.getChildAt(0).measuredHeight - binding.nestedScrollView.measuredHeight)) {
+//                // NestedScrollView reaches the bottom
+//                binding.bottomAppBar.animate().translationY(binding.bottomAppBar.height.toFloat()).setInterpolator(AccelerateInterpolator()).start()
+//                binding.fab.animate().translationY(binding.fab.height.toFloat()).setInterpolator(AccelerateInterpolator()).start()
+//            } else {
+//                // NestedScrollView can still be scrolled
+//                binding.bottomAppBar.animate().translationY(0f).setInterpolator(DecelerateInterpolator()).start()
+//                binding.fab.animate().translationY(0f).setInterpolator(DecelerateInterpolator()).start()
+//            }
+//        }
+
 
         navview =findViewById(R.id.bottomNavigationView)
         replace(HomeFragment())

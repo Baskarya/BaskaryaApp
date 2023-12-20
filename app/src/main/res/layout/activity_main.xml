@@ -6,17 +6,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity"
+    android:id="@+id/d"
     android:background="@drawable/background_1">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/navhost"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+<!--        <androidx.core.widget.NestedScrollView-->
+<!--            android:id="@+id/nestedScrollView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
 
+            <FrameLayout
+                android:id="@+id/navhost"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+<!--        </androidx.core.widget.NestedScrollView>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
