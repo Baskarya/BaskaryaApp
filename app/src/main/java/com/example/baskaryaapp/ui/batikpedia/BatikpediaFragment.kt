@@ -1,21 +1,22 @@
 package com.example.baskaryaapp.ui.batikpedia
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.baskaryaapp.R
 import com.example.baskaryaapp.data.api.ApiConfig.apiService
 import com.example.baskaryaapp.data.helper.FirebaseHelper
 import com.example.baskaryaapp.data.repo.BatikRepository
 import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.FragmentBatikpediaBinding
 import com.example.baskaryaapp.ui.BatikViewModelFactory
+import com.example.baskaryaapp.ui.home.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -25,7 +26,7 @@ class BatikpediaFragment : Fragment() {
     private lateinit var binding: FragmentBatikpediaBinding
     private val firebaseHelper = FirebaseHelper()
     private lateinit var batikList: MutableList<BatikItem>
-
+    lateinit var imageView2 : ImageView
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentBatikpediaBinding.inflate(inflater, container, false)
@@ -42,10 +43,14 @@ class BatikpediaFragment : Fragment() {
         val layoutManager = GridLayoutManager(requireContext(), 3)
 
         binding.idRVBatik.layoutManager = layoutManager
+        imageView2= view.findViewById(R.id.imageView2)
 
-//        batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
-//            setBatikData(listBatik)
-//        }
+        imageView2.setOnClickListener{
+            val homeFragment = HomeFragment()
+            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.navhost, homeFragment)
+            fragmentTransaction.commit()
+        }
 
         batikList = mutableListOf()
 

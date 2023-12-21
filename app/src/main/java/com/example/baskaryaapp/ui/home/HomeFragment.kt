@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -101,38 +100,6 @@ class HomeFragment : Fragment() {
             showLoading(loading)
         }
 
-        //SearchView
-        val searchView =view.findViewById<SearchView>(R.id.searchView)
-
-        searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
-
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (!query.isNullOrEmpty()) {
-                    // Buat instance dari SearchResultFragment
-                    val searchResultFragment = SearchResultFragment()
-
-                    // Lakukan transaksi fragment untuk pindah ke SearchResultFragment
-                    val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                    fragmentTransaction.replace(R.id.homefragment, searchResultFragment)
-                    fragmentTransaction.addToBackStack(null) // Agar dapat kembali ke fragment sebelumnya
-                    fragmentTransaction.commit()
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                val searchResultFragment = SearchResultFragment()
-
-                if (!newText.isNullOrEmpty()) {
-                    // Buat instance SearchResultFragment dengan membawa data pencarian
-                    val bundle = Bundle()
-                    bundle.putString("query", newText)
-                    searchResultFragment.arguments = bundle
-                }
-
-                return true
-            }
-        })
         morear =view.findViewById(R.id.tv_moreTa)
         morebp =view.findViewById(R.id.tv_morebp)
         search_btn=view.findViewById(R.id.iv_search)
