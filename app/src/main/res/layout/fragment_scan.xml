@@ -9,6 +9,7 @@
     tools:context=".ui.scan.ScanFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:paddingBottom="120dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <TextView
@@ -108,9 +109,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_marginEnd="30dp"
+                app:borderWidth="0dp"
                 android:backgroundTint="@color/color_3"
                 android:src="@drawable/baseline_camera_24"
-                android:tint="@color/white" />
+                android:tint="@android:color/white"/>
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -119,6 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:backgroundTint="@color/color_3"
+                app:borderWidth="0dp"
                 android:src="@drawable/baseline_image_24"
                 android:tint="@color/white" />
 
@@ -140,18 +143,6 @@
                 android:text="@string/upload"
                 android:textColor="@color/black" />
         </LinearLayout>
-
-        <View
-            android:id="@+id/horizontal_line"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="100dp"
-            android:background="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_button" />
 
     <ProgressBar
         android:id="@+id/progressBar"

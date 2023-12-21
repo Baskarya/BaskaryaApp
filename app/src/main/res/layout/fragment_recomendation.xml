@@ -12,9 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="50dp">
-
-
+        android:paddingBottom="60dp">
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="match_parent"

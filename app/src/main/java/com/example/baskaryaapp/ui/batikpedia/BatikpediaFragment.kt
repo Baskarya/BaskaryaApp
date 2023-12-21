@@ -8,7 +8,9 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.data.api.ApiConfig.apiService
 import com.example.baskaryaapp.data.helper.FirebaseHelper
