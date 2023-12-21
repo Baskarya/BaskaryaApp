@@ -34,17 +34,18 @@
             super.onViewCreated(view, savedInstanceState)
             binding = FragmentScanBinding.bind(view)
             adapter = RecomentationAdapter()
+            binding.buttonAdd.visibility = View.INVISIBLE
             binding.imageView2.setOnClickListener{back()}
             binding.fabGallery.setOnClickListener { startGallery() }
             binding.fabCamera.setOnClickListener { startCamera() }
             binding.buttonAdd.setOnClickListener { uploadImage() }
         }
 
-        override fun onResume() {
-            super.onResume()
-            binding.buttonAdd.visibility = View.VISIBLE
-            binding.cardView.visibility = View.VISIBLE
-        }
+//        override fun onResume() {
+//            super.onResume()
+//            binding.buttonAdd.visibility = View.VISIBLE
+//            binding.cardView.visibility = View.VISIBLE
+//        }
 
         private fun startGallery() {
             launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
@@ -127,6 +128,7 @@
             currentImageUri?.let {
                 Log.d("Image URI", "showImage: $it")
                 binding.ivItemImage.setImageURI(it)
+                binding.buttonAdd.visibility = View.VISIBLE
             }
         }
         private fun back(){
