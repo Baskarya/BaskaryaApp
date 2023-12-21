@@ -26,7 +26,6 @@ class ArticlesFragment : Fragment() {
     private lateinit var binding: FragmentArticlesBinding
     private val firebaseHelper = FirebaseHelper()
     private lateinit var articleList: MutableList<ArticlesItem>
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -89,14 +88,7 @@ class ArticlesFragment : Fragment() {
 //    }
 
     private fun setArticlesData(items: List<ArticlesItem>, bookmarkedIds: List<String?>) {
-        val adapter = ArticlesAdapter()
-        val itemsWithBookmarkStatus = items.map { batik ->
-            batik.copy(isBookmarked = bookmarkedIds.contains(batik.id))
-        }
-        adapter.submitList(itemsWithBookmarkStatus)
-
         val layoutManager = binding.rvArticles.layoutManager as? LinearLayoutManager
-
         val lastFirstVisiblePosition = layoutManager?.findFirstVisibleItemPosition()
         val topOffset = if (lastFirstVisiblePosition != RecyclerView.NO_POSITION) {
             val firstView = binding.rvArticles.getChildAt(0)
@@ -105,9 +97,21 @@ class ArticlesFragment : Fragment() {
             0
         }
 
+        val adapter = ArticlesAdapter()
+        val itemsWithBookmarkStatus = items.map { article ->
+            article.copy(isBookmarked = bookmarkedIds.contains(article.id))
+        }
+        adapter.submitList(itemsWithBookmarkStatus)
+
+        // Simpan posisi tampilan sebelum memperbarui adapter
+        val recyclerViewState = layoutManager?.onSaveInstanceState()
+
         binding.rvArticles.adapter = adapter
 
+        // Memulihkan posisi tampilan setelah memperbarui adapter
+        layoutManager?.onRestoreInstanceState(recyclerViewState)
         layoutManager?.scrollToPositionWithOffset(lastFirstVisiblePosition ?: 0, topOffset)
+
         showLoading(false)
     }
 

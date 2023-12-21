@@ -8,9 +8,9 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.data.api.ApiConfig.apiService
 import com.example.baskaryaapp.data.helper.FirebaseHelper
@@ -99,14 +99,34 @@ class BatikpediaFragment : Fragment() {
 //    }
 
     private fun setBatikData(items: List<BatikItem>, bookmarkedIds: List<String?>) {
+        val layoutManager = binding.idRVBatik.layoutManager as? LinearLayoutManager
+        val lastFirstVisiblePosition = layoutManager?.findFirstVisibleItemPosition()
+        val topOffset = if (lastFirstVisiblePosition != RecyclerView.NO_POSITION) {
+            val firstView = binding.idRVBatik.getChildAt(0)
+            firstView?.top ?: 0
+        } else {
+            0
+        }
+
         val adapter = BatikRVAdapter()
         // Set status bookmark pada setiap item berdasarkan daftar bookmarkedIds
         val itemsWithBookmarkStatus = items.map { batik ->
             batik.copy(isBookmarked = bookmarkedIds.contains(batik.id))
         }
         adapter.submitList(itemsWithBookmarkStatus)
+
+        // Simpan posisi tampilan sebelum memperbarui adapter
+        val recyclerViewState = layoutManager?.onSaveInstanceState()
+
         binding.idRVBatik.adapter = adapter
+
+        // Memulihkan posisi tampilan setelah memperbarui adapter
+        layoutManager?.onRestoreInstanceState(recyclerViewState)
+        layoutManager?.scrollToPositionWithOffset(lastFirstVisiblePosition ?: 0, topOffset)
+
+        showLoading(false)
     }
+
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
