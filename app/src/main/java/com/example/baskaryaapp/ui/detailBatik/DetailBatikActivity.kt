@@ -1,9 +1,8 @@
 package com.example.baskaryaapp.ui.detailBatik
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.baskaryaapp.R
 import com.example.baskaryaapp.data.helper.FirebaseHelper
@@ -22,7 +21,7 @@ class DetailBatikActivity : AppCompatActivity() {
 
         binding = ActivityDetailBatikBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        binding.imageView2.setOnClickListener{back()}
         val batik = intent.getParcelableExtra<BatikItem>(EXTRA_BATIK)
         batik?.let {
             Glide.with(this)
@@ -94,7 +93,9 @@ class DetailBatikActivity : AppCompatActivity() {
         Log.d("DetailBatikActivity", "title: $title")
         Log.d("DetailBatikActivity", "imageurl: $imageUrl")
     }
-
+    private fun back(){
+        super.onBackPressed()
+    }
     companion object {
         const val EXTRA_ID = "key_id"
         const val EXTRA_BATIK = "key_batik"

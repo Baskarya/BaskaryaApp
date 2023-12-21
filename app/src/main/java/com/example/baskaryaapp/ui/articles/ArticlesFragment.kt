@@ -1,10 +1,10 @@
 package com.example.baskaryaapp.ui.articles
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,10 +13,8 @@ import com.example.baskaryaapp.data.api.ApiConfig
 import com.example.baskaryaapp.data.helper.FirebaseHelper
 import com.example.baskaryaapp.data.repo.ArticlesRepository
 import com.example.baskaryaapp.data.response.ArticlesItem
-import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.FragmentArticlesBinding
 import com.example.baskaryaapp.ui.ArticlesViewModelFactory
-import com.example.baskaryaapp.ui.batikpedia.BatikRVAdapter
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
