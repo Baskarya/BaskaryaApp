@@ -1,8 +1,8 @@
 package com.example.baskaryaapp.data.database
 
-data class BookmarkBatik(
-    val batikId: String,
+class BookmarkCustom (
+    val customId: String,
     val userId: String,
-    val title: String,
+    val name: String,
     val imageUrl: String
 )

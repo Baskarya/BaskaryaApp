@@ -2,6 +2,7 @@ package com.example.baskaryaapp.data.helper
 
 import com.example.baskaryaapp.data.database.BookmarkArticles
 import com.example.baskaryaapp.data.database.BookmarkBatik
+import com.example.baskaryaapp.data.database.BookmarkCustom
 import com.example.baskaryaapp.data.response.ArticlesItem
 import com.example.baskaryaapp.data.response.BatikItem
 import com.google.firebase.auth.FirebaseAuth
@@ -98,4 +99,45 @@ class FirebaseHelper {
                 callback(bookmarkedIds)
             }
     }
+
+//    fun addBookmarkCustom(customId: String, name:String, imageUrl: String, customList: MutableList<CustomItem>) {
+//        val userId = auth.currentUser?.uid
+//        if (userId != null) {
+//            val bookmark = BookmarkCustom(customId, userId, name, imageUrl)
+//            getBookmarkCollection().add(bookmark)
+//                .addOnSuccessListener {
+//                    // Update status bookmark pada model data
+//                    customList.find { it.id == customId }?.isBookmarked = true
+////                    notifyDataSetChanged()
+//                }
+//        }
+//    }
+
+//    fun removeBookmarkCustom(customId: String, name:String, imageUrl: String, customList: MutableList<CustomItem>) {
+//        val userId = auth.currentUser?.uid
+//        if (userId != null) {
+//            getBookmarkCollection()
+//                .whereEqualTo("customId", customId)
+//                .whereEqualTo("userId", userId)
+//                .get()
+//                .addOnSuccessListener { documents ->
+//                    for (document in documents) {
+//                        document.reference.delete()
+//                        // Update status bookmark pada model data
+//                        customList.find { it.id == customId }?.isBookmarked = false
+////                        notifyDataSetChanged()
+//                    }
+//                }
+//        }
+//    }
+
+//    fun getBookmarkedCustom(userId: String, callback: (List<String?>) -> Unit) {
+//        getBookmarkCollection()
+//            .whereEqualTo("userId", userId)
+//            .get()
+//            .addOnSuccessListener { documents ->
+//                val bookmarkedIds = documents.map { it.getString("customId") }.toList()
+//                callback(bookmarkedIds)
+//            }
+//    }
 }

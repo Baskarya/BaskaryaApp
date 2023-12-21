@@ -54,7 +54,7 @@
         android:hint="@string/email"
         tools:alpha="100">
 
-        <com.example.baskaryaapp.ui.custom.MyEditText
+        <com.example.baskaryaapp.ui.customUi.MyEditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
         android:hint="@string/password"
         tools:alpha="100">
 
-        <com.example.baskaryaapp.ui.custom.MyEditText
+        <com.example.baskaryaapp.ui.customUi.MyEditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

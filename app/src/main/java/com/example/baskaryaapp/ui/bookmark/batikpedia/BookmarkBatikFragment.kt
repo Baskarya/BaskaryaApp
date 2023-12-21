@@ -26,15 +26,14 @@ import kotlinx.coroutines.launch
 
 class BookmarkBatikFragment : Fragment() {
     private lateinit var binding: FragmentBookmarkBatikBinding
+    private val firebaseHelper = FirebaseHelper()
+    private lateinit var batikList: MutableList<BatikItem>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentBookmarkBatikBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-    private val firebaseHelper = FirebaseHelper()
-    private lateinit var batikList: MutableList<BatikItem>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

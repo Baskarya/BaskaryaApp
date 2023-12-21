@@ -46,10 +46,6 @@ class RegisterActivity : AppCompatActivity() {
         }.start()
 
         val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(100)
-//        val nameTextView =
-//            ObjectAnimator.ofFloat(binding.nameTextView, View.ALPHA, 1f).setDuration(100)
-//        val nameEditTextLayout =
-//            ObjectAnimator.ofFloat(binding.nameEditTextLayout, View.ALPHA, 1f).setDuration(100)
         val emailTextView =
             ObjectAnimator.ofFloat(binding.emailTextView, View.ALPHA, 1f).setDuration(100)
         val emailEditTextLayout =
@@ -65,8 +61,6 @@ class RegisterActivity : AppCompatActivity() {
         AnimatorSet().apply {
             playSequentially(
                 title,
-//                nameTextView,
-//                nameEditTextLayout,
                 emailTextView,
                 emailEditTextLayout,
                 passwordTextView,
@@ -80,22 +74,34 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun register(){
+
         val email= binding.emailEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
 
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val user = auth.currentUser
-                user?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName("YourDisplayName").build())
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Toast.makeText(this, "Signed Up Failed!", Toast.LENGTH_SHORT).show()
-            }
-        }.addOnFailureListener { exception ->
-            Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG).show()
+        if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
+            Toast.makeText(this, "There is empty field", Toast.LENGTH_SHORT).show()
         }
-
+        else{
+            showLoading(true)
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    user?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName("YourDisplayName").build())
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this, "Signed Up Failed!", Toast.LENGTH_SHORT).show()
+                }
+            }.addOnFailureListener { exception ->
+                Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG).show()
+            }
+        }
+        return
     }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
 }

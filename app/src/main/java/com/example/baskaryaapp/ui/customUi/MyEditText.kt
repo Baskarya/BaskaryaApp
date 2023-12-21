@@ -1,4 +1,4 @@
-package com.example.baskaryaapp.ui.custom
+package com.example.baskaryaapp.ui.customUi
 
 import android.content.Context
 import android.graphics.Canvas
