@@ -1,76 +1,119 @@
 package com.example.baskaryaapp.ui.bookmark.customization
 
-import android.app.Activity
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.baskaryaapp.data.database.BookmarkCustom
 import com.example.baskaryaapp.data.response.ArticlesItem
-import com.example.baskaryaapp.databinding.ItemListArticlesBinding
+import com.example.baskaryaapp.data.response.Data
 import com.example.baskaryaapp.databinding.ItemListCustomizationBinding
-import com.example.baskaryaapp.ui.detailArticle.DetailArticleActivity
 
-class CustomizationAdapter : ListAdapter<ArticlesItem, CustomizationAdapter.ListViewHolder>(DIFF_CALLBACK){
+//class CustomizationAdapter : ListAdapter<Data, CustomizationAdapter.ListViewHolder>(DIFF_CALLBACK){
+//
+//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+//        val binding = ItemListCustomizationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+//        return ListViewHolder(binding)
+//    }
+//
+//    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+//        val custom = getItem(position)
+//        holder.bind(custom)
+//    }
+//
+//    class ListViewHolder(private val binding: ItemListCustomizationBinding) : RecyclerView.ViewHolder(binding.root){
+//        fun bind(custom: Data){
+//            Glide.with(binding.root.context)
+//                .load(custom.imageUrl)
+//                .into(binding.imgItemPhoto)
+//
+////            binding.root.setOnClickListener{
+////                val intentDetail = Intent(binding.root.context, DetailArticleActivity::class.java)
+////                intentDetail.putExtra(EXTRA_ID, custom.id)
+////                intentDetail.putExtra(EXTRA_CUSTOM, custom)
+////                intentDetail.putExtra("key_id", custom.id)
+////                intentDetail.putExtra("NAMA_BATIK", custom.name)
+////                intentDetail.putExtra("IMAGE_URL", custom.imageUrl)
+////
+////                val optionsCompat: ActivityOptionsCompat =
+////                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+////                        itemView.context as Activity,
+////                        Pair(binding.imgItemPhoto, "image"),
+////                    )
+////
+////                itemView.context.startActivity(intentDetail, optionsCompat.toBundle())
+////            }
+//        }
+//    }
+//
+//    companion object {
+//
+//        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Data>(){
+//            override fun areItemsTheSame(
+//                oldItem: Data,
+//                newItem: Data
+//            ): Boolean {
+//                return oldItem == newItem
+//            }
+//
+//            override fun areContentsTheSame(
+//                oldItem: Data,
+//                newItem: Data
+//            ): Boolean {
+//                return oldItem == newItem
+//            }
+//        }
+//
+//        const val EXTRA_ID = "key_id"
+//        const val EXTRA_CUSTOM = "key_custom"
+//    }
+//}
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+class CustomizationAdapter : ListAdapter<BookmarkCustom, CustomizationAdapter.BookmarkCustomViewHolder>(DIFF_CALLBACK) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookmarkCustomViewHolder {
         val binding = ItemListCustomizationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ListViewHolder(binding)
+        return BookmarkCustomViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val articles = getItem(position)
-        holder.bind(articles)
+    override fun onBindViewHolder(holder: BookmarkCustomViewHolder, position: Int) {
+        val bookmarkCustom = getItem(position)
+        holder.bind(bookmarkCustom)
     }
 
-    class ListViewHolder(private val binding: ItemListCustomizationBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(articles: ArticlesItem){
+    class BookmarkCustomViewHolder(private val binding: ItemListCustomizationBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(bookmarkCustom: BookmarkCustom) {
+            // Bind data to views
             Glide.with(binding.root.context)
-                .load(articles.imageUrl)
+                .load(bookmarkCustom.imageUrl)
                 .into(binding.imgItemPhoto)
 
-            binding.root.setOnClickListener{
-                val intentDetail = Intent(binding.root.context, DetailArticleActivity::class.java)
-                intentDetail.putExtra(EXTRA_ID, articles.id)
-                intentDetail.putExtra(EXTRA_ARTICLES, articles)
-                intentDetail.putExtra("key_id", articles.id)
-                intentDetail.putExtra("key_title", articles.title)
-                intentDetail.putExtra("key_imageUrl", articles.imageUrl)
-
-                val optionsCompat: ActivityOptionsCompat =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        itemView.context as Activity,
-                        Pair(binding.imgItemPhoto, "image"),
-                    )
-
-                itemView.context.startActivity(intentDetail, optionsCompat.toBundle())
+            // Handle item click if needed
+            binding.root.setOnClickListener {
+                // Handle item click action
             }
         }
     }
 
     companion object {
-
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ArticlesItem>(){
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BookmarkCustom>(){
             override fun areItemsTheSame(
-                oldItem: ArticlesItem,
-                newItem: ArticlesItem
+                oldItem: BookmarkCustom,
+                newItem: BookmarkCustom
             ): Boolean {
                 return oldItem == newItem
             }
 
+            @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
-                oldItem: ArticlesItem,
-                newItem: ArticlesItem
+                oldItem: BookmarkCustom,
+                newItem: BookmarkCustom
             ): Boolean {
                 return oldItem == newItem
             }
         }
-
-        const val EXTRA_ID = "key_id"
-        const val EXTRA_ARTICLES = "key_articles"
     }
 }

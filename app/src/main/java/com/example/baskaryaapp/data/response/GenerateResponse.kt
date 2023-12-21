@@ -30,7 +30,9 @@ data class Data(
 	val id: String? = null,
 
 	@field:SerializedName("publishedDate")
-	val publishedDate: PublishedDate? = null
+	val publishedDate: PublishedDate? = null,
+
+	var isBookmarked: Boolean = false
 ) : Parcelable
 
 @Parcelize

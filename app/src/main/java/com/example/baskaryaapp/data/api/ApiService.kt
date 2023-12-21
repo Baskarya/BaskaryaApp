@@ -55,4 +55,9 @@ interface ApiService {
         @Field("batikName") batikName: String
     ): Call<GenerateResponse>
 
+    @POST("/api/custom")
+    @FormUrlEncoded
+    fun custom(
+    ): GenerateResponse
+
 }

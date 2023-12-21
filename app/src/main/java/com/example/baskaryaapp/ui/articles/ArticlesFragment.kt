@@ -68,15 +68,17 @@ class ArticlesFragment : Fragment() {
                             articlesViewModel.listArticles.observe(requireActivity()) { listArticles ->
                                 setArticlesData(listArticles, bookmarkedIds)
                             }
+
+                            articlesViewModel.isLoading.observe(requireActivity()) { loading ->
+                                showLoading(loading)
+                            }
                         }
                     }
                 }
             }
         }
 
-        articlesViewModel.isLoading.observe(requireActivity()) { loading ->
-            showLoading(loading)
-        }
+
     }
 
 //    private fun setArticlesData(items: List<ArticlesItem>) {

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.baskaryaapp.R
-import com.example.baskaryaapp.data.api.ApiGenerate
+import com.example.baskaryaapp.data.api.ApiConfig
 import com.example.baskaryaapp.data.response.GenerateResponse
 import com.example.baskaryaapp.data.response.SimilarImagesItem
 import com.example.baskaryaapp.databinding.ItemListBatikNotextBinding
@@ -62,8 +62,7 @@ class RecomentationAdapter : ListAdapter<SimilarImagesItem, RecomentationAdapter
             val imageUrl = similarImage.url ?: ""
             val batikName = similarImage.namaBatik ?: ""
 
-
-            val call = ApiGenerate.apiService.customBatik(uid, imageUrl, batikName)
+            val call = ApiConfig.apiService.customBatik(uid, imageUrl, batikName)
             call.enqueue(object : Callback<GenerateResponse> {
                 override fun onResponse(call: Call<GenerateResponse>, response: Response<GenerateResponse>) {
                     progressBar.visibility = View.GONE
@@ -72,6 +71,8 @@ class RecomentationAdapter : ListAdapter<SimilarImagesItem, RecomentationAdapter
                         generateResponse?.let {
                             val intent = Intent(context, CustomizationActivity::class.java)
 
+                            intent.putExtra("key_custom", it.data)
+                            intent.putExtra("key_id", it.data?.id)
                             intent.putExtra("IMAGE_URL", it.data?.imageUrl)
                             intent.putExtra("NAMA_BATIK", it.data?.name)
 
