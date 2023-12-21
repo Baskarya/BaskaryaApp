@@ -59,6 +59,7 @@ class ArticlesFragment : Fragment() {
 
         lifecycleScope.launch {
             while (lifecycleScope.coroutineContext.isActive) {
+                showLoading(true)
                 delay(5000)
                 if (isAdded() && userId != null) {
                     // Dapatkan data bookmark
@@ -69,9 +70,10 @@ class ArticlesFragment : Fragment() {
                                 setArticlesData(listArticles, bookmarkedIds)
                             }
 
-                            articlesViewModel.isLoading.observe(requireActivity()) { loading ->
-                                showLoading(loading)
-                            }
+//                            articlesViewModel.isLoading.observe(requireActivity()) { loading ->
+//                                showLoading(loading)
+//                            }
+                            showLoading(false)
                         }
                     }
                 }
@@ -95,6 +97,8 @@ class ArticlesFragment : Fragment() {
         }
         adapter.submitList(itemsWithBookmarkStatus)
         binding.rvArticles.adapter = adapter
+
+        showLoading(false)
     }
 
     private fun showLoading(isLoading: Boolean) {

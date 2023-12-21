@@ -41,6 +41,9 @@ class AdapterArticle (private val maxItemCount: Int): ListAdapter<ArticlesItem, 
                 val intentDetail = Intent(binding.root.context, DetailArticleActivity::class.java)
                 intentDetail.putExtra(EXTRA_ID, articles.id)
                 intentDetail.putExtra(EXTRA_ARTICLES, articles)
+                intentDetail.putExtra("key_id", articles.id)
+                intentDetail.putExtra("key_title", articles.title)
+                intentDetail.putExtra("key_imageUrl", articles.imageUrl)
 
                 val optionsCompat: ActivityOptionsCompat =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(

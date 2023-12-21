@@ -67,6 +67,7 @@ class BookmarkBatikFragment : Fragment() {
 
         lifecycleScope.launch {
             while (lifecycleScope.coroutineContext.isActive) {
+                showLoading(true)
                 delay(5000)
                 if (isAdded() && userId != null) {
                     // Dapatkan data bookmark
@@ -77,14 +78,15 @@ class BookmarkBatikFragment : Fragment() {
                                 setBatikData(listBatik, bookmarkedIds)
                             }
                         }
+                        showLoading(false)
                     }
                 }
             }
         }
 
-        batikpediaViewModel.isLoading.observe(requireActivity()) { loading ->
-            showLoading(loading)
-        }
+//        batikpediaViewModel.isLoading.observe(requireActivity()) { loading ->
+//            showLoading(loading)
+//        }
     }
 
     private fun setBatikData(items: List<BatikItem>, bookmarkedIds: List<String?>) {

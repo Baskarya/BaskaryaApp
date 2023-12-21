@@ -20,6 +20,7 @@
     <string name="scan">Scan</string>
     <string name="setting">Setting</string>
     <string name="search">Search</string>
+    <string name="search_desc">Search by description</string>
     <string name="more">More</string>
     <string name="newest">Newest Article</string>
 

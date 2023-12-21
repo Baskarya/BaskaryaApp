@@ -68,11 +68,23 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //            }
 //        }
 //    }
+    showLoading(true)
 
-    userId?.let { uid ->
-        firebaseHelper.fetchCustomizations(uid) { customizations ->
-            bookmarkedCustomizations = customizations.toMutableList()
-            setCustomizationData(bookmarkedCustomizations)
+    lifecycleScope.launch {
+        while (lifecycleScope.coroutineContext.isActive) {
+            showLoading(true)
+            delay(5000)
+            if (isAdded() && userId != null) {
+                if (isAdded()) {
+                    userId?.let { uid ->
+                        firebaseHelper.fetchCustomizations(uid) { customizations ->
+                            bookmarkedCustomizations = customizations.toMutableList()
+                            setCustomizationData(bookmarkedCustomizations)
+                            showLoading(false)
+                        }
+                    }
+                }
+            }
         }
     }
 

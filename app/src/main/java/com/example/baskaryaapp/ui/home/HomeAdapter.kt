@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.ItemListBatikBinding
+import com.example.baskaryaapp.ui.batikpedia.BatikRVAdapter
 import com.example.baskaryaapp.ui.detailBatik.DetailBatikActivity
 
 
@@ -43,6 +44,9 @@ class HomeAdapter (private val maxItemCount: Int): ListAdapter<BatikItem, HomeAd
                 val intentDetail = Intent(binding.root.context, DetailBatikActivity::class.java)
                 intentDetail.putExtra(EXTRA_ID, batik.id)
                 intentDetail.putExtra(EXTRA_BATIK, batik)
+                intentDetail.putExtra("key_id", batik.id)
+                intentDetail.putExtra("key_title", batik.title)
+                intentDetail.putExtra("key_imageUrl", batik.imageUrl)
 
                 val optionsCompat: ActivityOptionsCompat =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(

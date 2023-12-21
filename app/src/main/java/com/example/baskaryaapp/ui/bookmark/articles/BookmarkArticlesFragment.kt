@@ -62,6 +62,7 @@ class BookmarkArticlesFragment : Fragment()  {
 
         lifecycleScope.launch {
             while (lifecycleScope.coroutineContext.isActive) {
+                showLoading(true)
                 delay(5000)
                 if (isAdded() && userId != null) {
                     // Dapatkan data bookmark
@@ -71,15 +72,16 @@ class BookmarkArticlesFragment : Fragment()  {
                             articlesViewModel.listArticles.observe(requireActivity()) { listArticles ->
                                 setArticlesData(listArticles, bookmarkedIds)
                             }
+                            showLoading(false)
                         }
                     }
                 }
             }
         }
 
-        articlesViewModel.isLoading.observe(requireActivity()) { loading ->
-            showLoading(loading)
-        }
+//        articlesViewModel.isLoading.observe(requireActivity()) { loading ->
+//            showLoading(loading)
+//        }
     }
 
 //    private fun setArticlesData(items: List<ArticlesItem>) {
