@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.customization.CustomizationFragment">
+    android:background="@drawable/background_1"
+    tools:context=".ui.customization.CustomizationActivity">
 
     <TextView
         android:id="@+id/titleTextView"
@@ -30,10 +31,11 @@
 
     <ImageView
         android:id="@+id/iv_custom"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:src="@drawable/login_banner"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,20 +88,10 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:text="Kawung"
-            android:paddingStart="100dp"
+            android:textAlignment="center"
             android:textColor="@color/color_5"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:layout_marginTop="60dp"/>
-        <TextView
-            android:id="@+id/tv_bp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:text="@string/batik_patern"
-            android:paddingStart="180dp"
-            android:textColor="@color/color_5"
-            android:textSize="20dp"
             android:layout_marginTop="60dp"/>
 
     </androidx.cardview.widget.CardView>
@@ -115,6 +107,51 @@
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fabCradleMargin="12dp"
+            app:fabCradleVerticalOffset="10dp"
+            app:fabCradleRoundedCornerRadius="20dp"
+            android:layout_gravity="bottom">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                app:elevation="0dp"
+                app:itemIconTint="@color/color_5"
+                app:itemTextColor="@color/color_5"
+                app:menu="@menu/bottom_nav_menu" />
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_camera"
+            android:backgroundTint="@color/color_2"
+            app:layout_anchor="@id/bottomAppBar" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

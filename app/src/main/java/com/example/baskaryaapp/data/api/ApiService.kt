@@ -2,9 +2,12 @@ package com.example.baskaryaapp.data.api
 
 import com.example.baskaryaapp.data.response.ArticlesResponse
 import com.example.baskaryaapp.data.response.BatikResponse
+import com.example.baskaryaapp.data.response.GenerateResponse
 import com.example.baskaryaapp.data.response.UploadResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -42,5 +45,14 @@ interface ApiService {
     fun postbatik(
         @Part file: MultipartBody.Part
     ): Call<UploadResponse>
+
+
+    @POST("/api/custom")
+    @FormUrlEncoded
+    fun customBatik(
+        @Field("uid") username: String,
+        @Field("imageUrl") imageUrl: String,
+        @Field("batikName") batikName: String
+    ): Call<GenerateResponse>
 
 }

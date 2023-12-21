@@ -7,29 +7,31 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="5dp"
+    android:backgroundTint="@color/color_3"
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp">
 
     <!--on below line we are creating a
         linear layout for grid view item-->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/color_4"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <!--on below line we are creating
-            a simple image view-->
         <ImageView
             android:id="@+id/idIVBatik"
             android:layout_width="88dp"
             android:layout_height="88dp"
-            android:layout_gravity="center"
             android:layout_margin="8dp"
             android:padding="5dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher" />
 
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
