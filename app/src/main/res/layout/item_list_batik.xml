@@ -8,13 +8,14 @@
     android:layout_gravity="center"
     android:layout_margin="5dp"
     app:cardCornerRadius="16dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    android:background="@color/color_4">
 
     <!--on below line we are creating a
         linear layout for grid view item-->
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="170dp"
         android:background="@color/color_4"
         android:orientation="vertical">
 

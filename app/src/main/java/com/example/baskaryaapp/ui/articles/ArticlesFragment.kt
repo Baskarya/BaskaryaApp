@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.baskaryaapp.data.api.ApiConfig
 import com.example.baskaryaapp.data.helper.FirebaseHelper
 import com.example.baskaryaapp.data.repo.ArticlesRepository
@@ -89,13 +90,24 @@ class ArticlesFragment : Fragment() {
 
     private fun setArticlesData(items: List<ArticlesItem>, bookmarkedIds: List<String?>) {
         val adapter = ArticlesAdapter()
-        // Set status bookmark pada setiap item berdasarkan daftar bookmarkedIds
         val itemsWithBookmarkStatus = items.map { batik ->
             batik.copy(isBookmarked = bookmarkedIds.contains(batik.id))
         }
         adapter.submitList(itemsWithBookmarkStatus)
+
+        val layoutManager = binding.rvArticles.layoutManager as? LinearLayoutManager
+
+        val lastFirstVisiblePosition = layoutManager?.findFirstVisibleItemPosition()
+        val topOffset = if (lastFirstVisiblePosition != RecyclerView.NO_POSITION) {
+            val firstView = binding.rvArticles.getChildAt(0)
+            firstView?.top ?: 0
+        } else {
+            0
+        }
+
         binding.rvArticles.adapter = adapter
 
+        layoutManager?.scrollToPositionWithOffset(lastFirstVisiblePosition ?: 0, topOffset)
         showLoading(false)
     }
 
