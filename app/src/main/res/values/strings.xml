@@ -55,4 +55,9 @@
     <string name="isinote2">Make sure the photo captures the batik pattern you want, otherwise the result will not be satisfactory</string>
     <string name="bookmark_added">Bookmark added!</string>
     <string name="bookmark_removed">Bookmark removed!</string>
+    <string name="article">Article</string>
+    <string name="konfirmasi_logout">Confirm Logout</string>
+    <string name="yakin_logout">" Are you sure you want to log out?"</string>
+    <string name="Ya">Yes</string>
+    <string name="No">No</string>
 </resources>

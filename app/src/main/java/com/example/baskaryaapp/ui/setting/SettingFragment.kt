@@ -35,7 +35,6 @@ class SettingFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_setting, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,12 +76,12 @@ class SettingFragment : Fragment() {
     private fun showLogoutConfirmation() {
         // Menampilkan dialog konfirmasi sebelum logout
         AlertDialog.Builder(requireContext())
-            .setTitle("Konfirmasi Logout")
-            .setMessage("Apakah Anda yakin ingin logout?")
-            .setPositiveButton("Ya") { _, _ ->
+            .setTitle(R.string.konfirmasi_logout)
+            .setMessage(R.string.yakin_logout)
+            .setPositiveButton(R.string.Ya) { _, _ ->
                 logoutUser()
             }
-            .setNegativeButton("Tidak", null)
+            .setNegativeButton(R.string.No, null)
             .show()
     }
 

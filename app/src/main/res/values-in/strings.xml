@@ -2,4 +2,6 @@
 <resources>
     <string name="bookmark_added">Bookmark added!</string>
     <string name="bookmark_removed">Bookmark removed!</string>
+    <string name="search_desc">Cari berdasarkan deskripsi</string>
+    <string name="articles">Artikel</string>
 </resources>

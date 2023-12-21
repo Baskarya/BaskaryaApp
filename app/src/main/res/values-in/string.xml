@@ -52,4 +52,8 @@
     <string name="batik_patern">Pola batik</string>
     <string name="save">Simpan</string>
     <string name="isinote2">Pastikan foto menangkap pola batik yang Anda inginkan, jika tidak, hasilnya tidak akan memuaskan</string>
+    <string name="konfirmasi_logout">Konfirmasi Logout</string>
+    <string name="yakin_logout">Apakah Anda yakin ingin logout?</string>
+    <string name="Ya">Ya</string>
+    <string name="No">Tidak</string>
 </resources>
