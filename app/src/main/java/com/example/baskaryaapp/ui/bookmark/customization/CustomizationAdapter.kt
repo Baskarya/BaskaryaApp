@@ -1,8 +1,12 @@
 package com.example.baskaryaapp.ui.bookmark.customization
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +15,7 @@ import com.example.baskaryaapp.data.database.BookmarkCustom
 import com.example.baskaryaapp.data.response.ArticlesItem
 import com.example.baskaryaapp.data.response.Data
 import com.example.baskaryaapp.databinding.ItemListCustomizationBinding
+import com.example.baskaryaapp.ui.detailCustomization.DetailCustomizationActivity
 
 //class CustomizationAdapter : ListAdapter<Data, CustomizationAdapter.ListViewHolder>(DIFF_CALLBACK){
 //
@@ -91,9 +96,19 @@ class CustomizationAdapter : ListAdapter<BookmarkCustom, CustomizationAdapter.Bo
                 .load(bookmarkCustom.imageUrl)
                 .into(binding.imgItemPhoto)
 
-            // Handle item click if needed
-            binding.root.setOnClickListener {
-                // Handle item click action
+            binding.root.setOnClickListener{
+                val intentDetail = Intent(binding.root.context, DetailCustomizationActivity::class.java)
+                intentDetail.putExtra("key_id", bookmarkCustom.userId)
+                intentDetail.putExtra("NAMA_BATIK", bookmarkCustom.name)
+                intentDetail.putExtra("IMAGE_URL", bookmarkCustom.imageUrl)
+
+                val optionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        itemView.context as Activity,
+                        Pair(binding.imgItemPhoto, "image"),
+                    )
+
+                itemView.context.startActivity(intentDetail, optionsCompat.toBundle())
             }
         }
     }

@@ -60,4 +60,7 @@
     <string name="yakin_logout">Apakah Anda yakin ingin logout?</string>
     <string name="Ya">Ya</string>
     <string name="No">Tidak</string>
+    <string name="detail_customization">Detail Kustomisasi</string>
+    <string name="delete">Hapus</string>
+    <string name="for_you">Untuk Kau</string>
 </resources>

@@ -60,4 +60,7 @@
     <string name="yakin_logout">" Are you sure you want to log out?"</string>
     <string name="Ya">Yes</string>
     <string name="No">No</string>
+    <string name="detail_customization">Detail Customization</string>
+    <string name="delete">Delete</string>
+    <string name="for_you">For You</string>
 </resources>

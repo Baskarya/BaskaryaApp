@@ -38,7 +38,6 @@ override fun onCreateView(
 override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-
     val layoutManager = LinearLayoutManager(requireActivity())
     binding.rvBookmarkCustom.layoutManager = layoutManager
     val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
@@ -82,7 +81,7 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         layoutManager?.onRestoreInstanceState(recyclerViewState) // memulihkan posisi tampilan setelah memperbarui adapter
     }
 
-private fun showLoading(isLoading: Boolean) {
-    binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-}
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
 }

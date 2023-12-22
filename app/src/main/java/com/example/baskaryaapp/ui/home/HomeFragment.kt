@@ -62,8 +62,8 @@ class HomeFragment : Fragment() {
         vpSlider=view.findViewById(R.id.view_pager)
         val arrSlider= ArrayList<Int>()
         arrSlider.add(R.drawable.baskarya_logo)
-        arrSlider.add(R.drawable.login_banner)
-        arrSlider.add(R.drawable.register_banner)
+        arrSlider.add(R.drawable.banner_baskarya2)
+        arrSlider.add(R.drawable.banner_baskarya3)
 
         var adapterSlider=AdapterSlider(arrSlider,activity)
         vpSlider.adapter=adapterSlider
