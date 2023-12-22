@@ -6,26 +6,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ApiConfig {
-//    private val retrofit: Retrofit = Retrofit.Builder()
-//        .baseUrl("https://md-baskarya-veuznuhx2a-et.a.run.app/")
-//        .addConverterFactory(GsonConverterFactory.create())
-//        .build()
-
-//    private val retrofit: Retrofit = Retrofit.Builder()
-//        .baseUrl("https://mobile-aqtiniby7q-et.a.run.app/")
-//        .addConverterFactory(GsonConverterFactory.create())
-//        .build()
-
-//    private val retrofit: Retrofit = Retrofit.Builder()
-//        .baseUrl("https://baskarya-app.et.r.appspot.com/")
-//        .addConverterFactory(GsonConverterFactory.create())
-//        .build()
-
-//    private val retrofit: Retrofit = Retrofit.Builder()
-//        .baseUrl("https://baskarya-app-veuznuhx2a-et.a.run.app/")
-//        .addConverterFactory(GsonConverterFactory.create())
-//        .build()
-
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl("https://baskarya-app-veuznuhx2a-et.a.run.app/")
         .addConverterFactory(GsonConverterFactory.create())

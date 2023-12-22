@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.baskaryaapp.data.database.BookmarkCustom
-import com.example.baskaryaapp.data.response.ArticlesItem
-import com.example.baskaryaapp.data.response.Data
 import com.example.baskaryaapp.databinding.ItemListCustomizationBinding
 import com.example.baskaryaapp.ui.detailCustomization.DetailCustomizationActivity
 
@@ -91,7 +89,6 @@ class CustomizationAdapter : ListAdapter<BookmarkCustom, CustomizationAdapter.Bo
 
     class BookmarkCustomViewHolder(private val binding: ItemListCustomizationBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(bookmarkCustom: BookmarkCustom) {
-            // Bind data to views
             Glide.with(binding.root.context)
                 .load(bookmarkCustom.imageUrl)
                 .into(binding.imgItemPhoto)

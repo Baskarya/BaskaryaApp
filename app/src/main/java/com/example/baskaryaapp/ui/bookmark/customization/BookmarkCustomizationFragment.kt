@@ -30,7 +30,6 @@ override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
 ): View? {
-    // Inflate the layout for this fragment
     binding = FragmentBookmarkCustomizationBinding.inflate(inflater, container, false)
     return binding.root
 }
@@ -72,13 +71,13 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
     private fun setCustomizationData(items: List<BookmarkCustom>) {
         val layoutManager = binding.rvBookmarkCustom.layoutManager
-        recyclerViewState = layoutManager?.onSaveInstanceState() // menyimpan posisi tampilan sebelum memperbarui data
+        recyclerViewState = layoutManager?.onSaveInstanceState()
 
         val adapter = CustomizationAdapter()
         adapter.submitList(items)
         binding.rvBookmarkCustom.adapter = adapter
 
-        layoutManager?.onRestoreInstanceState(recyclerViewState) // memulihkan posisi tampilan setelah memperbarui adapter
+        layoutManager?.onRestoreInstanceState(recyclerViewState)
     }
 
     private fun showLoading(isLoading: Boolean) {

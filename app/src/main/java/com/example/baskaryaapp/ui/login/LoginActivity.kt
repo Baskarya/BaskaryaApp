@@ -31,17 +31,6 @@ class LoginActivity : AppCompatActivity() {
 
         playAnimation()
 
-//        binding.loginButton.setOnClickListener{
-//            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//            startActivity(intent)
-//        }
-//        binding.signup.setOnClickListener{
-//            val intent =Intent(this,RegisterActivity::class.java)
-//            startActivity(intent)
-//        }
-
-//        ini tes
-
         binding.loginButton.setOnClickListener{
             login()
         }
@@ -100,7 +89,6 @@ class LoginActivity : AppCompatActivity() {
             showLoading(true)
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Save user session
                     saveUserSession()
 
                     val intent = Intent(this, MainActivity::class.java)
@@ -117,14 +105,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun saveUserSession() {
-        // Mark the user as logged in
         sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
     }
 
     private fun checkUserSession() {
-        // Check if the user is already logged in
         if (sharedPreferences.getBoolean("isLoggedIn", false)) {
-            // If logged in, direct the user to the main activity
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()

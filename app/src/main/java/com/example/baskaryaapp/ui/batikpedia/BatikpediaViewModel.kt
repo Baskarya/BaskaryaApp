@@ -30,7 +30,6 @@ class BatikpediaViewModel(private val repository: BatikRepository) : ViewModel()
                 } else {
                     Log.e("BatikViewModel", "Error load stories: ${response.status}")
                 }
-//                _listBatik.value = response.data
             } catch (e: Exception) {
                 Log.e("BatikViewModel", "Error load stories: ${e.message}")
             } finally {

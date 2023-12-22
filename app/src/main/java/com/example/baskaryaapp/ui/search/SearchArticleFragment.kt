@@ -30,7 +30,6 @@ class SearchArticleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentSearchArticleBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -60,7 +59,6 @@ class SearchArticleFragment : Fragment() {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (!query.isNullOrEmpty()) {
-                    // Buat instance dari SearchResultFragment
                     searchArticle(query)
                 }
                 return true
@@ -70,7 +68,6 @@ class SearchArticleFragment : Fragment() {
                 val searchResultFragment = SearchResultFragment()
 
                 if (!newText.isNullOrEmpty()) {
-                    // Buat instance SearchResultFragment dengan membawa data pencarian
                     val bundle = Bundle()
                     bundle.putString("query", newText)
                     searchResultFragment.arguments = bundle
@@ -82,40 +79,29 @@ class SearchArticleFragment : Fragment() {
     }
 
     private fun searchArticle(query:String)  {
-        // Memanggil metode Retrofit yang telah kamu definisikan sebelumnya
         val call = ApiConfig.apiService.searcharticle(query)
         showLoading(true)
-        // Memanggil permintaan jaringan secara asynchronous
         call.enqueue(object : Callback<ArticlesResponse> {
             override fun onResponse(call: Call<ArticlesResponse>, response: Response<ArticlesResponse>) {
                 if (response.isSuccessful) {
                     val batikResponse = response.body()
-                    // Cek apakah respons tidak null dan memiliki data
                     batikResponse?.let {
                         if (it.data.isNullOrEmpty()) {
-                            // Data tidak tersedia
                             showLoading(false)
-                            // Tampilkan pesan bahwa data tidak ditemukan
-                            // Misalnya dengan menggunakan Toast atau Snackbar
                             Toast.makeText(context, "Data tidak ditemukan", Toast.LENGTH_SHORT).show()
                         } else {
-                            // Panggil fungsi setBatikData dengan hasil pencarian
                             setArticlesData(it.data)
                             showLoading(false)
                         }
                     }
                 } else {
-                    // Menangani respons gagal
-                    // Tampilkan pesan kesalahan atau lakukan tindakan yang sesuai
                     showLoading(false)
-                    // Tampilkan pesan kesalahan dari server jika ada
                     val errorMessage = "Error: Data tidak ditemukan"
                     Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<ArticlesResponse>, t: Throwable) {
-                // Menangani kegagalan jaringan
                 showLoading(false)
                 Toast.makeText(context, "Terjadi kesalahan: " + t.message, Toast.LENGTH_SHORT).show()
             }

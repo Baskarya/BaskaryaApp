@@ -3,7 +3,6 @@ package com.example.baskaryaapp.data.response
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
 
 data class ArticlesResponse(
 
@@ -29,8 +28,6 @@ data class ArticlesItem(
 	@field:SerializedName("id")
 	val id: String? = null,
 
-//	@field:SerializedName("publishedDate")
-//	val publishedDate: @RawValue PublishedDate? = null,
 
 	@field:SerializedName("title")
 	val title: String? = null,
@@ -41,11 +38,4 @@ data class ArticlesItem(
 	var isBookmarked: Boolean = false
 ):Parcelable
 
-//data class PublishedDate(
-//
-//	@field:SerializedName("_nanoseconds")
-//	val nanoseconds: Int? = null,
-//
-//	@field:SerializedName("_seconds")
-//	val seconds: Int? = null
-//)
+

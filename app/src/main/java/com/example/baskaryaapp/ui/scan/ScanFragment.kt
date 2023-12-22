@@ -41,11 +41,6 @@
             binding.buttonAdd.setOnClickListener { uploadImage() }
         }
 
-//        override fun onResume() {
-//            super.onResume()
-//            binding.buttonAdd.visibility = View.VISIBLE
-//            binding.cardView.visibility = View.VISIBLE
-//        }
 
         private fun startGallery() {
             launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
@@ -81,9 +76,7 @@
             val requestFile = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
             val imagePart = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
-            // Tampilkan ProgressBar
             binding.progressBar.visibility = View.VISIBLE
-            // Sembunyikan tombol upload
             binding.buttonAdd.isEnabled = false
 
             ApiUpload.apiService.postbatik(imagePart).enqueue(object : retrofit2.Callback<UploadResponse> {
@@ -97,17 +90,13 @@
                     } else {
                         Log.e("UploadResponse", "Unsuccessful response: ${response.code()}")
                     }
-                    // Sembunyikan ProgressBar setelah selesai
                     binding.progressBar.visibility = View.GONE
-                    // Tampilkan tombol upload lagi
                     binding.buttonAdd.isEnabled = true
                 }
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
                     Log.e("UploadResponse", "Failure: ${t.message}")
-                    // Sembunyikan ProgressBar jika terjadi kegagalan
                     binding.progressBar.visibility = View.GONE
-                    // Tampilkan tombol upload lagi
                     binding.buttonAdd.isEnabled = true
                 }
             })

@@ -15,7 +15,6 @@ class FirebaseHelper {
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    // Mendapatkan referensi koleksi bookmark
     private fun getBookmarkCollection(): CollectionReference {
         return firestore.collection("bookmarks")
     }
@@ -26,9 +25,7 @@ class FirebaseHelper {
             val bookmark = BookmarkBatik(batikId, userId, title, imageUrl)
             getBookmarkCollection().add(bookmark)
                 .addOnSuccessListener {
-                    // Update status bookmark pada model data
                     batikList.find { it.id == batikId }?.isBookmarked = true
-//                    notifyDataSetChanged()
                 }
         }
     }
@@ -43,9 +40,7 @@ class FirebaseHelper {
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         document.reference.delete()
-                        // Update status bookmark pada model data
                         batikList.find { it.id == batikId }?.isBookmarked = false
-//                        notifyDataSetChanged()
                     }
                 }
         }
@@ -67,9 +62,7 @@ class FirebaseHelper {
             val bookmark = BookmarkArticles(articleId, userId, title, imageUrl)
             getBookmarkCollection().add(bookmark)
                 .addOnSuccessListener {
-                    // Update status bookmark pada model data
                     articleList.find { it.id == articleId }?.isBookmarked = true
-//                    notifyDataSetChanged()
                 }
         }
     }
@@ -84,9 +77,7 @@ class FirebaseHelper {
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         document.reference.delete()
-                        // Update status bookmark pada model data
                         articleList.find { it.id == articleId }?.isBookmarked = false
-//                        notifyDataSetChanged()
                     }
                 }
         }
@@ -108,9 +99,7 @@ class FirebaseHelper {
             val bookmark = BookmarkCustom(customId, userId, name, imageUrl)
             getBookmarkCollection().add(bookmark)
                 .addOnSuccessListener {
-                    // Update status bookmark pada model data
                     customList.find { it.id == customId }?.isBookmarked = true
-//                    notifyDataSetChanged()
                 }
         }
     }
@@ -125,9 +114,7 @@ class FirebaseHelper {
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         document.reference.delete()
-                        // Update status bookmark pada model data
                         customList.find { it.id == customId }?.isBookmarked = false
-//                        notifyDataSetChanged()
                     }
                 }
         }
@@ -142,35 +129,6 @@ class FirebaseHelper {
                 callback(bookmarkedIds)
             }
     }
-
-//    fun fetchCustomizations(customIds: List<String?>, callback: (List<Data>) -> Unit) {
-//        val customizations = mutableListOf<Data>()
-//
-//        customIds.forEach { customId ->
-//            customId?.let {
-//                firestore.collection("bookmarks").document(it)
-//                    .get()
-//                    .addOnSuccessListener { documentSnapshot ->
-//                        if (documentSnapshot.exists()) {
-//                            val data = documentSnapshot.toObject(Data::class.java)
-//                            data?.let {
-//                                customizations.add(it)
-//                            }
-//                        }
-//
-//                        if (customizations.size == customIds.size) {
-//                            callback(customizations)
-//                            // Tambahkan log untuk memastikan bahwa callback dipanggil
-//                            Log.d("FirestoreCallback", "Callback called with data: $customizations")
-//                        }
-//                    }
-//                    .addOnFailureListener { e ->
-//                        // Tangkap error jika terjadi
-//                        Log.e("FirestoreError", "Error fetching customization data: $e")
-//                    }
-//            }
-//        }
-//    }
 
     fun fetchCustomizations(userId: String, callback: (List<BookmarkCustom>) -> Unit) {
         getBookmarkCollection()
@@ -192,7 +150,6 @@ class FirebaseHelper {
                 callback(bookmarkedCustomizations)
             }
             .addOnFailureListener { e ->
-                // Tangkap error jika terjadi
                 Log.e("FirestoreError", "Error fetching customization data: $e")
             }
     }

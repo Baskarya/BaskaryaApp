@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -26,10 +25,8 @@ import com.example.baskaryaapp.data.response.BatikItem
 import com.example.baskaryaapp.databinding.FragmentHomeBinding
 import com.example.baskaryaapp.ui.ArticlesViewModelFactory
 import com.example.baskaryaapp.ui.BatikViewModelFactory
-import com.example.baskaryaapp.ui.articles.ArticlesAdapter
 import com.example.baskaryaapp.ui.articles.ArticlesFragment
 import com.example.baskaryaapp.ui.articles.ArticlesViewModel
-import com.example.baskaryaapp.ui.batikpedia.BatikRVAdapter
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaFragment
 import com.example.baskaryaapp.ui.batikpedia.BatikpediaViewModel
 import com.example.baskaryaapp.ui.search.SearchResultFragment
@@ -58,7 +55,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val handler = Handler(Looper.getMainLooper())
-        val delay = 3000L // Ubah waktu delay sesuai keinginan, misalnya 3000L untuk 3 detik
+        val delay = 3000L
         vpSlider=view.findViewById(R.id.view_pager)
         val arrSlider= ArrayList<Int>()
         arrSlider.add(R.drawable.baskarya_logo)
@@ -99,9 +96,7 @@ class HomeFragment : Fragment() {
         val itemDecoration = DividerItemDecoration(requireActivity(), arlayoutManager.orientation)
         binding.RVArticle.addItemDecoration(itemDecoration)
 
-//        articlesViewModel.listArticles.observe(requireActivity()) { listArticles ->
-//            setArticlesData(listArticles)
-//        }
+
         binding.idRVCourses.layoutManager = layoutManager
 
         batikList = mutableListOf()
@@ -115,10 +110,8 @@ class HomeFragment : Fragment() {
             while (lifecycleScope.coroutineContext.isActive) {
                 delay(5000)
                 if (isAdded() && userId != null) {
-                    // Dapatkan data bookmark
                     firebaseHelper.getBookmarkedBatiks(userId) { bookmarkedIds ->
                         if (isAdded()) {
-                            // Set data batik
                             batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
                                 setBatikData(listBatik, bookmarkedIds)
                             }
@@ -134,10 +127,8 @@ class HomeFragment : Fragment() {
                 showLoading(true)
                 delay(5000)
                 if (isAdded() && userId != null) {
-                    // Dapatkan data bookmark
                     firebaseHelper.getBookmarkedArticles(userId) { bookmarkedIds ->
                         if (isAdded()) {
-                            // Set data article
                             articlesViewModel.listArticles.observe(requireActivity()) { listArticles ->
                                 setArticlesData(listArticles, bookmarkedIds)
                             }
@@ -148,9 +139,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-//        batikpediaViewModel.isLoading.observe(requireActivity()) { loading ->
-//            showLoading(loading)
-//        }
 
         morear =view.findViewById(R.id.tv_moreTa)
         morebp =view.findViewById(R.id.tv_morebp)
@@ -179,7 +167,6 @@ class HomeFragment : Fragment() {
 
     private fun setBatikData(items: List<BatikItem>, bookmarkedIds: List<String?>) {
         val adapter = HomeAdapter(3)
-        // Set status bookmark pada setiap item berdasarkan daftar bookmarkedIds
         val itemsWithBookmarkStatus = items.map { batik ->
             batik.copy(isBookmarked = bookmarkedIds.contains(batik.id))
         }
@@ -187,15 +174,8 @@ class HomeFragment : Fragment() {
         binding.idRVCourses.adapter = adapter
     }
 
-//    private fun setArticlesData(items: List<ArticlesItem>) {
-//        val adapter = AdapterArticle(1)
-//        adapter.submitList(items)
-//        binding.RVArticle.adapter = adapter
-//    }
-
     private fun setArticlesData(items: List<ArticlesItem>, bookmarkedIds: List<String?>) {
         val adapter = AdapterArticle(1)
-        // Set status bookmark pada setiap item berdasarkan daftar bookmarkedIds
         val itemsWithBookmarkStatus = items.map { batik ->
             batik.copy(isBookmarked = bookmarkedIds.contains(batik.id))
         }

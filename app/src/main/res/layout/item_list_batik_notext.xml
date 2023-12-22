@@ -11,8 +11,7 @@
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp">
 
-    <!--on below line we are creating a
-        linear layout for grid view item-->
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

@@ -32,30 +32,14 @@ class DetailBatikActivity : AppCompatActivity() {
             binding.tvItemDescription.text = it.description
         }
 
-//        detailBatikViewModel.getBatik(intent.getStringExtra(EXTRA_ID))
-//        val id = intent.getIntExtra("key_id", 0)
-//        val id = intent.getIntExtra(EXTRA_ID, 0)
+
         val id = intent.getStringExtra("key_id").toString()
         val title = intent.getStringExtra("key_title").toString()
         val imageUrl = intent.getStringExtra("key_imageUrl").toString()
         batikList = mutableListOf()
 
         var bookmark = false
-//        CoroutineScope(Dispatchers.IO).launch {
-//            val count = detailBatikViewModel.isBookmarked(id)
-//            withContext(Dispatchers.Main){
-//                val userId = auth.currentUser?.uid
-//                if (userId != null) {
-//                    if (count > 0){
-//                        binding.icBookmark.setImageResource(R.drawable.ic_bookmarked)
-//                        bookmark = true
-//                    }else{
-//                        binding.icBookmark.setImageResource(R.drawable.ic_unbookmarked)
-//                        bookmark = false
-//                    }
-//                }
-//            }
-//        }
+
 
         if (batik?.isBookmarked == true) {
             binding.icBookmark.setImageResource(R.drawable.ic_bookmarked)
@@ -76,19 +60,7 @@ class DetailBatikActivity : AppCompatActivity() {
             }
         }
 
-//        binding.icBookmark.setOnClickListener{
-//            bookmark = !bookmark
-//            val userId = auth.currentUser?.uid
-//            if (userId != null) {
-//                if (bookmark) {
-//                    binding.icBookmark.setImageResource(R.drawable.ic_bookmarked)
-//                    detailBatikViewModel.saveBatik(BookmarkBatik(id, title, imageUrl))
-//                } else {
-//                    binding.icBookmark.setImageResource(R.drawable.ic_unbookmarked)
-//                    detailBatikViewModel.deleteBatik(id)
-//                }
-//            }
-//        }
+
         Log.d("DetailBatikActivity", "ID: $id")
         Log.d("DetailBatikActivity", "title: $title")
         Log.d("DetailBatikActivity", "imageurl: $imageUrl")

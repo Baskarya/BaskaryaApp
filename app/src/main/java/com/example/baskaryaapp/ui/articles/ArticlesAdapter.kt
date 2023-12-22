@@ -32,7 +32,6 @@ class ArticlesAdapter : ListAdapter<ArticlesItem, ArticlesAdapter.ListViewHolder
                 .load(articles.imageUrl)
                 .into(binding.imgItemPhoto)
             binding.tvItemTitle.text = articles.title
-//            binding.tvItemDescription.text = articles.content
 
             binding.root.setOnClickListener{
                 val intentDetail = Intent(binding.root.context, DetailArticleActivity::class.java)

@@ -24,7 +24,6 @@ class SettingFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Inisialisasi Firebase Authentication dan SharedPreferences
         auth = FirebaseAuth.getInstance()
         sharedPreferences = requireActivity().getSharedPreferences("user_session", Context.MODE_PRIVATE)
     }
@@ -33,7 +32,6 @@ class SettingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_setting, container, false)
     }
 
@@ -48,7 +46,6 @@ class SettingFragment : Fragment() {
         view.findViewById<View>(R.id.btn_logout)?.setOnClickListener {
             showLogoutConfirmation()
         }
-        //ganti bahasa
         view.findViewById<View>(R.id.cv_bahasa).setOnClickListener{
             startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
             true
@@ -74,7 +71,6 @@ class SettingFragment : Fragment() {
     }
 
     private fun showLogoutConfirmation() {
-        // Menampilkan dialog konfirmasi sebelum logout
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.konfirmasi_logout)
             .setMessage(R.string.yakin_logout)
@@ -88,17 +84,14 @@ class SettingFragment : Fragment() {
     private fun logoutUser() {
         auth.signOut()
 
-        // Clear user session
         clearUserSession()
 
-        // Redirect to LoginActivity
         val intent = Intent(requireContext(), LoginActivity::class.java)
         startActivity(intent)
         requireActivity().finish()
     }
 
     private fun clearUserSession() {
-        // Mark the user as logged out
         sharedPreferences.edit().putBoolean("isLoggedIn", false).apply()
     }
 }

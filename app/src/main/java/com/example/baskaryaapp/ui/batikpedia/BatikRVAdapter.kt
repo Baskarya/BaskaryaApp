@@ -44,17 +44,9 @@ class BatikRVAdapter : ListAdapter<BatikItem, BatikRVAdapter.ListViewHolder>(DIF
                 .into(binding.idIVBatik)
             binding.idTVBatik.text = batik?.title
 
-//        if (batik.isBookmarked) {
-//            // Tampilkan ikon bookmark terisi jika batik di-bookmark
-//            binding.icBookmark.setImageResource(R.drawable.ic_bookmarked)
-//        } else {
-//            // Tampilkan ikon bookmark kosong jika batik tidak di-bookmark
-//            binding.icBookmark.setImageResource(R.drawable.ic_unbookmarked)
-//        }
 
             binding.root.setOnClickListener{
                 val intentDetail = Intent(binding.root.context, DetailBatikActivity::class.java)
-//                intentDetail.putExtra(EXTRA_ID, batik.id)
                 intentDetail.putExtra(EXTRA_BATIK, batik)
                 intentDetail.putExtra("key_id", batik.id)
                 intentDetail.putExtra("key_title", batik.title)

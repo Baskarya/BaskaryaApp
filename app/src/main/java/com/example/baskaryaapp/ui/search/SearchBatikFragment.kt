@@ -38,9 +38,6 @@ class SearchBatikFragment : Fragment() {
         val factory = BatikViewModelFactory.getInstance(repository)
         val batikpediaViewModel = ViewModelProvider(this, factory)[BatikpediaViewModel::class.java]
 
-        // on below line we are creating a variable
-        // for our grid layout manager and specifying
-        // column count as 2
         val layoutManager = GridLayoutManager(requireContext(), 3)
 
         binding.idRVBatik.layoutManager = layoutManager
@@ -79,50 +76,29 @@ class SearchBatikFragment : Fragment() {
     }
 
     private fun searchBatik(query: String) {
-        // Memanggil metode Retrofit yang telah kamu definisikan sebelumnya
         val call = ApiConfig.apiService.searchbatik(query)
         showLoading(true)
-        // Memanggil permintaan jaringan secara asynchronous
         call.enqueue(object : Callback<BatikResponse> {
             override fun onResponse(call: Call<BatikResponse>, response: Response<BatikResponse>) {
                 if (response.isSuccessful) {
                     val batikResponse = response.body()
-                    // Cek apakah respons tidak null dan memiliki data
-//                    batikResponse?.let {
-//                        // Panggil fungsi setBatikData dengan hasil pencarian
-//                        setBatikData(it.data)
-//                        showLoading(false)
-//                    }
-//                } else {
-//                    // Menangani respons gagal
-//                    // Tampilkan pesan kesalahan atau lakukan tindakan yang sesuai
-//                }
                     batikResponse?.let {
                         if (it.data.isNullOrEmpty()) {
-                            // Data tidak tersedia
                             showLoading(false)
-                            // Tampilkan pesan bahwa data tidak ditemukan
-                            // Misalnya dengan menggunakan Toast atau Snackbar
                             Toast.makeText(context, "Data tidak ditemukan", Toast.LENGTH_SHORT).show()
                         } else {
-                            // Panggil fungsi setBatikData dengan hasil pencarian
                             setBatikData(it.data)
                             showLoading(false)
                         }
                     }
                 } else {
-                    // Menangani respons gagal
-                    // Tampilkan pesan kesalahan atau lakukan tindakan yang sesuai
                     showLoading(false)
-                    // Tampilkan pesan kesalahan dari server jika ada
                     val errorMessage = "Error: Data tidak ditemukan"
                     Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<BatikResponse>, t: Throwable) {
-                // Menangani kegagalan jaringan
-                // Tampilkan pesan kesalahan atau lakukan tindakan yang sesuai
                 showLoading(false)
                 Toast.makeText(context, "Terjadi kesalahan: " + t.message, Toast.LENGTH_SHORT).show()
             }

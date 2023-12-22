@@ -60,9 +60,7 @@ class BatikpediaFragment : Fragment() {
         val userId = auth.currentUser?.uid
 
         if (userId != null) {
-            // Dapatkan data bookmark
             firebaseHelper.getBookmarkedBatiks(userId) { bookmarkedIds ->
-                // Set data batik
                 batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
                     setBatikData(listBatik, bookmarkedIds)
                 }
@@ -73,10 +71,8 @@ class BatikpediaFragment : Fragment() {
             while (lifecycleScope.coroutineContext.isActive) {
                 delay(10000)
                 if (isAdded() && userId != null) {
-                    // Dapatkan data bookmark
                     firebaseHelper.getBookmarkedBatiks(userId) { bookmarkedIds ->
                         if (isAdded()) {
-                            // Set data batik
                             batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
                                 setBatikData(listBatik, bookmarkedIds)
                             }
@@ -91,12 +87,6 @@ class BatikpediaFragment : Fragment() {
         }
     }
 
-//    private fun setBatikData(items: List<BatikItem>) {
-//        val adapter = BatikRVAdapter()
-//        adapter.submitList(items)
-//        binding.idRVBatik.adapter = adapter
-//        Log.d("DetailBatikActivity", "ID: $items")
-//    }
 
     private fun setBatikData(items: List<BatikItem>, bookmarkedIds: List<String?>) {
         val layoutManager = binding.idRVBatik.layoutManager as? LinearLayoutManager
@@ -109,18 +99,15 @@ class BatikpediaFragment : Fragment() {
         }
 
         val adapter = BatikRVAdapter()
-        // Set status bookmark pada setiap item berdasarkan daftar bookmarkedIds
         val itemsWithBookmarkStatus = items.map { batik ->
             batik.copy(isBookmarked = bookmarkedIds.contains(batik.id))
         }
         adapter.submitList(itemsWithBookmarkStatus)
 
-        // Simpan posisi tampilan sebelum memperbarui adapter
         val recyclerViewState = layoutManager?.onSaveInstanceState()
 
         binding.idRVBatik.adapter = adapter
 
-        // Memulihkan posisi tampilan setelah memperbarui adapter
         layoutManager?.onRestoreInstanceState(recyclerViewState)
         layoutManager?.scrollToPositionWithOffset(lastFirstVisiblePosition ?: 0, topOffset)
 

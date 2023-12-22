@@ -11,16 +11,13 @@
     app:cardElevation="4dp"
     android:background="@color/color_4">
 
-    <!--on below line we are creating a
-        linear layout for grid view item-->
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="170dp"
         android:background="@color/color_4"
         android:orientation="vertical">
 
-        <!--on below line we are creating
-            a simple image view-->
         <ImageView
             android:id="@+id/idIVBatik"
             android:layout_width="88dp"
@@ -31,8 +28,7 @@
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher" />
 
-        <!--on below line we are creating
-            a simple text view-->
+
         <TextView
             android:id="@+id/idTVBatik"
             android:layout_width="match_parent"

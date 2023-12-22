@@ -30,7 +30,6 @@ class ArticlesViewModel(private val repository: ArticlesRepository) : ViewModel(
                 } else {
                     Log.e("ArticlesViewModel", "Error load stories: ${response.status}")
                 }
-//                _listBatik.value = response.data
             } catch (e: Exception) {
                 Log.e("ArticlesViewModel", "Error load stories: ${e.message}")
             } finally {

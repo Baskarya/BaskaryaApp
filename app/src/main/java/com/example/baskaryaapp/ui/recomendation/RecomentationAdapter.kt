@@ -46,7 +46,6 @@ class RecomentationAdapter : ListAdapter<SimilarImagesItem, RecomentationAdapter
                 }
             }
 
-            // Menambahkan onClickListener untuk melakukan POST saat item di RecyclerView ditekan
             itemView.setOnClickListener {
                 val context = itemView.context
                 progressBar.visibility = View.VISIBLE

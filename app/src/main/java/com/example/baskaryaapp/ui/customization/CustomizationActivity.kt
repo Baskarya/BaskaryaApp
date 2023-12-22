@@ -24,7 +24,6 @@ class CustomizationActivity : AppCompatActivity() {
         binding = ActivityCustomizationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.imageView2.setOnClickListener{back()}
-        // Mengambil data yang dikirimkan dari RecomendationFragment
         val id = intent.getStringExtra("key_id").toString()
         val namaBatik = intent.getStringExtra("NAMA_BATIK").toString()
         val imageUrl = intent.getStringExtra("IMAGE_URL").toString()
@@ -64,7 +63,6 @@ class CustomizationActivity : AppCompatActivity() {
     private fun showToastAndNavigate(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
-        // Navigate to BookmarkCustomizationFragment
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()

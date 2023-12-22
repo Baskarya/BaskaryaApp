@@ -51,9 +51,6 @@ class ArticlesFragment : Fragment() {
         val auth: FirebaseAuth = FirebaseAuth.getInstance()
         val userId = auth.currentUser?.uid
 
-//        articlesViewModel.listArticles.observe(requireActivity()) { listArticles ->
-//            setArticlesData(listArticles)
-//        }
 
         lifecycleScope.launch {
             while (lifecycleScope.coroutineContext.isActive) {
@@ -68,9 +65,6 @@ class ArticlesFragment : Fragment() {
                                 setArticlesData(listArticles, bookmarkedIds)
                             }
 
-//                            articlesViewModel.isLoading.observe(requireActivity()) { loading ->
-//                                showLoading(loading)
-//                            }
                             showLoading(false)
                         }
                     }
@@ -81,11 +75,6 @@ class ArticlesFragment : Fragment() {
 
     }
 
-//    private fun setArticlesData(items: List<ArticlesItem>) {
-//        val adapter = ArticlesAdapter()
-//        adapter.submitList(items)
-//        binding.rvArticles.adapter = adapter
-//    }
 
     private fun setArticlesData(items: List<ArticlesItem>, bookmarkedIds: List<String?>) {
         val layoutManager = binding.rvArticles.layoutManager as? LinearLayoutManager
@@ -103,12 +92,10 @@ class ArticlesFragment : Fragment() {
         }
         adapter.submitList(itemsWithBookmarkStatus)
 
-        // Simpan posisi tampilan sebelum memperbarui adapter
         val recyclerViewState = layoutManager?.onSaveInstanceState()
 
         binding.rvArticles.adapter = adapter
 
-        // Memulihkan posisi tampilan setelah memperbarui adapter
         layoutManager?.onRestoreInstanceState(recyclerViewState)
         layoutManager?.scrollToPositionWithOffset(lastFirstVisiblePosition ?: 0, topOffset)
 

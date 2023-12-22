@@ -53,19 +53,13 @@ class BookmarkArticlesFragment : Fragment()  {
         val auth: FirebaseAuth = FirebaseAuth.getInstance()
         val userId = auth.currentUser?.uid
 
-//        articlesViewModel.listArticles.observe(requireActivity()) { listArticles ->
-//            setArticlesData(listArticles)
-//        }
-
         lifecycleScope.launch {
             while (lifecycleScope.coroutineContext.isActive) {
                 showLoading(true)
                 delay(5000)
                 if (isAdded() && userId != null) {
-                    // Dapatkan data bookmark
                     firebaseHelper.getBookmarkedArticles(userId) { bookmarkedIds ->
                         if (isAdded()) {
-                            // Set data article
                             articlesViewModel.listArticles.observe(requireActivity()) { listArticles ->
                                 setArticlesData(listArticles, bookmarkedIds)
                             }
@@ -76,21 +70,16 @@ class BookmarkArticlesFragment : Fragment()  {
             }
         }
 
-//        articlesViewModel.isLoading.observe(requireActivity()) { loading ->
-//            showLoading(loading)
-//        }
     }
 
 
     private fun setArticlesData(items: List<ArticlesItem>, bookmarkedIds: List<String?>) {
         val adapter = ArticlesAdapter()
 
-        // Filter batik yang telah di-bookmark berdasarkan daftar bookmarkedIds
         val bookmarkedArticles = items.filter { batik ->
             bookmarkedIds.contains(batik.id)
         }
 
-        // Set status bookmark pada semua batik
         val itemsWithBookmarkStatus = bookmarkedArticles.map { articles ->
             articles.copy(isBookmarked = bookmarkedIds.contains(articles.id))
         }

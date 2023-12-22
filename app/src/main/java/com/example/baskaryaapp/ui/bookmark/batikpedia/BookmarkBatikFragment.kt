@@ -1,19 +1,17 @@
 package com.example.baskaryaapp.ui.bookmark.batikpedia
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.baskaryaapp.R
 import com.example.baskaryaapp.data.api.ApiConfig
 import com.example.baskaryaapp.data.helper.FirebaseHelper
 import com.example.baskaryaapp.data.repo.BatikRepository
 import com.example.baskaryaapp.data.response.BatikItem
-import com.example.baskaryaapp.databinding.FragmentBatikpediaBinding
 import com.example.baskaryaapp.databinding.FragmentBookmarkBatikBinding
 import com.example.baskaryaapp.ui.BatikViewModelFactory
 import com.example.baskaryaapp.ui.batikpedia.BatikRVAdapter
@@ -45,35 +43,20 @@ class BookmarkBatikFragment : Fragment() {
         val layoutManager = GridLayoutManager(requireContext(), 3)
         binding.idBookmarkBatik.layoutManager = layoutManager
 
-//        batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
-//            setBatikData(listBatik)
-//        }
 
         batikList = mutableListOf()
 
         val auth: FirebaseAuth = FirebaseAuth.getInstance()
         val userId = auth.currentUser?.uid
 
-//        if (userId != null) {
-//            // Dapatkan data bookmark
-//            firebaseHelper.getBookmarkedBatiks(userId) { bookmarkedIds ->
-//                // Set data batik
-//                batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
-//                    setBatikData(listBatik, bookmarkedIds)
-////                    setBatikData2(listBatik, bookmarkedIds)
-//                }
-//            }
-//        }
 
         lifecycleScope.launch {
             while (lifecycleScope.coroutineContext.isActive) {
                 showLoading(true)
                 delay(5000)
                 if (isAdded() && userId != null) {
-                    // Dapatkan data bookmark
                     firebaseHelper.getBookmarkedBatiks(userId) { bookmarkedIds ->
                         if (isAdded()) {
-                            // Set data batik
                             batikpediaViewModel.listBatik.observe(requireActivity()) { listBatik ->
                                 setBatikData(listBatik, bookmarkedIds)
                             }
@@ -84,20 +67,16 @@ class BookmarkBatikFragment : Fragment() {
             }
         }
 
-//        batikpediaViewModel.isLoading.observe(requireActivity()) { loading ->
-//            showLoading(loading)
-//        }
+
     }
 
     private fun setBatikData(items: List<BatikItem>, bookmarkedIds: List<String?>) {
         val adapter = BatikRVAdapter()
 
-        // Filter batik yang telah di-bookmark berdasarkan daftar bookmarkedIds
         val bookmarkedBatiks = items.filter { batik ->
             bookmarkedIds.contains(batik.id)
         }
 
-        // Set status bookmark pada semua batik
         val itemsWithBookmarkStatus = bookmarkedBatiks.map { batik ->
             batik.copy(isBookmarked = bookmarkedIds.contains(batik.id))
         }
